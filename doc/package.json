@@ -1,0 +1,26 @@
+{
+  "name": "uxi-bcl-doc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "uxi-cli dev",
+    "test": "npm run test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "uxi-cli": "^1.0.71"
+  },
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-intl": "^2.4.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "redux": "^3.6.0",
+    "redux-form": "^7.1.2",
+    "styled-components": "3.2.0",
+    "uxi": "0.0.252"
+  }
+}
