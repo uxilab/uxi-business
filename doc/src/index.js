@@ -35,18 +35,19 @@ const App = () => (
   <Provider store={store}>
     <IntlProvider locale="en">
       <ThemeProvider>
-      <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+      {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <SignInForm
             onClick={(value) => {alert(JSON.stringify(value))}}
           />
-        </div>
-        <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+        </div> */}
+         {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <ForgotPasswordForm
             onClick={(value) => {alert(JSON.stringify(value))}}
           />
-        </div>
+        </div> */}
         <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <MyForm
+            initialValues={{ 'test': 'oefkeofkeofkeofk' }}
             onClick={(values) => { alert(JSON.stringify(values)); }}
           />
         </div>

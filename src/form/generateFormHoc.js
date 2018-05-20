@@ -34,7 +34,14 @@ const generateFormHoc = (formName, fields = []) => {
     pristine,
     submitting,
   }) => (
-    <div style={{ padding:'16px' }}>
+    <div
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          handleSubmit(onClick)();
+        }
+      }}
+      style={{ padding:'16px' }}
+    >
       {
         generatedFields.map((field) => {
           return (
