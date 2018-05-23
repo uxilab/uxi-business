@@ -1,12 +1,13 @@
 import React from 'react';
 import Text from 'uxi/Text';
 import RequiredField from './RequiredField';
+import InputFieldGroup from './InputFieldGroup';
 
 const FormDecorator = (Input, props) => field => (
   <div>
     <div>
       {
-        props.label &&
+        !props.noLabel && props.label &&
         (
           <label>
             {props.label}
@@ -22,14 +23,34 @@ const FormDecorator = (Input, props) => field => (
         </Text>
       </div>
     }
+    {
+      field.meta.asyncValidating && 'Loadingg!!!'
+    }
     <div style={{ marginBottom: '16px' }}>
-      <Input
-        {...props}
-        {...field}
-        {...field.input}
-        success={field.meta.touched && !field.meta.error}
-        error={field.meta.touched && field.meta.error}
-      />
+      {
+        (props.prefix || props.sufix) && (
+          <InputFieldGroup prefix={props.prefix} sufix={props.sufix}>
+            <Input
+              {...props}
+              {...field}
+              {...field.input}
+              success={field.meta.touched && !field.meta.error}
+              error={field.meta.touched && field.meta.error}
+            />
+          </InputFieldGroup>
+        )
+      }
+      {
+        (!props.prefix && !props.sufix) && (
+          <Input
+            {...props}
+            {...field}
+            {...field.input}
+            success={field.meta.touched && !field.meta.error}
+            error={field.meta.touched && field.meta.error}
+          />
+        )
+      }
     </div>
   </div>
 );

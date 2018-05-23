@@ -17,13 +17,17 @@ import FormDecoratorHoc from './FormDecoratorHoc';
 
 const genreateFields = (fields = []) => {
   return fields.map(
-    (field) => (
-      { name: field.name, field: FormDecoratorHoc(field.Input || TextField, field) }
-    )
+    (field) => ({
+      name: field.name,
+      type: field.type,
+      autoFocus: field.autoFocus,
+      validate: (field.validate || []),
+      component: FormDecoratorHoc(field.Input || TextField, field),
+    })
   );
 };
 
-const generateFormHoc = (formName, fields = []) => {
+const generateFormHoc = (formName, fields = [], options = {}) => {
   const generatedFields = genreateFields(fields) || [];
   
   const GeneratedForm = ({
@@ -46,10 +50,11 @@ const generateFormHoc = (formName, fields = []) => {
         generatedFields.map((field) => {
           return (
             <Field
+              key={field.name}
               name={field.name}
               type={field.type || 'text'}
               autoFocus={field.autoFocus || false}
-              component={field.field}
+              component={field.component}
               validate={field.validate || []}
             />
           );
@@ -67,7 +72,7 @@ const generateFormHoc = (formName, fields = []) => {
     </div>
   );
 
-  return reduxForm({ form: formName })(GeneratedForm);
+  return reduxForm({ form: formName, ...options })(GeneratedForm);
 };
 
 export default generateFormHoc;

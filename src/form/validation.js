@@ -1,5 +1,13 @@
 export const required = value => (value ? undefined : 'Required');
 
+export const validPassword = (value) => {
+  if(value.length < 8) {
+    return 'Password must contain at least 8 characters';
+  }
+
+  return null;
+}
+
 const isUrl = (str) => {
   /* eslint-disable no-useless-escape */
   const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;

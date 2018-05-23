@@ -3,13 +3,15 @@ import { render } from 'react-dom';
 import {
   SignInForm,
   ForgotPasswordForm,
-  generateFormHoc,
+  ResetPasswordForm,
 } from 'uxi-business';
 import ThemeProvider from 'uxi/Theme/ThemeProvider';
 import { createStore, combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import FormWithCusomtInput from './examples/FormWithCusomtInput';
+import FormWithFieldAsyncValidation from './examples/FormWithFieldAsyncValidation';
 
 const rootReducer = combineReducers({
   // ...your other reducers here
@@ -20,16 +22,6 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer)
 
-const MyForm = generateFormHoc('example', [
-  {
-    name: 'test',
-    label: 'Test Label'
-  },
-  {
-    name: 'test2',
-    label: 'Test Label2'
-  },
-]);
 
 const App = () => (
   <Provider store={store}>
@@ -45,12 +37,19 @@ const App = () => (
             onClick={(value) => {alert(JSON.stringify(value))}}
           />
         </div> */}
-        <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
-          <MyForm
-            initialValues={{ 'test': 'oefkeofkeofkeofk' }}
-            onClick={(values) => { alert(JSON.stringify(values)); }}
+       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+          <FormWithCusomtInput />
+      </div>*/}
+       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+          <ResetPasswordForm
+            onClick={(value) => {alert(JSON.stringify(value))}}
           />
-        </div>
+      </div>*/}
+      <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+        <FormWithFieldAsyncValidation
+          onClick={(value) => {alert(JSON.stringify(value))}}
+          />
+      </div>
       </ThemeProvider>
     </IntlProvider>
   </Provider>
