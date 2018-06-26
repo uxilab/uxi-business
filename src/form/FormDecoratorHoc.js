@@ -34,6 +34,8 @@ const FormDecorator = (Input, props) => field => (
               {...props}
               {...field}
               {...field.input}
+              value={undefined}
+              defaultValue={field.input.value}
               success={field.meta.touched && !field.meta.error}
               error={field.meta.touched && field.meta.error}
             />
@@ -46,6 +48,8 @@ const FormDecorator = (Input, props) => field => (
             {...props}
             {...field}
             {...field.input}
+            value={undefined}
+            defaultValue={field.input.value}
             success={field.meta.touched && !field.meta.error}
             error={field.meta.touched && field.meta.error}
           />
