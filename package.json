@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "uxi-cli dev",
-    "pack": "uxi-cli pack"
+    "pack": "uxi-cli pack",
+    "deploy": "npm version patch && npm run pack && npm publish build"
   },
   "repository": {
     "type": "git",
