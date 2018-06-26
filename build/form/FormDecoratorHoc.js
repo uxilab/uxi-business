@@ -18,6 +18,10 @@ var _RequiredField = require('./RequiredField');
 
 var _RequiredField2 = _interopRequireDefault(_RequiredField);
 
+var _InputFieldGroup = require('./InputFieldGroup');
+
+var _InputFieldGroup2 = _interopRequireDefault(_InputFieldGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FormDecorator = function FormDecorator(Input, props) {
@@ -28,7 +32,7 @@ var FormDecorator = function FormDecorator(Input, props) {
       _react2.default.createElement(
         'div',
         null,
-        props.label && _react2.default.createElement(
+        !props.noLabel && props.label && _react2.default.createElement(
           'label',
           null,
           props.label,
@@ -44,10 +48,23 @@ var FormDecorator = function FormDecorator(Input, props) {
           props.helpText
         )
       ),
+      field.meta.asyncValidating && 'Loadingg!!!',
       _react2.default.createElement(
         'div',
         { style: { marginBottom: '16px' } },
-        _react2.default.createElement(Input, _extends({}, props, field, field.input, {
+        (props.prefix || props.sufix) && _react2.default.createElement(
+          _InputFieldGroup2.default,
+          { prefix: props.prefix, sufix: props.sufix },
+          _react2.default.createElement(Input, _extends({}, props, field, field.input, {
+            value: undefined,
+            defaultValue: field.input.value,
+            success: field.meta.touched && !field.meta.error,
+            error: field.meta.touched && field.meta.error
+          }))
+        ),
+        !props.prefix && !props.sufix && _react2.default.createElement(Input, _extends({}, props, field, field.input, {
+          value: undefined,
+          defaultValue: field.input.value,
           success: field.meta.touched && !field.meta.error,
           error: field.meta.touched && field.meta.error
         }))

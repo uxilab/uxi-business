@@ -49,7 +49,14 @@ var ForgotPasswordForm = function ForgotPasswordForm(_ref) {
       loginUrl = _ref.loginUrl;
   return _react2.default.createElement(
     'div',
-    { style: { padding: '16px' } },
+    {
+      onKeyPress: function onKeyPress(e) {
+        if (e.key === 'Enter') {
+          handleSubmit(onClick)();
+        }
+      },
+      style: { padding: '16px' }
+    },
     _react2.default.createElement(
       'div',
       null,

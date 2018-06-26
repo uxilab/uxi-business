@@ -28,12 +28,15 @@ var _validation = require('../../form/validation');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EmailInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
-  label: _react2.default.createElement(_reactIntl.FormattedMessage, {
-    id: 'uxi-business-Email',
-    defaultMessage: 'Email'
-  })
-});
+var validatePassword = function validatePassword(values) {
+  var errors = {};
+
+  if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Use same value as the password';
+  }
+
+  return errors;
+};
 
 var PasswordInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
   type: 'password',
@@ -43,10 +46,16 @@ var PasswordInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
   })
 });
 
-var SignInForm = function SignInForm(_ref) {
+var ConfirmPasswordInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
+  type: 'password',
+  label: _react2.default.createElement(_reactIntl.FormattedMessage, {
+    id: 'uxi-business-password',
+    defaultMessage: 'Confirm your password'
+  })
+});
+
+var ResetPasswordForm = function ResetPasswordForm(_ref) {
   var isFetching = _ref.isFetching,
-      forgotUrl = _ref.forgotUrl,
-      forgotLink = _ref.forgotLink,
       onClick = _ref.onClick,
       handleSubmit = _ref.handleSubmit,
       pristine = _ref.pristine,
@@ -65,44 +74,15 @@ var SignInForm = function SignInForm(_ref) {
       'div',
       null,
       _react2.default.createElement(_reduxForm.Field, {
-        name: 'email',
-        type: 'email',
-        autoFocus: true,
-        component: EmailInput,
-        validate: [_validation.required, _validation.email]
-      }),
-      _react2.default.createElement(_reduxForm.Field, {
         name: 'password',
         component: PasswordInput,
-        validate: [_validation.required]
+        validate: [_validation.required, _validation.validPassword]
+      }),
+      _react2.default.createElement(_reduxForm.Field, {
+        name: 'confirmPassword',
+        component: ConfirmPasswordInput,
+        validate: [_validation.required, _validation.validPassword]
       })
-    ),
-    _react2.default.createElement(
-      'div',
-      { style: { display: 'flex', padding: '0 0 16px 0', alignItems: "center" } },
-      _react2.default.createElement(
-        'div',
-        { style: { flex: 1 } },
-        _react2.default.createElement(_Input.Checkbox, {
-          label: _react2.default.createElement(_reactIntl.FormattedMessage, {
-            id: 'uxi-business-rememberMe',
-            defaultMessage: 'Remember me'
-          })
-        })
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        !forgotLink && _react2.default.createElement(
-          'a',
-          { href: forgotUrl ? forgotUrl : '/forgot' },
-          _react2.default.createElement(_reactIntl.FormattedMessage, {
-            id: 'uxi-business-forgotPassword',
-            defaultMessage: 'I forgot my password'
-          })
-        ),
-        forgotLink && forgotLink
-      )
     ),
     _react2.default.createElement(
       'div',
@@ -113,12 +93,15 @@ var SignInForm = function SignInForm(_ref) {
         type: 'primary',
         onClick: handleSubmit(onClick),
         message: _react2.default.createElement(_reactIntl.FormattedMessage, {
-          id: 'uxi-business-signin',
-          defaultMessage: 'Sign in'
+          id: 'uxi-business-resetPasswordAction',
+          defaultMessage: 'Change Password'
         })
       })
     )
   );
 };
 
-exports.default = (0, _reduxForm.reduxForm)({ form: 'uxi-business-signin' })(SignInForm);
+exports.default = (0, _reduxForm.reduxForm)({
+  form: 'uxi-business-resetPassword',
+  validate: validatePassword
+})(ResetPasswordForm);

@@ -7,6 +7,14 @@ var required = exports.required = function required(value) {
   return value ? undefined : 'Required';
 };
 
+var validPassword = exports.validPassword = function validPassword(value) {
+  if (value.length < 8) {
+    return 'Password must contain at least 8 characters';
+  }
+
+  return null;
+};
+
 var isUrl = function isUrl(str) {
   /* eslint-disable no-useless-escape */
   var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;

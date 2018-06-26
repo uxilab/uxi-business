@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -30,12 +32,19 @@ var genreateFields = function genreateFields() {
   var fields = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
   return fields.map(function (field) {
-    return { name: field.name, field: (0, _FormDecoratorHoc2.default)(field.Input || _Input.TextField, field) };
+    return {
+      name: field.name,
+      type: field.type,
+      autoFocus: field.autoFocus,
+      validate: field.validate || [],
+      component: (0, _FormDecoratorHoc2.default)(field.Input || _Input.TextField, field)
+    };
   });
 };
 
 var generateFormHoc = function generateFormHoc(formName) {
   var fields = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   var generatedFields = genreateFields(fields) || [];
 
@@ -48,13 +57,21 @@ var generateFormHoc = function generateFormHoc(formName) {
         submitting = _ref.submitting;
     return _react2.default.createElement(
       'div',
-      { style: { padding: '16px' } },
+      {
+        onKeyPress: function onKeyPress(e) {
+          if (e.key === 'Enter') {
+            handleSubmit(onClick)();
+          }
+        },
+        style: { padding: '16px' }
+      },
       generatedFields.map(function (field) {
         return _react2.default.createElement(_reduxForm.Field, {
+          key: field.name,
           name: field.name,
           type: field.type || 'text',
           autoFocus: field.autoFocus || false,
-          component: field.field,
+          component: field.component,
           validate: field.validate || []
         });
       }),
@@ -72,7 +89,7 @@ var generateFormHoc = function generateFormHoc(formName) {
     );
   };
 
-  return (0, _reduxForm.reduxForm)({ form: formName })(GeneratedForm);
+  return (0, _reduxForm.reduxForm)(_extends({ form: formName }, options))(GeneratedForm);
 };
 
 exports.default = generateFormHoc;
