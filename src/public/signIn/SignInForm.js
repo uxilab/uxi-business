@@ -80,7 +80,7 @@ const SignInForm = ({
         </div>
         <div>
           {
-              !forgotLink && 
+              !forgotLink &&
               (
                 <a href={ forgotUrl ? forgotUrl : '/forgot' }>
                   <FormattedMessage
@@ -95,7 +95,7 @@ const SignInForm = ({
       </div>
       <div style={{ display: 'flex', justifyContent:'flex-end'}}>
         <Button
-          disabled={pristine || submitting || isFetching}
+          disabled={submitting || isFetching}
           icon={ isFetching ? <Loader /> : null }
           type="primary"
           onClick={handleSubmit(onClick)}
