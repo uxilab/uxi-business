@@ -45,11 +45,11 @@ const App = () => (
             onClick={(value) => {alert(JSON.stringify(value))}}
           />
       </div>*/}
-      <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+      {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
         <FormWithFieldAsyncValidation
           onClick={(value) => {alert(JSON.stringify(value))}}
           />
-      </div>
+      </div> */}
       </ThemeProvider>
     </IntlProvider>
   </Provider>
