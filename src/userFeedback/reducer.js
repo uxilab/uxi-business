@@ -10,17 +10,6 @@ import {
   generalQueued,
   clearError,
 } from './actions';
-import {
-  widgetErrorActions,
-  clearErrors,
-} from '../../action/error';
-
-const {
-  accessDenied,
-  accessUnauthorized,
-  globalError,
-  queued,
-} = widgetErrorActions;
 
 const initalDefault = {
   accessDeniedGlobalMessages: [],

@@ -1,8 +1,5 @@
 import { createAction } from 'redux-actions';
 import uuid from 'uuid/v4';
-import {
-  logMessage,
-} from '../../helpers/logger';
 
 export const generalAccessDenied = createAction('GENERAL_ACCESS_DENIED');
 export const generalSessionExpired = createAction('GENERAL_SESSION_EXPIRED');
