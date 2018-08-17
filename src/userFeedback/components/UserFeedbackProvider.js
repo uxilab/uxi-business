@@ -40,7 +40,7 @@ const UserFeedbackProvider = ({
 );
 
 const mapStateToProps = ({
-  error: {
+  userFeedback: {
     accessDeniedGlobalMessages,
     sessionExpiredGlobalMessages,
     unknownErrorMessages,
