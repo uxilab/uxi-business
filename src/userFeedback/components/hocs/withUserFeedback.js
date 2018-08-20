@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultErrorContainer from '../containers/DefaultErrorContainer';
+import DefaultErrorContainer from '../UserFeedbackProvider';
 
 export default Comp => props => (
   <DefaultErrorContainer>

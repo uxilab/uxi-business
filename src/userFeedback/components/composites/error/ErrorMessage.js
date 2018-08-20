@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   FormattedMessage,
 } from 'react-intl';
 import Alert from 'uxi/Alert';
-import {
-  compose,
-  withStateHandlers,
-} from 'recompose';
 import ShowMoreDetails from '../shared/ShowMoreDetails';
 
-const DefaultError = ({
-  hasMultiple,
-  moreDetails,
-  showMore,
-  toggle,
-}) => (
-  <Alert showClose style={{ margin: '15px', fontSize: '14px' }} type="error">
+class DefaultError extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMore: false,
+    };
+  }
+
+  toggle() {
+    const { showMore } = this.state;
+
+    this.setState({
+      showMore: !showMore,
+    });
+  }
+
+  render() {
+    const {
+      hasMultiple,
+      moreDetails,
+      showMore,
+      toggle,
+      onClose,
+    } = this.props;
+
+    return (
+      <Alert
+        onClose={onClose}
+        showClose
+        style={{ margin: '15px', fontSize: '14px' }}
+        type="error"
+      >
     <div style={{ fontSize: '16px', fontWeight: 'bold', paddingBottom: '6px' }} >
       {
         hasMultiple ? (
@@ -56,17 +77,8 @@ const DefaultError = ({
       ) : null
     }
   </Alert>
-);
+    );
+  }
+}
 
-export default compose(
-  withStateHandlers(
-    () => ({
-      showMore: false,
-    }),
-    {
-      toggle: ({ showMore }) => () => ({
-        showMore: !showMore,
-      }),
-    },
-  )
-)(DefaultError);
+export default DefaultError;

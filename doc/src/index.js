@@ -5,6 +5,10 @@ import {
   ForgotPasswordForm,
   ResetPasswordForm,
 } from 'uxi-business';
+import {
+  reducer as userFeedback,
+  UserFeedbackProvider,
+} from 'uxi-business/userFeedback';
 import ThemeProvider from 'uxi/Theme/ThemeProvider';
 import { createStore, combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
@@ -12,21 +16,34 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import FormWithCusomtInput from './examples/FormWithCusomtInput';
 import FormWithFieldAsyncValidation from './examples/FormWithFieldAsyncValidation';
+import { connect } from 'react-redux';
+import { showSuccess, showWarning } from 'uxi-business/userFeedback/actions';
 
 const rootReducer = combineReducers({
-  // ...your other reducers here
-  // you have to pass formReducer under 'form' key,
-  // for custom keys look up the docs for 'getFormState'
-  form: formReducer
-})
+  form: formReducer,
+  userFeedback,
+});
 
 const store = createStore(rootReducer)
 
+const DispatchButtons = ({ dispatch }) => {
+  return (
+    <div>
+      <button onClick={() => {dispatch(showSuccess({ message:'Yo!!' }))}} >Show Success</button>
+      <button onClick={() => {dispatch(showWarning({ message:'Dooh!'}))}} >Show Warning</button>
+    </div>
+  )
+}
+const DispatchButtonsContainer = connect()(DispatchButtons);
 
 const App = () => (
   <Provider store={store}>
     <IntlProvider locale="en">
       <ThemeProvider>
+        <UserFeedbackProvider>
+          <h1>Title</h1>
+          <DispatchButtonsContainer />
+        </UserFeedbackProvider>
       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <SignInForm
             onClick={(value) => {alert(JSON.stringify(value))}}

@@ -1,14 +1,19 @@
 import { handleActions } from 'redux-actions';
 import {
-  entityNotFound,
-  entityNoAccess,
-  somethingOdd,
+  showSuccess,
+  showWarning,
+  showError,
+  showInfo,
   generalAccessDenied,
   generalSessionExpired,
   generalUnknownError,
   generalEntityNotFound,
   generalQueued,
   clearError,
+  shouldClearError,
+  shouldClearSuccess,
+  shouldClearWarnings,
+  shouldClearInfo,
 } from './actions';
 
 const initalDefault = {
@@ -17,9 +22,41 @@ const initalDefault = {
   unknownErrorMessages: [],
   notFoundGlobalMessages: [],
   queuedGlobalMessages: [],
+  globalSuccessMessages: [],
+  globalWarningMessages: [],
+  globalErrorMessages: [],
+  globalInfoMessages: [],
 };
 
-export default handleActions({()
+export default handleActions({
+  [showSuccess]: (state, {payload}) => ({
+    ...state,
+    globalSuccessMessages: [
+      ...state.globalSuccessMessages,
+      payload,
+    ],
+  }),
+  [showWarning]: (state, { payload }) => ({
+    ...state,
+    globalWarningMessages: [
+      ...state.globalWarningMessages,
+      payload,
+    ],
+  }),
+  [showError]: (state, { payload }) => ({
+    ...state,
+    globalErrorMessages: [
+      ...state.globalErrorMessages,
+      payload,
+    ],
+  }),
+  [showInfo]: (state, { payload }) => ({
+    ...state,
+    globalInfoMessages: [
+      ...state.globalInfoMessages,
+      payload,
+    ],
+  }),
   [generalAccessDenied]: (state, { payload }) => ({
     ...state,
     accessDeniedGlobalMessages: [
@@ -62,5 +99,21 @@ export default handleActions({()
     unknownErrorMessages: state.unknownErrorMessages.filter(m => m.id !== payload),
     notFoundGlobalMessages: state.notFoundGlobalMessages.filter(m => m.id !== payload),
     queuedGlobalMessages: state.queuedGlobalMessages.filter(m => m.id !== payload),
+  }),
+  [shouldClearError]: state => ({
+    ...state,
+    globalErrorMessages: [],
+  }),
+  [shouldClearSuccess]: state => ({
+    ...state,
+    globalSuccessMessages: [],
+  }),
+  [shouldClearWarnings]: state => ({
+    ...state,
+    globalWarningMessages: [],
+  }),
+  [shouldClearInfo]: state => ({
+    ...state,
+    globalInfoMessages: [],
   }),
 }, initalDefault);

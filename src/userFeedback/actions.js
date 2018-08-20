@@ -1,12 +1,38 @@
 import { createAction } from 'redux-actions';
 import uuid from 'uuid/v4';
 
+export const showSuccess = createAction('GENERAL_SHOW_SUCCESS');
+export const showWarning = createAction('GENERAL_SHOW_WARNING');
+export const showError = createAction('GENERAL_SHOW_ERROR');
+export const showInfo = createAction('GENERAL_SHOW_INFORMATION');
+
+export const shouldClearError = createAction('GENERAL_CLEAR_ERROR');
+export const shouldClearSuccess = createAction('GENERAL_CLEAR_SUCCESS');
+export const shouldClearWarnings = createAction('GENERAL_CLEAR_WARNINGS');
+export const shouldClearInfo = createAction('GENERAL_CLEAR_INFO');
+
 export const generalAccessDenied = createAction('GENERAL_ACCESS_DENIED');
 export const generalSessionExpired = createAction('GENERAL_SESSION_EXPIRED');
 export const generalUnknownError = createAction('GENERAL_UNKNOWN_ERROR');
 export const generalEntityNotFound = createAction('GENERAL_ENTITY_NOT_FOUND');
 export const generalQueued = createAction('GENERAL_REQUEST_QUEUED');
 export const clearError = createAction('GENERAL_CLEAR_ERROR');
+
+const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
+  const successMessage = options.successMessage;
+  const id = uuid();
+  if(resp.ok) {
+    dispatch(
+      options.success ?
+        options.success({ id, message: successMessage}) :
+        showSuccess({ id, message: successMessage})
+    )
+
+    setTimeout(() => {
+      dispatch(clearError(id));
+    }, 10000);
+  }
+}
 
 export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
   const response = e.requestError || {};
@@ -163,5 +189,10 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
  */
 export const withDefaultErrorHandlingActions = (
   promise, options = {}
-) => params => dispatch => promise(params)(dispatch)
-  .catch(defaultErrorHandling(dispatch, params, options));
+) => params => dispatch => {
+  if(options.withMutation) {
+    return promise(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options));
+  }
+
+  return promise(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options));
+}

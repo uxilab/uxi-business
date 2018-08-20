@@ -1,37 +1,77 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GlobalErrorMessage from './composites/GlobalErrorMessage';
-import DefaultSessionExpired from './composites/DefaultSessionExpired';
-import GlobalQueuedMessage from './composites/GlobalQueuedMessage';
+import GlobalSuccessMessage from './composites/GlobalSuccessMessage';
+import SessionExpired from './composites/SessionExpired';
 import UserFeedbackWrapper from './composites/UserFeedbackWrapper';
+import GlobalWarnningMessage from './composites/GlobalWarningMessage';
+import GlobalInfoMessage from './composites/GlobalInfoMessage';
+import {
+  shouldClearError,
+  shouldClearSuccess,
+  shouldClearWarnings,
+  shouldClearInfo,
+} from '../actions';
 
 const UserFeedbackProvider = ({
   children,
   sessionExpiredGlobalMessages,
   errorMessages,
-  queuedGlobalMessages,
+  successMessages,
+  warningMessages,
+  globalInfoMessages,
+  clearErrors,
+  clearSuccess,
+  clearWarning,
+  clearInfo,
 }) => (
   <div>
     <UserFeedbackWrapper>
       {
-        queuedGlobalMessages &&
-        queuedGlobalMessages.length > 0 &&
-        (
-          <GlobalQueuedMessage messages={queuedGlobalMessages} />
-        )
-      }
-      {
         sessionExpiredGlobalMessages &&
         sessionExpiredGlobalMessages.length > 0 &&
         (
-          <DefaultSessionExpired />
+          <SessionExpired />
         )
       }
       {
         errorMessages &&
         errorMessages.length > 0 &&
         (
-          <GlobalErrorMessage messages={errorMessages} />
+          <GlobalErrorMessage
+            messages={errorMessages}
+            onClose={clearErrors}
+          />
+        )
+      }
+      {
+        successMessages &&
+        successMessages.length > 0 &&
+        (
+          <GlobalSuccessMessage
+            messages={successMessages}
+            onClose={clearSuccess}
+          />
+        )
+      }
+      {
+        warningMessages &&
+        warningMessages.length > 0 &&
+        (
+          <GlobalWarnningMessage
+            messages={warningMessages}
+            onClose={clearWarning}
+          />
+        )
+      }
+      {
+        globalInfoMessages &&
+        globalInfoMessages.length > 0 &&
+        (
+          <GlobalInfoMessage
+            messages={globalInfoMessages}
+            onClose={clearInfo}
+          />
         )
       }
     </UserFeedbackWrapper>
@@ -46,9 +86,16 @@ const mapStateToProps = ({
     unknownErrorMessages,
     notFoundGlobalMessages,
     queuedGlobalMessages,
+    globalErrorMessages,
+    globalSuccessMessages,
+    globalWarningMessages,
+    globalInfoMessages,
   },
 }) => {
   const errorMessages = [
+    ...globalErrorMessages.map(m => ({
+      ...m,
+    })),
     ...accessDeniedGlobalMessages.map(m => ({
       ...m,
       type: 'accessDenied',
@@ -63,6 +110,18 @@ const mapStateToProps = ({
     })),
   ];
 
+  const warningMessages = [
+    ...globalWarningMessages,
+    ...(queuedGlobalMessages || []).map(m => ({
+      ...m,
+      type: 'queue',
+    }))
+  ];
+
+  const successMessages = [
+    ...globalSuccessMessages,
+  ];
+
   return {
     hasAlert: (
       errorMessages.length > 0 ||
@@ -71,10 +130,28 @@ const mapStateToProps = ({
     ),
     errorMessages,
     sessionExpiredGlobalMessages,
-    queuedGlobalMessages,
+    successMessages,
+    warningMessages,
+    globalInfoMessages,
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  clearErrors() {
+    dispatch(shouldClearError());
+  },
+  clearSuccess() {
+    dispatch(shouldClearSuccess());
+  },
+  clearWarning() {
+    dispatch(shouldClearWarnings());
+  },
+  clearInfo() {
+    dispatch(shouldClearInfo());
+  },
+});
+
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(UserFeedbackProvider);

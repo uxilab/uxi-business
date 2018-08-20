@@ -35,6 +35,7 @@ const findAppropriateErrorMessage = (errorMessage) => {
 
 const GlobalErrorMessage = ({
   messages = [],
+  onClose,
 }) => {
   const isEmpty = messages.length === 0;
 
@@ -51,6 +52,7 @@ const GlobalErrorMessage = ({
 
   return (
     <ErrorMessage
+      onClose={onClose}
       hasMultiple={messages.length > 1}
       moreDetails={
         (messagesWithDetails && messagesWithDetails.length > 0)
