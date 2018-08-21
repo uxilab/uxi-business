@@ -9,7 +9,7 @@ import {
 import {
   reducer as userMessage,
   UserMessageProvider,
-} from 'uxi-business/userFeedback';
+} from 'uxi-business/userMessage';
 import ThemeProvider from 'uxi/Theme/ThemeProvider';
 import { createStore, combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
@@ -18,7 +18,7 @@ import { IntlProvider } from 'react-intl';
 import FormWithCusomtInput from './examples/FormWithCusomtInput';
 import FormWithFieldAsyncValidation from './examples/FormWithFieldAsyncValidation';
 import { connect } from 'react-redux';
-import { showSuccess, showWarning, showError, showInfo } from 'uxi-business/userFeedback/actions';
+import { showSuccess, showWarning, showError, showInfo } from 'uxi-business/userMessage/actions';
 
 const rootReducer = combineReducers({
   form: formReducer,

@@ -8,6 +8,7 @@ import {
   generalSessionExpired,
   generalUnknownError,
   generalEntityNotFound,
+  generalConflictedEntity,
   generalQueued,
   clearError,
   shouldClearError,
