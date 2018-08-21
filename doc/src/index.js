@@ -44,6 +44,7 @@ const App = () => (
     <IntlProvider locale="en">
       <ThemeProvider>
         <UxiBusinessProvider
+          onSessionExpired={()=> {alert('logout ')}}
         >
           <UserMessageProvider>
             <h1>Title</h1>

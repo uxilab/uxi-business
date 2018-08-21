@@ -20,6 +20,17 @@ const findAppropriateErrorMessage = (errorMessage) => {
     );
   }
 
+  if (errorMessage.type === 'accessDenied') {
+    return (
+      <span>
+        <FormattedMessage
+          id="module-error-accessDenied"
+          defaultMessage="You do not have access to this ressource"
+        />
+      </span>
+    );
+  }
+
   if (errorMessage.type === 'noFound') {
     return (
       <span>

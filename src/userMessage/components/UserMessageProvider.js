@@ -30,13 +30,13 @@ const UserFeedbackProvider = ({
 }) => (
   <div>
     <AppContext.Consumer>
-      {({ onLogout }) => (
+      {({ onSessionExpired }) => (
          <UserFeedbackWrapper>
          {
            sessionExpiredGlobalMessages &&
            sessionExpiredGlobalMessages.length > 0 &&
            (
-             <SessionExpired onLogout={onLogout} />
+             <SessionExpired onSessionExpired={onSessionExpired} />
            )
          }
          {

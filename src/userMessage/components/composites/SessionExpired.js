@@ -25,15 +25,15 @@ class SessionExpired extends Component {
   }
 
   componentWillReceiveProps() {
-    const { onLogout } = this.props;
+    const { onSessionExpired } = this.props;
     const { countDown } = this.state;
     if (countDown === 1) {
-      onLogout();
+      onSessionExpired();
     }
   }
 
   render() {
-    const { onLogout } = this.props;
+    const { onSessionExpired } = this.props;
     const { countDown } = this.state;
 
     return (
@@ -50,7 +50,7 @@ class SessionExpired extends Component {
             <Button
               text="Log back in"
               type="primary"
-              onClick={onLogout}
+              onClick={onSessionExpired}
             />
           </div>
         </Alert>
