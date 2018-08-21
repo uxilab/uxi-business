@@ -14,7 +14,10 @@ class UxiBusinessProvider extends Component {
       logoutUrl,
       onSessionExpired: props.onSessionExpired ? props.onSessionExpired : () => {
         window.location = logoutUrl;
-      }
+      },
+      log: props.log ? props.log : (e) => {
+        console.log(e);
+      },
     };
   }
 
