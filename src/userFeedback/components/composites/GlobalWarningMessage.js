@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import WarningMessage from './warning/WarningMessage';
-import AllMessageDetails from './message/AllMessageDetails';
+import SingleMessage from './message/SingleMessage';
+import MultipleMessage from './message/MultipleMessage';
 
 const findAppropriateWarningMessage = (successMessage) => {
   if (successMessage.message) {
@@ -16,7 +16,7 @@ const findAppropriateWarningMessage = (successMessage) => {
     <span>
       <FormattedMessage
         id="module-sucesss-defaultMessage"
-        defaultMessage="You operation has been completed successfuly"
+        defaultMessage="You operation has been queued successfuly"
       />
     </span>
   );
@@ -32,23 +32,39 @@ const GlobalWarningMessage = ({
     return null;
   }
 
-  const messagesWithDetails = messages.map(warningMessage => ({
-    ...warningMessage,
-    message: findAppropriateWarningMessage(warningMessage),
+  const messagesWithDetails = messages.map(warning => ({
+    ...warning,
+    message: findAppropriateWarningMessage(warning),
   }));
 
+  if(messages.length === 1) {
+    return (
+      <SingleMessage
+        type="warning"
+        message={messages[0]}
+        onClose={onClose}
+      />
+    );
+  }
+
   return (
-    <WarningMessage
-      onClose={onClose}
-      hasMultiple={messages.length > 1}
-      moreDetails={
-        (messagesWithDetails && messagesWithDetails.length > 0)
-          ? (
-            <AllMessageDetails
-              messages={messagesWithDetails}
-            />
-          ) : null
+    <MultipleMessage
+      type="warning"
+      defaultTitle={
+        <FormattedMessage
+          id="module-warning-defaultTitleMultiple"
+          defaultMessage="Warning"
+        />
       }
+      defaultExplanation={
+        <FormattedMessage
+          id="module-warning-defaultMultiple"
+          defaultMessage="You have {value} warnings"
+          values={{ value: messagesWithDetails.length }}
+        />
+      }
+      messages={messagesWithDetails}
+      onClose={onClose}
     />
   );
 };

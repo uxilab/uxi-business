@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import InfoMessage from './info/InfoMessage';
-import AllMessageDetails from './message/AllMessageDetails';
+import SingleMessage from './message/SingleMessage';
+import MultipleMessage from './message/MultipleMessage';
 
 const GlobalInfoMessage = ({
   messages = [],
@@ -15,18 +15,34 @@ const GlobalInfoMessage = ({
 
   const messagesWithDetails = messages.filter((m) => (m.message));
 
+  if(messagesWithDetails.length === 1) {
+    return (
+      <SingleMessage
+        type="info"
+        message={messagesWithDetails[0]}
+        onClose={onClose}
+      />
+    );
+  }
+
   return (
-    <InfoMessage
-      onClose={onClose}
-      hasMultiple={messages.length > 1}
-      moreDetails={
-        (messagesWithDetails && messagesWithDetails.length > 0)
-          ? (
-            <AllMessageDetails
-              messages={messagesWithDetails}
-            />
-          ) : null
+    <MultipleMessage
+      type="info"
+      defaultTitle={
+        <FormattedMessage
+          id="module-info-defaultTitleMultiple"
+          defaultMessage="Information"
+        />
       }
+      defaultExplanation={
+        <FormattedMessage
+          id="module-info-defaultMultiple"
+          defaultMessage="You have {value} errors"
+          values={{ value: messagesWithDetails.length }}
+        />
+      }
+      messages={messagesWithDetails}
+      onClose={onClose}
     />
   );
 };

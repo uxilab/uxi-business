@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 class SessionExpired extends Component {
   constructor(props) {
     super(props);
-    this.logout = this.logout.bind(this);
     this.state = {
       countDown: 10,
     };
@@ -26,13 +25,17 @@ class SessionExpired extends Component {
   }
 
   componentWillReceiveProps() {
-    const { logout } = this.props;
+    const { onLogout } = this.props;
+    const { countDown } = this.state;
     if (countDown === 1) {
-      logout();
+      onLogout();
     }
   }
 
   render() {
+    const { onLogout } = this.props;
+    const { countDown } = this.state;
+
     return (
       (
         <Alert isBanner type="error">
@@ -47,7 +50,7 @@ class SessionExpired extends Component {
             <Button
               text="Log back in"
               type="primary"
-              onClick={this.logout}
+              onClick={onLogout}
             />
           </div>
         </Alert>

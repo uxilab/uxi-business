@@ -18,7 +18,7 @@ import {
 
 const initalDefault = {
   accessDeniedGlobalMessages: [],
-  sessionExpiredGlobalMessages: [],
+  sessionExpiredGlobalMessages: [{}],
   unknownErrorMessages: [],
   notFoundGlobalMessages: [],
   queuedGlobalMessages: [],

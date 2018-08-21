@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import SuccessMessage from './success/SuccessMessage'
-import AllMessageDetails from './message/AllMessageDetails';
+import SingleMessage from './message/SingleMessage';
+import MultipleMessage from './message/MultipleMessage';
 
 const findAppropriateSuccessMessage = (successMessage) => {
   if (successMessage.message) {
@@ -13,12 +13,10 @@ const findAppropriateSuccessMessage = (successMessage) => {
   }
 
   return (
-    <span>
-      <FormattedMessage
-        id="module-sucesss-defaultMessage"
-        defaultMessage="Your operation has been completed successfuly"
-      />
-    </span>
+    <FormattedMessage
+      id="module-sucesss-defaultMessage"
+      defaultMessage="Your operation has been completed successfuly"
+    />
   );
 };
 
@@ -37,18 +35,34 @@ const GlobalSuccessMessage = ({
     message: findAppropriateSuccessMessage(successMessage),
   }));
 
+  if(messages.length === 1) {
+    return (
+      <SingleMessage
+        type="success"
+        message={messages[0]}
+        onClose={onClose}
+      />
+    );
+  }
+
   return (
-    <SuccessMessage
-      onClose={onClose}
-      hasMultiple={messages.length > 1}
-      moreDetails={
-        (messagesWithDetails && messagesWithDetails.length > 0)
-          ? (
-            <AllMessageDetails
-              messages={messagesWithDetails}
-            />
-          ) : null
+    <MultipleMessage
+      type="success"
+      defaultTitle={
+        <FormattedMessage
+          id="module-sucess-defaultTitleMultiple"
+          defaultMessage="Operations completed successfuly"
+        />
       }
+      defaultExplanation={
+        <FormattedMessage
+          id="module-sucess-defaultMultiple"
+          defaultMessage="You have {value} success messages"
+          values={{ value: messages.length }}
+        />
+      }
+      messages={messagesWithDetails}
+      onClose={onClose}
     />
   );
 };

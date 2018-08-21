@@ -4,6 +4,7 @@ import {
   SignInForm,
   ForgotPasswordForm,
   ResetPasswordForm,
+  UxiBusinessProvider,
 } from 'uxi-business';
 import {
   reducer as userFeedback,
@@ -17,7 +18,7 @@ import { IntlProvider } from 'react-intl';
 import FormWithCusomtInput from './examples/FormWithCusomtInput';
 import FormWithFieldAsyncValidation from './examples/FormWithFieldAsyncValidation';
 import { connect } from 'react-redux';
-import { showSuccess, showWarning } from 'uxi-business/userFeedback/actions';
+import { showSuccess, showWarning, showError, showInfo } from 'uxi-business/userFeedback/actions';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -31,6 +32,8 @@ const DispatchButtons = ({ dispatch }) => {
     <div>
       <button onClick={() => {dispatch(showSuccess({ message:'Yo!!' }))}} >Show Success</button>
       <button onClick={() => {dispatch(showWarning({ message:'Dooh!'}))}} >Show Warning</button>
+      <button onClick={() => {dispatch(showError({ message:'Dooh Error!'}))}} >Show Error</button>
+      <button onClick={() => {dispatch(showInfo({ message:'Just so you know!'}))}} >Show Info</button>
     </div>
   )
 }
@@ -40,10 +43,12 @@ const App = () => (
   <Provider store={store}>
     <IntlProvider locale="en">
       <ThemeProvider>
-        <UserFeedbackProvider>
-          <h1>Title</h1>
-          <DispatchButtonsContainer />
-        </UserFeedbackProvider>
+        <UxiBusinessProvider>
+          <UserFeedbackProvider>
+            <h1>Title</h1>
+            <DispatchButtonsContainer />
+          </UserFeedbackProvider>
+        </UxiBusinessProvider>
       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <SignInForm
             onClick={(value) => {alert(JSON.stringify(value))}}

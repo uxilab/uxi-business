@@ -1,5 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  AppContext
+} from '../../provider/UxiBusinessProvider';
 import GlobalErrorMessage from './composites/GlobalErrorMessage';
 import GlobalSuccessMessage from './composites/GlobalSuccessMessage';
 import SessionExpired from './composites/SessionExpired';
@@ -26,55 +29,59 @@ const UserFeedbackProvider = ({
   clearInfo,
 }) => (
   <div>
-    <UserFeedbackWrapper>
-      {
-        sessionExpiredGlobalMessages &&
-        sessionExpiredGlobalMessages.length > 0 &&
-        (
-          <SessionExpired />
-        )
-      }
-      {
-        errorMessages &&
-        errorMessages.length > 0 &&
-        (
-          <GlobalErrorMessage
-            messages={errorMessages}
-            onClose={clearErrors}
-          />
-        )
-      }
-      {
-        successMessages &&
-        successMessages.length > 0 &&
-        (
-          <GlobalSuccessMessage
-            messages={successMessages}
-            onClose={clearSuccess}
-          />
-        )
-      }
-      {
-        warningMessages &&
-        warningMessages.length > 0 &&
-        (
-          <GlobalWarnningMessage
-            messages={warningMessages}
-            onClose={clearWarning}
-          />
-        )
-      }
-      {
-        globalInfoMessages &&
-        globalInfoMessages.length > 0 &&
-        (
-          <GlobalInfoMessage
-            messages={globalInfoMessages}
-            onClose={clearInfo}
-          />
-        )
-      }
-    </UserFeedbackWrapper>
+    <AppContext.Consumer>
+      {({ onLogout }) => (
+         <UserFeedbackWrapper>
+         {
+           sessionExpiredGlobalMessages &&
+           sessionExpiredGlobalMessages.length > 0 &&
+           (
+             <SessionExpired onLogout={onLogout} />
+           )
+         }
+         {
+           errorMessages &&
+           errorMessages.length > 0 &&
+           (
+             <GlobalErrorMessage
+               messages={errorMessages}
+               onClose={clearErrors}
+             />
+           )
+         }
+         {
+           successMessages &&
+           successMessages.length > 0 &&
+           (
+             <GlobalSuccessMessage
+               messages={successMessages}
+               onClose={clearSuccess}
+             />
+           )
+         }
+         {
+           warningMessages &&
+           warningMessages.length > 0 &&
+           (
+             <GlobalWarnningMessage
+               messages={warningMessages}
+               onClose={clearWarning}
+             />
+           )
+         }
+         {
+           globalInfoMessages &&
+           globalInfoMessages.length > 0 &&
+           (
+             <GlobalInfoMessage
+               messages={globalInfoMessages}
+               onClose={clearInfo}
+             />
+           )
+         }
+       </UserFeedbackWrapper>
+      )}
+    </AppContext.Consumer>
     {children}
   </div>
 );
@@ -123,11 +130,6 @@ const mapStateToProps = ({
   ];
 
   return {
-    hasAlert: (
-      errorMessages.length > 0 ||
-      sessionExpiredGlobalMessages.length > 0 ||
-      queuedGlobalMessages.length > 0
-    ),
     errorMessages,
     sessionExpiredGlobalMessages,
     successMessages,
