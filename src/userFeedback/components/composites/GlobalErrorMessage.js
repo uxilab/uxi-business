@@ -31,6 +31,17 @@ const findAppropriateErrorMessage = (errorMessage) => {
     );
   }
 
+  if(errorMessage.type === 'conflicted') {
+    return (
+      <span>
+        <FormattedMessage
+          id="module-error-entityConflict"
+          defaultMessage="An error occured, you are probably trying to create the same Entity"
+        />
+      </span>
+    );
+  }
+
   return (
     <span>
       <FormattedMessage

@@ -1,7 +1,7 @@
 export reducer from './reducer';
 export withDefaultErrorHandlingActions from './actions';
-export withUserFeedback from './components/hocs/withUserFeedback';
-export UserFeedbackProvider from './components/UserFeedbackProvider';
+export withUserMessage from './components/hocs/withUserMessage';
+export UserMessageProvider from './components/UserMessageProvider';
 
 class DefaultErrorRequest extends Error {
   constructor(requestError = {}, ...params) {

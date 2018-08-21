@@ -18,7 +18,7 @@ import {
 
 const initalDefault = {
   accessDeniedGlobalMessages: [],
-  sessionExpiredGlobalMessages: [{}],
+  sessionExpiredGlobalMessages: [],
   unknownErrorMessages: [],
   notFoundGlobalMessages: [],
   queuedGlobalMessages: [],
@@ -26,6 +26,7 @@ const initalDefault = {
   globalWarningMessages: [],
   globalErrorMessages: [],
   globalInfoMessages: [],
+  globalConflictedEntity:[],
 };
 
 export default handleActions({
@@ -75,6 +76,13 @@ export default handleActions({
     ...state,
     unknownErrorMessages: [
       ...state.unknownErrorMessages,
+      payload,
+    ],
+  }),
+  [generalConflictedEntity]: (state, {payload}) => ({
+    ...state,
+    globalConflictedEntity: [
+      ...state.globalConflictedEntity,
       payload,
     ],
   }),

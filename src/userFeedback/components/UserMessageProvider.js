@@ -87,12 +87,13 @@ const UserFeedbackProvider = ({
 );
 
 const mapStateToProps = ({
-  userFeedback: {
+  userMessage: {
     accessDeniedGlobalMessages,
     sessionExpiredGlobalMessages,
     unknownErrorMessages,
     notFoundGlobalMessages,
     queuedGlobalMessages,
+    globalConflictedEntity,
     globalErrorMessages,
     globalSuccessMessages,
     globalWarningMessages,
@@ -114,6 +115,10 @@ const mapStateToProps = ({
     ...notFoundGlobalMessages.map(m => ({
       ...m,
       type: 'noFound',
+    })),
+    ...globalConflictedEntity.map(m => ({
+      ...m,
+      type: 'conflicted',
     })),
   ];
 

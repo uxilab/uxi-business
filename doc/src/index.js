@@ -7,8 +7,8 @@ import {
   UxiBusinessProvider,
 } from 'uxi-business';
 import {
-  reducer as userFeedback,
-  UserFeedbackProvider,
+  reducer as userMessage,
+  UserMessageProvider,
 } from 'uxi-business/userFeedback';
 import ThemeProvider from 'uxi/Theme/ThemeProvider';
 import { createStore, combineReducers } from 'redux'
@@ -22,7 +22,7 @@ import { showSuccess, showWarning, showError, showInfo } from 'uxi-business/user
 
 const rootReducer = combineReducers({
   form: formReducer,
-  userFeedback,
+  userMessage,
 });
 
 const store = createStore(rootReducer)
@@ -43,11 +43,12 @@ const App = () => (
   <Provider store={store}>
     <IntlProvider locale="en">
       <ThemeProvider>
-        <UxiBusinessProvider>
-          <UserFeedbackProvider>
+        <UxiBusinessProvider
+        >
+          <UserMessageProvider>
             <h1>Title</h1>
             <DispatchButtonsContainer />
-          </UserFeedbackProvider>
+          </UserMessageProvider>
         </UxiBusinessProvider>
       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <SignInForm

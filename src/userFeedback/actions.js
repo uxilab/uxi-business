@@ -16,6 +16,7 @@ export const generalSessionExpired = createAction('GENERAL_SESSION_EXPIRED');
 export const generalUnknownError = createAction('GENERAL_UNKNOWN_ERROR');
 export const generalEntityNotFound = createAction('GENERAL_ENTITY_NOT_FOUND');
 export const generalQueued = createAction('GENERAL_REQUEST_QUEUED');
+export const generalConflictedEntity = createAction('GENERAL_ENTITY_CONFLICTED');
 export const clearError = createAction('GENERAL_CLEAR_ERROR');
 
 const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
@@ -127,6 +128,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
     response.original.status <= 599
   ) {
     options.log && options.log(`Error ${response.original.status} - Unknown - for ${response.original.url}`);
+
     const unknownErrorMessage = {
       id,
       params,
@@ -152,10 +154,18 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
       url: requestURL,
     };
 
+    if(response.original.status === 409) {
+      return dispatch(
+        options.conflictedEntity ?
+        options.conflictedEntity(unknownErrorMessage) :
+        generalConflictedEntity(unknownErrorMessage)
+      );
+    }
+
     return dispatch(
       options.unknownError ?
       options.unknownError(unknownErrorMessage) :
-        generalUnknownError(unknownErrorMessage)
+        unknownError(unknownErrorMessage)
     );
   }
 
