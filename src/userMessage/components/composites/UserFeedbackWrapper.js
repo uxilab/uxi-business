@@ -1,17 +1,19 @@
 import React from 'react';
-import Slide from 'uxi/internal/Slide';
+import CompactSlide from 'uxi/internal/CompactSlide';
 import Flex from 'uxi/Layout/Flex';
 
 const UserFeedbackContainer = ({ children }) => (
-  <Slide
+  <CompactSlide
     anchor="top"
     direction="bottom"
-    inAttr
+    inAttr={children && React.Children.count(children) > 0}
   >
-    <Flex style={{ maxWidth: '700px', minWidth: '700px', margin: '0 auto' }}>
-      {children}
+    <Flex style={{ flexDirection: 'column' }}>
+      <div>
+        {children}
+      </div>
     </Flex>
-  </Slide>
+  </CompactSlide>
 );
 
 export default UserFeedbackContainer;
