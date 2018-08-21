@@ -120,13 +120,13 @@ Show an info message
 
 ### Default REST error handling
 
-HTTP Status : 200 => success message
-HTTP Status : 202 => warning queue message
-HTTP Status : 403 => access denied error message
-HTTP Status : 404 => entity notfound error message
-HTTP Status : 409 => conflict error message
-HTTP Status : 5xx => unknow error message
-HTTP Status : 4xx => unknow error message
+- HTTP Status : 200 => success message
+- HTTP Status : 202 => warning queue message
+- HTTP Status : 403 => access denied error message
+- HTTP Status : 404 => entity notfound error message
+- HTTP Status : 409 => conflict error message
+- HTTP Status : 5xx => unknow error message
+- HTTP Status : 4xx => unknow error message
 
 **How to decorate my action to receive the default User Message behavior?**
 
