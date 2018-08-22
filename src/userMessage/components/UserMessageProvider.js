@@ -93,6 +93,7 @@ const mapStateToProps = ({
     unknownErrorMessages,
     notFoundGlobalMessages,
     queuedGlobalMessages,
+    globalNetworkErrorMessages,
     globalConflictedEntity,
     globalErrorMessages,
     globalSuccessMessages,
@@ -101,6 +102,10 @@ const mapStateToProps = ({
   },
 }) => {
   const errorMessages = [
+    ...globalNetworkErrorMessages.map(m => ({
+      ...m,
+      type: 'network',
+    })),
     ...globalErrorMessages.map(m => ({
       ...m,
     })),

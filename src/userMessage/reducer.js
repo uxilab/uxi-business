@@ -7,6 +7,7 @@ import {
   generalAccessDenied,
   generalSessionExpired,
   generalUnknownError,
+  generalNetworkError,
   generalEntityNotFound,
   generalConflictedEntity,
   generalQueued,
@@ -23,6 +24,7 @@ const initalDefault = {
   unknownErrorMessages: [],
   notFoundGlobalMessages: [],
   queuedGlobalMessages: [],
+  globalNetworkErrorMessages: [],
   globalSuccessMessages: [],
   globalWarningMessages: [],
   globalErrorMessages: [],
@@ -77,6 +79,13 @@ export default handleActions({
     ...state,
     unknownErrorMessages: [
       ...state.unknownErrorMessages,
+      payload,
+    ],
+  }),
+  [generalNetworkError]: (state, { payload }) => ({
+    ...state,
+    globalNetworkErrorMessages: [
+      ...state.globalNetworkErrorMessages,
       payload,
     ],
   }),

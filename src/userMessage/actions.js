@@ -18,3 +18,4 @@ export const generalEntityNotFound = createAction('GENERAL_ENTITY_NOT_FOUND');
 export const generalQueued = createAction('GENERAL_REQUEST_QUEUED');
 export const generalConflictedEntity = createAction('GENERAL_ENTITY_CONFLICTED');
 export const clearError = createAction('GENERAL_CLEAR_ERROR');
+export const generalNetworkError = createAction('GENERAL_NETWORK_ERROR');

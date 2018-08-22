@@ -2,6 +2,7 @@ import {
   generalAccessDenied,
   generalSessionExpired,
   generalUnknownError,
+  generalNetworkError,
   generalEntityNotFound,
   generalQueued,
   generalConflictedEntity,
@@ -172,9 +173,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
     };
 
     return dispatch(
-      options.unknownError ?
-      options.unknownError(unknownErrorMessage) :
-        generalUnknownError(unknownErrorMessage)
+      options.networkError ?
+      options.networkError(unknownErrorMessage) :
+      generalNetworkError(unknownErrorMessage)
     );
   }
 
@@ -197,9 +198,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
     }
 
     return dispatch(
-      options.unknownError ?
-      options.unknownError(unknownErrorMessage) :
-        generalUnknownError(unknownErrorMessage)
+      options.networkError ?
+      options.networkError(unknownErrorMessage) :
+      generalNetworkError(unknownErrorMessage)
     );
   }
 
