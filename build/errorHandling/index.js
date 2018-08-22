@@ -7,6 +7,12 @@ exports.withDefaultErrorHandlingActions = exports.defaultErrorHandling = exports
 
 var _actions = require('../userMessage/actions');
 
+var _v = require('uuid/v4');
+
+var _v2 = _interopRequireDefault(_v);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -85,7 +91,7 @@ var defaultMutationHandling = function defaultMutationHandling(dispatch) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   return function (resp) {
     var successMessage = options.successMessage;
-    var id = uuid();
+    var id = (0, _v2.default)();
     if (resp.ok) {
       dispatch(options.success ? options.success({ id: id, message: successMessage }) : (0, _actions.showSuccess)({ id: id, message: successMessage }));
 
@@ -102,7 +108,7 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
     var response = e.requestError || {};
     var errorMessage = response.message || e.message;
     var requestURL = response && response.original ? response.original.url : '';
-    var id = uuid();
+    var id = (0, _v2.default)();
 
     setTimeout(function () {
       dispatch((0, _actions.clearError)(id));
