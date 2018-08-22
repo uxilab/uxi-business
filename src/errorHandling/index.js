@@ -9,6 +9,7 @@ import {
   clearError,
   showSuccess,
 } from '../userMessage/actions';
+import uuid from 'uuid/v4';
 
 class DefaultErrorRequest extends Error {
   constructor(requestError = {}, ...params) {

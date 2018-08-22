@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.clearError = exports.generalConflictedEntity = exports.generalQueued = exports.generalEntityNotFound = exports.generalUnknownError = exports.generalSessionExpired = exports.generalAccessDenied = exports.shouldClearInfo = exports.shouldClearWarnings = exports.shouldClearSuccess = exports.shouldClearError = exports.showInfo = exports.showError = exports.showWarning = exports.showSuccess = undefined;
+exports.generalNetworkError = exports.clearError = exports.generalConflictedEntity = exports.generalQueued = exports.generalEntityNotFound = exports.generalUnknownError = exports.generalSessionExpired = exports.generalAccessDenied = exports.shouldClearInfo = exports.shouldClearWarnings = exports.shouldClearSuccess = exports.shouldClearError = exports.showInfo = exports.showError = exports.showWarning = exports.showSuccess = undefined;
 
 var _reduxActions = require('redux-actions');
 
@@ -30,3 +30,4 @@ var generalEntityNotFound = exports.generalEntityNotFound = (0, _reduxActions.cr
 var generalQueued = exports.generalQueued = (0, _reduxActions.createAction)('GENERAL_REQUEST_QUEUED');
 var generalConflictedEntity = exports.generalConflictedEntity = (0, _reduxActions.createAction)('GENERAL_ENTITY_CONFLICTED');
 var clearError = exports.clearError = (0, _reduxActions.createAction)('GENERAL_CLEAR_ERROR');
+var generalNetworkError = exports.generalNetworkError = (0, _reduxActions.createAction)('GENERAL_NETWORK_ERROR');

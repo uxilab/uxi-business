@@ -179,7 +179,7 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         status: response.original.status
       };
 
-      return dispatch(options.unknownError ? options.unknownError(unknownErrorMessage) : (0, _actions.generalUnknownError)(unknownErrorMessage));
+      return dispatch(options.networkError ? options.networkError(unknownErrorMessage) : (0, _actions.generalNetworkError)(unknownErrorMessage));
     }
 
     if (response.isError) {
@@ -196,7 +196,7 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         return dispatch(options.conflictedEntity ? options.conflictedEntity(_unknownErrorMessage) : (0, _actions.generalConflictedEntity)(_unknownErrorMessage));
       }
 
-      return dispatch(options.unknownError ? options.unknownError(_unknownErrorMessage) : (0, _actions.generalUnknownError)(_unknownErrorMessage));
+      return dispatch(options.networkError ? options.networkError(_unknownErrorMessage) : (0, _actions.generalNetworkError)(_unknownErrorMessage));
     }
 
     if (errorMessage) {

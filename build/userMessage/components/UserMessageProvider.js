@@ -97,13 +97,18 @@ var mapStateToProps = function mapStateToProps(_ref3) {
       unknownErrorMessages = _ref3$userMessage.unknownErrorMessages,
       notFoundGlobalMessages = _ref3$userMessage.notFoundGlobalMessages,
       queuedGlobalMessages = _ref3$userMessage.queuedGlobalMessages,
+      globalNetworkErrorMessages = _ref3$userMessage.globalNetworkErrorMessages,
       globalConflictedEntity = _ref3$userMessage.globalConflictedEntity,
       globalErrorMessages = _ref3$userMessage.globalErrorMessages,
       globalSuccessMessages = _ref3$userMessage.globalSuccessMessages,
       globalWarningMessages = _ref3$userMessage.globalWarningMessages,
       globalInfoMessages = _ref3$userMessage.globalInfoMessages;
 
-  var errorMessages = [].concat(_toConsumableArray(globalErrorMessages.map(function (m) {
+  var errorMessages = [].concat(_toConsumableArray(globalNetworkErrorMessages.map(function (m) {
+    return _extends({}, m, {
+      type: 'network'
+    });
+  })), _toConsumableArray(globalErrorMessages.map(function (m) {
     return _extends({}, m);
   })), _toConsumableArray(accessDeniedGlobalMessages.map(function (m) {
     return _extends({}, m, {

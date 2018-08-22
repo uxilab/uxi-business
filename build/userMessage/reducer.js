@@ -22,6 +22,7 @@ var initalDefault = {
   unknownErrorMessages: [],
   notFoundGlobalMessages: [],
   queuedGlobalMessages: [],
+  globalNetworkErrorMessages: [],
   globalSuccessMessages: [],
   globalWarningMessages: [],
   globalErrorMessages: [],
@@ -64,23 +65,28 @@ exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, _define
   return _extends({}, state, {
     unknownErrorMessages: [].concat(_toConsumableArray(state.unknownErrorMessages), [payload])
   });
-}), _defineProperty(_handleActions, _actions.generalConflictedEntity, function (state, _ref8) {
+}), _defineProperty(_handleActions, _actions.generalNetworkError, function (state, _ref8) {
   var payload = _ref8.payload;
+  return _extends({}, state, {
+    globalNetworkErrorMessages: [].concat(_toConsumableArray(state.globalNetworkErrorMessages), [payload])
+  });
+}), _defineProperty(_handleActions, _actions.generalConflictedEntity, function (state, _ref9) {
+  var payload = _ref9.payload;
   return _extends({}, state, {
     globalConflictedEntity: [].concat(_toConsumableArray(state.globalConflictedEntity), [payload])
   });
-}), _defineProperty(_handleActions, _actions.generalEntityNotFound, function (state, _ref9) {
-  var payload = _ref9.payload;
+}), _defineProperty(_handleActions, _actions.generalEntityNotFound, function (state, _ref10) {
+  var payload = _ref10.payload;
   return _extends({}, state, {
     notFoundGlobalMessages: [].concat(_toConsumableArray(state.notFoundGlobalMessages), [payload])
   });
-}), _defineProperty(_handleActions, _actions.generalQueued, function (state, _ref10) {
-  var payload = _ref10.payload;
+}), _defineProperty(_handleActions, _actions.generalQueued, function (state, _ref11) {
+  var payload = _ref11.payload;
   return _extends({}, state, {
     queuedGlobalMessages: [].concat(_toConsumableArray(state.queuedGlobalMessages), [payload])
   });
-}), _defineProperty(_handleActions, _actions.clearError, function (state, _ref11) {
-  var payload = _ref11.payload;
+}), _defineProperty(_handleActions, _actions.clearError, function (state, _ref12) {
+  var payload = _ref12.payload;
   return _extends({}, state, {
     accessDeniedGlobalMessages: state.accessDeniedGlobalMessages.filter(function (m) {
       return m.id !== payload;
