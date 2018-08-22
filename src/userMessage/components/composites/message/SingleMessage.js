@@ -14,7 +14,7 @@ const SingleMessage = ({
 }) => (
     <Alert
       onClose={onClose}
-      style={{ margin: '15px', fontSize: '14px', minWidth:'400px' }}
+      style={{ fontSize: '14px', minWidth: '280px', width:'400px', maxWidth: '680px' }}
       type={type}
       showClose
     >
