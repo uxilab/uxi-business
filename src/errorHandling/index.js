@@ -1,3 +1,14 @@
+import {
+  generalAccessDenied,
+  generalSessionExpired,
+  generalUnknownError,
+  generalEntityNotFound,
+  generalQueued,
+  generalConflictedEntity,
+  clearError,
+  showSuccess,
+} from '../userMessage/actions';
+
 class DefaultErrorRequest extends Error {
   constructor(requestError = {}, ...params) {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
@@ -15,15 +26,13 @@ class DefaultErrorRequest extends Error {
 }
 
 export const withDefaultErrorHandler = (Comp) => (props) => (
-  return (
-    <AppContext.Consumer>
-      {({log})=> (
-        <SwallowComponet log={log}>
-          <Comp {...props} />
-        </SwallowComponet>
-      )}
-    </AppContext.Consumer>
-  )
+  <AppContext.Consumer>
+    {({log})=> (
+      <SwallowComponet log={log}>
+        <Comp {...props} />
+      </SwallowComponet>
+    )}
+  </AppContext.Consumer>
 );
 
 export const defaultCatch = (response) => {
@@ -42,3 +51,192 @@ export const defaultCatch = (response) => {
 };
 
 export const withDefaultCatch = (promise) => (promise.then(handleErrorAndCreateErrorResp));
+
+
+const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
+  const successMessage = options.successMessage;
+  const id = uuid();
+  if(resp.ok) {
+    dispatch(
+      options.success ?
+        options.success({ id, message: successMessage}) :
+        showSuccess({ id, message: successMessage})
+    )
+
+    setTimeout(() => {
+      dispatch(clearError(id));
+    }, 10000);
+  }
+}
+
+export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
+  const response = e.requestError || {};
+  const errorMessage = response.message || e.message;
+  const requestURL = response && response.original ? response.original.url : '';
+  const id = uuid();
+
+  setTimeout(() => {
+    dispatch(clearError(id));
+  }, 10000);
+
+  if (options.onErrorAction) {
+    dispatch(options.onErrorAction());
+  }
+
+  if (response.original && response.original.status === 401) {
+    options.log && options.log(`Error 401 - unauthorized - for ${response.original.url}`)
+
+    const unauthorizedMessage = {
+      id,
+      params,
+      errorMessage,
+      url: requestURL,
+      status: 401,
+    };
+
+    return dispatch(
+      options.sessionExpired ?
+      options.sessionExpired(unauthorizedMessage) :
+        generalSessionExpired(unauthorizedMessage)
+    );
+  }
+
+  if (response.original && response.original.status === 403) {
+    options.log && options.log(`Error 403 - access denied - for ${response.original.url}`);
+
+    const accessDeniedMessage = {
+      id,
+      params,
+      errorMessage,
+      url: requestURL,
+      status: 403,
+    };
+
+    return dispatch(
+      options.accessDenied ?
+      options.accessDenied(accessDeniedMessage) :
+        generalAccessDenied(accessDeniedMessage)
+    );
+  }
+
+  if (response.original && response.original.status === 404) {
+    options.log && options.log(`Error 404 - Not Found - for ${response.original.url}`);
+
+    const notFoundMessage = {
+      id,
+      params,
+      errorMessage,
+      url: requestURL,
+      status: 404,
+    };
+
+    return dispatch(
+      options.notFound ?
+      options.notFound(notFoundMessage) :
+        generalEntityNotFound(notFoundMessage)
+    );
+  }
+
+  if (response.original && response.original.status === 202) {
+    options.log && options.log(`Error 202 - Queued - for ${response.original.url}`);
+
+    const queuedMessage = {
+      id,
+      params,
+      errorMessage,
+      url: requestURL,
+      status: 202,
+    };
+
+    return dispatch(
+      options.queued ?
+      options.queued(queuedMessage) :
+        generalQueued(queuedMessage)
+    );
+  }
+
+  if (
+    response.original &&
+    response.original.status &&
+    response.original.status >= 400 &&
+    response.original.status <= 599
+  ) {
+    options.log && options.log(`Error ${response.original.status} - Unknown - for ${response.original.url}`);
+
+    const unknownErrorMessage = {
+      id,
+      params,
+      errorMessage,
+      url: requestURL,
+      status: response.original.status,
+    };
+
+    return dispatch(
+      options.unknownError ?
+      options.unknownError(unknownErrorMessage) :
+        generalUnknownError(unknownErrorMessage)
+    );
+  }
+
+  if (response.isError) {
+    options.log && options.log(`Uknow Error - Unknown status - for ${response.original.url}`);
+
+    const unknownErrorMessage = {
+      id,
+      params,
+      errorMessage,
+      url: requestURL,
+    };
+
+    if(response.original.status === 409) {
+      return dispatch(
+        options.conflictedEntity ?
+        options.conflictedEntity(unknownErrorMessage) :
+        generalConflictedEntity(unknownErrorMessage)
+      );
+    }
+
+    return dispatch(
+      options.unknownError ?
+      options.unknownError(unknownErrorMessage) :
+        generalUnknownError(unknownErrorMessage)
+    );
+  }
+
+  if (errorMessage) {
+    return dispatch(
+      options.unknownError ?
+      options.unknownError({
+          id,
+          params,
+          errorMessage,
+        }) :
+        generalUnknownError({
+          id,
+          params,
+          errorMessage,
+        })
+    );
+  }
+
+  return null;
+};
+/**
+ * Decorate an action that fetch Data and ensure there is a default actions handler.
+ * errorActions {
+ *    sessionExpired,
+ *    accessDenied,
+ *    notFound,
+ *    unknownError,
+ *    queued,
+ * }
+ */
+export const withDefaultErrorHandlingActions = (
+  promise, options = {}
+) => params => dispatch => {
+  if(options.withMutation) {
+    return promise(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options));
+  }
+
+  return promise(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options));
+}

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.withValidation = exports.formValidation = exports.generateFormHoc = exports.ResetPasswordForm = exports.ForgotPasswordForm = exports.SignInForm = undefined;
+exports.UxiBusinessProvider = exports.withValidation = exports.formValidation = exports.generateFormHoc = exports.ResetPasswordForm = exports.ForgotPasswordForm = exports.SignInForm = undefined;
 
 var _SignInForm2 = require('./public/signIn/SignInForm');
 
@@ -29,6 +29,10 @@ var _withValidation2 = require('./form/withValidation');
 
 var _withValidation3 = _interopRequireDefault(_withValidation2);
 
+var _UxiBusinessProvider2 = require('./provider/UxiBusinessProvider');
+
+var _UxiBusinessProvider3 = _interopRequireDefault(_UxiBusinessProvider2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.SignInForm = _SignInForm3.default;
@@ -37,3 +41,4 @@ exports.ResetPasswordForm = _ResetPasswordForm3.default;
 exports.generateFormHoc = _generateFormHoc3.default;
 exports.formValidation = _validation2.default;
 exports.withValidation = _withValidation3.default;
+exports.UxiBusinessProvider = _UxiBusinessProvider3.default;

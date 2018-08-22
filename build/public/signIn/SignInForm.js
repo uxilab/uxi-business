@@ -108,7 +108,7 @@ var SignInForm = function SignInForm(_ref) {
       'div',
       { style: { display: 'flex', justifyContent: 'flex-end' } },
       _react2.default.createElement(_Button2.default, {
-        disabled: pristine || submitting || isFetching,
+        disabled: submitting || isFetching,
         icon: isFetching ? _react2.default.createElement(_Indicator.Loader, null) : null,
         type: 'primary',
         onClick: handleSubmit(onClick),

@@ -1,7 +1,7 @@
 {
   "name": "uxi-business",
   "author": "",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "./index.js",
   "repository": {
@@ -16,6 +16,7 @@
   "peerDependencies": {
     "uxi": "0.0.276",
     "react": "^16.3.2",
+    "react-dom": "^16.4.2",
     "react-intl": "^2.4.0",
     "redux-form": "^7.1.2",
     "react-redux": "^5.0.6",
@@ -23,6 +24,8 @@
     "redux": "^3.6.0"
   },
   "dependencies": {
-    "uxi-cli": "^1.0.71"
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.6.1"
   }
 }
