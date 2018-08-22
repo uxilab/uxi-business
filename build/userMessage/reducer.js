@@ -102,6 +102,9 @@ exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, _define
     }),
     queuedGlobalMessages: state.queuedGlobalMessages.filter(function (m) {
       return m.id !== payload;
+    }),
+    globalNetworkErrorMessages: state.queuedGlobalMessages.filter(function (m) {
+      return m.id !== payload;
     })
   });
 }), _defineProperty(_handleActions, _actions.shouldClearError, function (state) {
