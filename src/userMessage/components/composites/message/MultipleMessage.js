@@ -41,7 +41,7 @@ class MultipleMessage extends Component {
       <Alert
         onClose={onClose}
         showClose
-        style={{ margin: '15px', fontSize: '14px', minWidth: '280px', width:'400px', maxWidth: '680px' }}
+        style={{ fontSize: '14px', minWidth: '280px', width:'400px', maxWidth: '680px' }}
         type={type}
       >
         <MessageTitle>
