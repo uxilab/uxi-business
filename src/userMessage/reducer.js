@@ -117,6 +117,7 @@ export default handleActions({
     unknownErrorMessages: state.unknownErrorMessages.filter(m => m.id !== payload),
     notFoundGlobalMessages: state.notFoundGlobalMessages.filter(m => m.id !== payload),
     queuedGlobalMessages: state.queuedGlobalMessages.filter(m => m.id !== payload),
+    globalNetworkErrorMessages: state.queuedGlobalMessages.filter(m => m.id !== payload),
   }),
   [shouldClearError]: state => ({
     ...state,
