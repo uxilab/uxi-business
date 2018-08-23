@@ -18,55 +18,82 @@ import {
   shouldClearInfo,
 } from './actions';
 
+const defaultMessage = 'global';
+
 const initalDefault = {
-  accessDeniedGlobalMessages: [],
   sessionExpiredGlobalMessages: [],
-  unknownErrorMessages: [],
-  notFoundGlobalMessages: [],
-  queuedGlobalMessages: [],
-  globalNetworkErrorMessages: [],
-  globalSuccessMessages: [],
-  globalWarningMessages: [],
-  globalErrorMessages: [],
-  globalInfoMessages: [],
-  globalConflictedEntity:[],
+  messages: {
+    [defaultMessage]: {
+      accessDenied: [],
+      notFoundError:[],
+      networkError: [],
+      success: [],
+      error:[],
+      warning: [],
+      unknownError: [],
+      info: [],
+      queued: [],
+      conflictedError: [],
+    }
+  },
+};
+
+const updateMessageStore = (messages = {}, payload, type) => {
+  const context = (payload && payload.context) ? payload.context : 'global';
+
+  return {
+      ...messages,
+      [context]: {
+        ...messages[context],
+        [type]: [
+          ...messages[context][type],
+          payload,
+        ],
+      },
+  };
+};
+
+const clearStoreFromError = (messages = {}, payload) => {
+  const context = (payload && payload.context) ? payload.context : 'global';
+  const id = payload ? payload.id : undefined;
+
+  return {
+    ...messages,
+    [context]: {
+      accessDenied: (messages[context].accessDenied || []).filter((e) => e.id === id),
+      notFoundError:  (messages[context].notFoundError || []).filter((e) => e.id === id),
+      networkError:  (messages[context].networkError || []).filter((e) => e.id === id),
+      success:  (messages[context].success || []).filter((e) => e.id === id),
+      error:  (messages[context].error || []).filter((e) => e.id === id),
+      warning:  (messages[context].warning || []).filter((e) => e.id === id),
+      unknownError:  (messages[context].unknownError || []).filter((e) => e.id === id),
+      info:  (messages[context].info || []).filter((e) => e.id === id),
+      queued:  (messages[context].queued || []).filter((e) => e.id === id),
+      conflictedError: (messages[context].conflictedError || []).filter((e) => e.id === id),
+    }
+  }
 };
 
 export default handleActions({
-  [showSuccess]: (state, {payload}) => ({
+  [showSuccess]: (state, { payload }) => ({
     ...state,
-    globalSuccessMessages: [
-      ...state.globalSuccessMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'success'),
   }),
   [showWarning]: (state, { payload }) => ({
     ...state,
-    globalWarningMessages: [
-      ...state.globalWarningMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'warning'),
   }),
   [showError]: (state, { payload }) => ({
     ...state,
-    globalErrorMessages: [
-      ...state.globalErrorMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'error'),
   }),
   [showInfo]: (state, { payload }) => ({
     ...state,
-    globalInfoMessages: [
-      ...state.globalInfoMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'info'),
   }),
   [generalAccessDenied]: (state, { payload }) => ({
     ...state,
-    accessDeniedGlobalMessages: [
-      ...state.accessDeniedGlobalMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'accessDenied'),
   }),
   [generalSessionExpired]: (state, { payload }) => ({
     ...state,
@@ -77,62 +104,42 @@ export default handleActions({
   }),
   [generalUnknownError]: (state, { payload }) => ({
     ...state,
-    unknownErrorMessages: [
-      ...state.unknownErrorMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'unknownError'),
   }),
   [generalNetworkError]: (state, { payload }) => ({
     ...state,
-    globalNetworkErrorMessages: [
-      ...state.globalNetworkErrorMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'networkError'),
   }),
-  [generalConflictedEntity]: (state, {payload}) => ({
+  [generalConflictedEntity]: (state, { payload }) => ({
     ...state,
-    globalConflictedEntity: [
-      ...state.globalConflictedEntity,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'conflictedError'),
   }),
   [generalEntityNotFound]: (state, { payload }) => ({
     ...state,
-    notFoundGlobalMessages: [
-      ...state.notFoundGlobalMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'notFoundError'),
   }),
   [generalQueued]: (state, { payload }) => ({
     ...state,
-    queuedGlobalMessages: [
-      ...state.queuedGlobalMessages,
-      payload,
-    ],
+    messages: updateMessageStore(state.messages, payload, 'queued'),
   }),
   [clearError]: (state, { payload }) => ({
     ...state,
-    accessDeniedGlobalMessages: state.accessDeniedGlobalMessages.filter(m => m.id !== payload),
-    sessionExpiredGlobalMessages: state.sessionExpiredGlobalMessages.filter(m => m.id !== payload),
-    unknownErrorMessages: state.unknownErrorMessages.filter(m => m.id !== payload),
-    notFoundGlobalMessages: state.notFoundGlobalMessages.filter(m => m.id !== payload),
-    queuedGlobalMessages: state.queuedGlobalMessages.filter(m => m.id !== payload),
-    globalNetworkErrorMessages: state.queuedGlobalMessages.filter(m => m.id !== payload),
+    messages: clearStoreFromError(state.messages, payload),
   }),
-  [shouldClearError]: state => ({
+  [shouldClearError]: (state, { payload }) => ({
     ...state,
-    globalErrorMessages: [],
+    messages: clearStoreFromError(state.messages, payload),
   }),
-  [shouldClearSuccess]: state => ({
+  [shouldClearSuccess]: (state, { payload }) => ({
     ...state,
-    globalSuccessMessages: [],
+    messages: clearStoreFromError(state.messages, payload),
   }),
-  [shouldClearWarnings]: state => ({
+  [shouldClearWarnings]: (state, { payload }) => ({
     ...state,
-    globalWarningMessages: [],
+    messages: clearStoreFromError(state.messages, payload),
   }),
-  [shouldClearInfo]: state => ({
+  [shouldClearInfo]: (state, { payload }) => ({
     ...state,
-    globalInfoMessages: [],
+    messages: clearStoreFromError(state.messages, payload),
   }),
 }, initalDefault);

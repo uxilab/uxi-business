@@ -15,6 +15,9 @@ import {
   shouldClearWarnings,
   shouldClearInfo,
 } from '../actions';
+import {
+  selectErrorMessage
+} from '../selector';
 
 const UserFeedbackProvider = ({
   children,
@@ -88,63 +91,17 @@ const UserFeedbackProvider = ({
 
 const mapStateToProps = ({
   userMessage: {
-    accessDeniedGlobalMessages,
+    messages: {
+      global,
+    },
     sessionExpiredGlobalMessages,
-    unknownErrorMessages,
-    notFoundGlobalMessages,
-    queuedGlobalMessages,
-    globalNetworkErrorMessages,
-    globalConflictedEntity,
-    globalErrorMessages,
-    globalSuccessMessages,
-    globalWarningMessages,
-    globalInfoMessages,
   },
-}) => {
-  const errorMessages = [
-    ...globalNetworkErrorMessages.map(m => ({
-      ...m,
-      type: 'network',
-    })),
-    ...globalErrorMessages.map(m => ({
-      ...m,
-    })),
-    ...accessDeniedGlobalMessages.map(m => ({
-      ...m,
-      type: 'accessDenied',
-    })),
-    ...unknownErrorMessages.map(m => ({
-      ...m,
-      type: 'unknown',
-    })),
-    ...notFoundGlobalMessages.map(m => ({
-      ...m,
-      type: 'noFound',
-    })),
-    ...globalConflictedEntity.map(m => ({
-      ...m,
-      type: 'conflicted',
-    })),
-  ];
-
-  const warningMessages = [
-    ...globalWarningMessages,
-    ...(queuedGlobalMessages || []).map(m => ({
-      ...m,
-      type: 'queue',
-    }))
-  ];
-
-  const successMessages = [
-    ...globalSuccessMessages,
-  ];
+ }) => {
+  const defaultMessages = selectErrorMessage(global);
 
   return {
-    errorMessages,
     sessionExpiredGlobalMessages,
-    successMessages,
-    warningMessages,
-    globalInfoMessages,
+    ...defaultMessages,
   };
 };
 

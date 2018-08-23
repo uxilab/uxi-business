@@ -71,7 +71,7 @@ const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
   }
 }
 
-export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
+export const defaultErrorHandling = (dispatch, params, options = {}, uniquedId) => (e) => {
   const response = e.requestError || {};
   const errorMessage = response.message || e.message;
   const requestURL = response && response.original ? response.original.url : '';
@@ -94,6 +94,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
       errorMessage,
       url: requestURL,
       status: 401,
+      uniquedId,
     };
 
     return dispatch(
@@ -112,6 +113,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
       errorMessage,
       url: requestURL,
       status: 403,
+      uniquedId,
     };
 
     return dispatch(
@@ -130,6 +132,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
       errorMessage,
       url: requestURL,
       status: 404,
+      uniquedId,
     };
 
     return dispatch(
@@ -148,6 +151,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
       errorMessage,
       url: requestURL,
       status: 202,
+      uniquedId,
     };
 
     return dispatch(
@@ -171,6 +175,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
       errorMessage,
       url: requestURL,
       status: response.original.status,
+      uniquedId,
     };
 
     return dispatch(
@@ -188,6 +193,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
       params,
       errorMessage,
       url: requestURL,
+      uniquedId,
     };
 
     if(response.original.status === 409) {
@@ -212,11 +218,13 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
           id,
           params,
           errorMessage,
+          uniquedId,
         }) :
         generalUnknownError({
           id,
           params,
           errorMessage,
+          uniquedId,
         })
     );
   }
@@ -234,11 +242,11 @@ export const defaultErrorHandling = (dispatch, params, options = {}) => (e) => {
  * }
  */
 export const withDefaultErrorHandlingActions = (
-  promise, options = {}
+  promise, options = {}, uniquedId,
 ) => params => dispatch => {
   if(options.withMutation) {
-    return promise(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options));
+    return promise(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options, uniquedId));
   }
 
-  return promise(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options));
+  return promise(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options, uniquedId));
 }
