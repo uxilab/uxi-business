@@ -68,15 +68,15 @@ const ForgotPasswordForm = ({
               onClick={handleSubmit(onClick)}
               message={
                 <FormattedMessage
-                  id="uxi-business-resetPassword"
-                  defaultMessage="Reset Password"
+                  id="uxi-business-sendMagicLink"
+                  defaultMessage="Send magic email"
                 />
               }
             />
           </div>
         <div style={{flex:1, paddingLeft:'32px'}}>
             {
-                !loginLink && 
+                !loginLink &&
                 (
                   <a href={ loginUrl ? loginUrl : '/signin' }>
                     <FormattedMessage

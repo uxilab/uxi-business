@@ -78,7 +78,7 @@ const ResetPasswordForm = ({
           validate={[required, validPassword]}
         />
       </div>
-      <div style={{ display: 'flex', justifyContent:'flex-end'}}>
+      <div style={{ width: '100%', display: 'flex', justifyContent:'flex-end' }}>
         <Button
           disabled={pristine || submitting || isFetching}
           icon={ isFetching ? <Loader /> : null }
