@@ -24,6 +24,7 @@ const DefaultUserFeedback = ({
   clearSuccess,
   clearWarning,
   clearInfo,
+  contextId,
 }) => (
   <div>
       {
@@ -71,30 +72,34 @@ const DefaultUserFeedback = ({
 
 const mapStateToProps = ({
   userMessage: {
-    messages: {
-      global,
-    },
+    messages,
   },
- }) => {
-  const defaultMessages = selectErrorMessage(global);
+ }, {
+   contextId,
+   messagesFromProps,
+  }
+) => {
+  const messageStore = contextId ? messages[contextId] : messages.global;
+  const store = selectErrorMessage(messageStore);
 
   return {
-    ...defaultMessages,
+    ...store,
+    contextId,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, { contextId }) => ({
   clearErrors() {
-    dispatch(shouldClearError());
+    dispatch(shouldClearError({ context: contextId }));
   },
   clearSuccess() {
-    dispatch(shouldClearSuccess());
+    dispatch(shouldClearSuccess({ context: contextId }));
   },
   clearWarning() {
-    dispatch(shouldClearWarnings());
+    dispatch(shouldClearWarnings({ context: contextId }));
   },
   clearInfo() {
-    dispatch(shouldClearInfo());
+    dispatch(shouldClearInfo({ context: contextId }));
   },
 });
 
@@ -102,4 +107,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(DefaultUserFeedback);
-

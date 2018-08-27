@@ -40,22 +40,28 @@ const initalDefault = {
 
 const updateMessageStore = (messages = {}, payload, type) => {
   const context = (payload && payload.context) ? payload.context : 'global';
+  const currentMessage = messages[context] || {};
 
-  return {
+  const result = {
       ...messages,
       [context]: {
-        ...messages[context],
+        ...currentMessage,
         [type]: [
-          ...messages[context][type],
+          ...(currentMessage[type] || []),
           payload,
         ],
       },
   };
+  return result;
 };
 
 const clearStoreFromError = (messages = {}, payload) => {
   const context = (payload && payload.context) ? payload.context : 'global';
   const id = payload ? payload.id : undefined;
+
+  if(!messages[context]) {
+    messages[context] = {};
+  }
 
   return {
     ...messages,

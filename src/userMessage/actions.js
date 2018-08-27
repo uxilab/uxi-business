@@ -1,4 +1,8 @@
 import { createAction } from 'redux-actions';
+import { connect } from 'react-redux';
+import React from 'react';
+import DefaultUserFeedback from './components/DefaultUserFeedback';
+
 import uuid from 'uuid/v4';
 
 const addIdIfNotThere = (message = {}) => {
@@ -10,7 +14,6 @@ const addIdIfNotThere = (message = {}) => {
 };
 
 export const showSuccess = createAction('GENERAL_SHOW_SUCCESS', addIdIfNotThere);
-
 export const showWarning = createAction('GENERAL_SHOW_WARNING', addIdIfNotThere);
 export const showError = createAction('GENERAL_SHOW_ERROR', addIdIfNotThere);
 export const showInfo = createAction('GENERAL_SHOW_INFORMATION', addIdIfNotThere);
@@ -29,20 +32,43 @@ export const generalConflictedEntity = createAction('GENERAL_ENTITY_CONFLICTED',
 export const clearError = createAction('GENERAL_CLEAR_ERROR', addIdIfNotThere);
 export const generalNetworkError = createAction('GENERAL_NETWORK_ERROR', addIdIfNotThere);
 
-export const connectWithContext = (Comp, options) => {
+export const withContainedUserFeedback = (Comp, options) => {
   const uniqueIDForEachDefault = uuid();
 
   const ToRender = (props) => {
-    const injectedDispatch = (action) => {
-      props.dispatchWithContext = props.dispatch(withDefaultErrorHandlingActions(action, options, uniqueIDForEachDefault));
-    };
-
     return (
-      <Component {...props} dispatch={injectedDispatch} />
+      <div>
+        <DefaultUserFeedback
+          contextId={uniqueIDForEachDefault}
+          messagesFromProps={props.userMessage}
+        />
+        <Comp {...props} />
+      </div>
     );
   };
 
-  const mapToStateProps = ({ userMessage }) => userMessage[uniqueIDForEachDefault];
+  const mapToStateProps = () => ({});
 
-  return connect(mapToStateProps)(ToRender);
+  const mapToDispatchProps = (dispatch) => ({
+    info: (options = {}) => {
+      dispatch(showInfo({ ...options, context: uniqueIDForEachDefault}));
+    },
+    error: (options = {}) => {
+      dispatch(showError({ ...options, context: uniqueIDForEachDefault}));
+    },
+    warning: (options = {}) => {
+      dispatch(showWarning({ ...options, context: uniqueIDForEachDefault}));
+    },
+    success: (options = {}) => {
+      dispatch(showSuccess({ ...options, context: uniqueIDForEachDefault}));
+    },
+    withContext: (...rest) => {
+      return {
+        params: rest,
+        context: uniqueIDForEachDefault,
+      };
+    },
+  });
+
+  return connect(mapToStateProps, mapToDispatchProps)(ToRender);
 };

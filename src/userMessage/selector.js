@@ -13,26 +13,26 @@ export const selectErrorMessage = (userMessageForContext = {}) => {
   } = userMessageForContext;
 
   const errorMessages = [
-    ...networkError.map(m => ({
+    ...(networkError || []).map(m => ({
       ...m,
       type: 'network',
     })),
-    ...error.map(m => ({
+    ...(error || []).map(m => ({
       ...m,
     })),
-    ...accessDenied.map(m => ({
+    ...(accessDenied || []).map(m => ({
       ...m,
       type: 'accessDenied',
     })),
-    ...unknownError.map(m => ({
+    ...(unknownError || []).map(m => ({
       ...m,
       type: 'unknown',
     })),
-    ...notFoundError.map(m => ({
+    ...(notFoundError || []).map(m => ({
       ...m,
       type: 'noFound',
     })),
-    ...conflictedError.map(m => ({
+    ...(conflictedError || []).map(m => ({
       ...m,
       type: 'conflicted',
     })),
@@ -47,7 +47,7 @@ export const selectErrorMessage = (userMessageForContext = {}) => {
   ];
 
   const successMessages = [
-    ...success,
+    ...(success || []),
   ];
 
   return {
