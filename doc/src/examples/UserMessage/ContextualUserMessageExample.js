@@ -21,7 +21,7 @@ const ContextualUserMessageExample = ({
   error,
   info,
   dispatch,
-  withContext,
+  dispatchWithContext,
 }) => {
   return (
     <div>
@@ -29,8 +29,7 @@ const ContextualUserMessageExample = ({
       <button onClick={() => {warning({ message:'Dooh!'})}} >Show Warning in context</button>
       <button onClick={() => {error({ message:'Dooh Error!'})}} >Show Error in context</button>
       <button onClick={() => {info({ message:'Just so you know!'})}} >Show Info in context</button>
-
-      <button onClick={() => dispatch(shouldFetchWithErrorHandling(withContext({})))}>Show from promise</button>
+      <button onClick={() => dispatchWithContext(shouldFetchWithErrorHandling, {})}>Show with dispatchWithContext</button>
     </div>
   );
 };

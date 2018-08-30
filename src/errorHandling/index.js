@@ -243,10 +243,10 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
  */
 export const withDefaultErrorHandlingActions = (
   thunk, options = {},
-) => (params) => dispatch => {
+) => (params, context) => dispatch => {
   if(options.withMutation) {
-    return thunk(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options, params ? params.context : null));
+    return thunk(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options, context));
   }
 
-  return thunk(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options, params ? params.context : null));
+  return thunk(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options, context));
 }

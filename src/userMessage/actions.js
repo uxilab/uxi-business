@@ -68,6 +68,9 @@ export const withContainedUserFeedback = (Comp, options) => {
         context: uniqueIDForEachDefault,
       };
     },
+    dispatchWithContext: (action, params) => {
+      dispatch(action(params, uniqueIDForEachDefault));
+    },
   });
 
   return connect(mapToStateProps, mapToDispatchProps)(ToRender);
