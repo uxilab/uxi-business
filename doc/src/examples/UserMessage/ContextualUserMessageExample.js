@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import { withContainedUserFeedback } from 'uxi-business/userMessage/actions';
+import { withContainedUserFeedback } from 'uxi-business/userMessage';
 import { withDefaultErrorHandlingActions } from 'uxi-business/errorHandling';
 
 const shouldFetch = (test) => (dispatch) => {

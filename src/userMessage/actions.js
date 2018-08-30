@@ -1,8 +1,5 @@
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import React from 'react';
-import DefaultUserFeedback from './components/DefaultUserFeedback';
-
 import uuid from 'uuid/v4';
 
 const addIdIfNotThere = (message = {}) => {
@@ -31,47 +28,3 @@ export const generalQueued = createAction('GENERAL_REQUEST_QUEUED', addIdIfNotTh
 export const generalConflictedEntity = createAction('GENERAL_ENTITY_CONFLICTED', addIdIfNotThere);
 export const clearError = createAction('GENERAL_CLEAR_ERROR', addIdIfNotThere);
 export const generalNetworkError = createAction('GENERAL_NETWORK_ERROR', addIdIfNotThere);
-
-export const withContainedUserFeedback = (Comp, options) => {
-  const uniqueIDForEachDefault = uuid();
-
-  const ToRender = (props) => {
-    return (
-      <div>
-        <DefaultUserFeedback
-          contextId={uniqueIDForEachDefault}
-          messagesFromProps={props.userMessage}
-        />
-        <Comp {...props} />
-      </div>
-    );
-  };
-
-  const mapToStateProps = () => ({});
-
-  const mapToDispatchProps = (dispatch) => ({
-    info: (options = {}) => {
-      dispatch(showInfo({ ...options, context: uniqueIDForEachDefault}));
-    },
-    error: (options = {}) => {
-      dispatch(showError({ ...options, context: uniqueIDForEachDefault}));
-    },
-    warning: (options = {}) => {
-      dispatch(showWarning({ ...options, context: uniqueIDForEachDefault}));
-    },
-    success: (options = {}) => {
-      dispatch(showSuccess({ ...options, context: uniqueIDForEachDefault}));
-    },
-    withContext: (...rest) => {
-      return {
-        params: rest,
-        context: uniqueIDForEachDefault,
-      };
-    },
-    dispatchWithContext: (action, params) => {
-      dispatch(action(params, uniqueIDForEachDefault));
-    },
-  });
-
-  return connect(mapToStateProps, mapToDispatchProps)(ToRender);
-};
