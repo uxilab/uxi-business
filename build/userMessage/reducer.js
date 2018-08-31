@@ -59,34 +59,34 @@ var clearStoreFromError = function clearStoreFromError() {
 
   return _extends({}, messages, _defineProperty({}, context, {
     accessDenied: (messages[context].accessDenied || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     notFoundError: (messages[context].notFoundError || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     networkError: (messages[context].networkError || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     success: (messages[context].success || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     error: (messages[context].error || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     warning: (messages[context].warning || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     unknownError: (messages[context].unknownError || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     info: (messages[context].info || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     queued: (messages[context].queued || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     }),
     conflictedError: (messages[context].conflictedError || []).filter(function (e) {
-      return e.id === id;
+      return e.id !== id;
     })
   }));
 };
