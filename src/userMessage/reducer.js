@@ -66,16 +66,16 @@ const clearStoreFromError = (messages = {}, payload) => {
   return {
     ...messages,
     [context]: {
-      accessDenied: (messages[context].accessDenied || []).filter((e) => e.id === id),
-      notFoundError:  (messages[context].notFoundError || []).filter((e) => e.id === id),
-      networkError:  (messages[context].networkError || []).filter((e) => e.id === id),
-      success:  (messages[context].success || []).filter((e) => e.id === id),
-      error:  (messages[context].error || []).filter((e) => e.id === id),
-      warning:  (messages[context].warning || []).filter((e) => e.id === id),
-      unknownError:  (messages[context].unknownError || []).filter((e) => e.id === id),
-      info:  (messages[context].info || []).filter((e) => e.id === id),
-      queued:  (messages[context].queued || []).filter((e) => e.id === id),
-      conflictedError: (messages[context].conflictedError || []).filter((e) => e.id === id),
+      accessDenied: (messages[context].accessDenied || []).filter((e) => e.id !== id),
+      notFoundError:  (messages[context].notFoundError || []).filter((e) => e.id !== id),
+      networkError:  (messages[context].networkError || []).filter((e) => e.id !== id),
+      success:  (messages[context].success || []).filter((e) => e.id !== id),
+      error:  (messages[context].error || []).filter((e) => e.id !== id),
+      warning:  (messages[context].warning || []).filter((e) => e.id !== id),
+      unknownError:  (messages[context].unknownError || []).filter((e) => e.id !== id),
+      info:  (messages[context].info || []).filter((e) => e.id !== id),
+      queued:  (messages[context].queued || []).filter((e) => e.id !== id),
+      conflictedError: (messages[context].conflictedError || []).filter((e) => e.id !== id),
     }
   }
 };

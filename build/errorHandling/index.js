@@ -104,6 +104,7 @@ var defaultMutationHandling = function defaultMutationHandling(dispatch) {
 
 var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorHandling(dispatch, params) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var context = arguments[3];
   return function (e) {
     var response = e.requestError || {};
     var errorMessage = response.message || e.message;
@@ -126,7 +127,8 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         params: params,
         errorMessage: errorMessage,
         url: requestURL,
-        status: 401
+        status: 401,
+        context: context
       };
 
       return dispatch(options.sessionExpired ? options.sessionExpired(unauthorizedMessage) : (0, _actions.generalSessionExpired)(unauthorizedMessage));
@@ -140,7 +142,8 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         params: params,
         errorMessage: errorMessage,
         url: requestURL,
-        status: 403
+        status: 403,
+        context: context
       };
 
       return dispatch(options.accessDenied ? options.accessDenied(accessDeniedMessage) : (0, _actions.generalAccessDenied)(accessDeniedMessage));
@@ -154,7 +157,8 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         params: params,
         errorMessage: errorMessage,
         url: requestURL,
-        status: 404
+        status: 404,
+        context: context
       };
 
       return dispatch(options.notFound ? options.notFound(notFoundMessage) : (0, _actions.generalEntityNotFound)(notFoundMessage));
@@ -168,7 +172,8 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         params: params,
         errorMessage: errorMessage,
         url: requestURL,
-        status: 202
+        status: 202,
+        context: context
       };
 
       return dispatch(options.queued ? options.queued(queuedMessage) : (0, _actions.generalQueued)(queuedMessage));
@@ -182,7 +187,8 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         params: params,
         errorMessage: errorMessage,
         url: requestURL,
-        status: response.original.status
+        status: response.original.status,
+        context: context
       };
 
       return dispatch(options.networkError ? options.networkError(unknownErrorMessage) : (0, _actions.generalNetworkError)(unknownErrorMessage));
@@ -195,7 +201,8 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
         id: id,
         params: params,
         errorMessage: errorMessage,
-        url: requestURL
+        url: requestURL,
+        context: context
       };
 
       if (response.original.status === 409) {
@@ -209,11 +216,13 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
       return dispatch(options.unknownError ? options.unknownError({
         id: id,
         params: params,
-        errorMessage: errorMessage
+        errorMessage: errorMessage,
+        context: context
       }) : (0, _actions.generalUnknownError)({
         id: id,
         params: params,
-        errorMessage: errorMessage
+        errorMessage: errorMessage,
+        context: context
       }));
     }
 
@@ -230,15 +239,15 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
  *    queued,
  * }
  */
-var withDefaultErrorHandlingActions = exports.withDefaultErrorHandlingActions = function withDefaultErrorHandlingActions(promise) {
+var withDefaultErrorHandlingActions = exports.withDefaultErrorHandlingActions = function withDefaultErrorHandlingActions(thunk) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return function (params) {
+  return function (params, context) {
     return function (dispatch) {
       if (options.withMutation) {
-        return promise(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options));
+        return thunk(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options, context));
       }
 
-      return promise(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options));
+      return thunk(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options, context));
     };
   };
 };

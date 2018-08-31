@@ -80,8 +80,8 @@ var ForgotPasswordForm = function ForgotPasswordForm(_ref) {
           type: 'primary',
           onClick: handleSubmit(onClick),
           message: _react2.default.createElement(_reactIntl.FormattedMessage, {
-            id: 'uxi-business-resetPassword',
-            defaultMessage: 'Reset Password'
+            id: 'uxi-business-sendMagicLink',
+            defaultMessage: 'Send magic email'
           })
         })
       ),

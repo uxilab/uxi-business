@@ -86,7 +86,7 @@ var ResetPasswordForm = function ResetPasswordForm(_ref) {
     ),
     _react2.default.createElement(
       'div',
-      { style: { display: 'flex', justifyContent: 'flex-end' } },
+      { style: { width: '100%', display: 'flex', justifyContent: 'flex-end' } },
       _react2.default.createElement(_Button2.default, {
         disabled: pristine || submitting || isFetching,
         icon: isFetching ? _react2.default.createElement(_Indicator.Loader, null) : null,
