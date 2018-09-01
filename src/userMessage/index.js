@@ -60,6 +60,12 @@ export const withContainedUserFeedback = (Comp, options) => {
   );
 };
 
+const showAndHide = (showFn, hideFn) => {
+  showFn();
+
+  setTimeout(hideFn, 5000);
+};
+
 export const showAlert = alert => (dispatch) => {
   const id = uuid();
   const alertWithId = {

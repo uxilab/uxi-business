@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.withContainedUserFeedback = exports.withUserMessageAction = exports.UserMessageProvider = exports.withUserMessage = exports.withDefaultErrorHandlingActions = exports.reducer = undefined;
+exports.showInfoAndHide = exports.showWarningAndHide = exports.showErrorAndHide = exports.showSuccessAndHide = exports.showAlert = exports.withContainedUserFeedback = exports.withUserMessageAction = exports.UserMessageProvider = exports.withUserMessage = exports.withDefaultErrorHandlingActions = exports.reducer = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -84,4 +84,62 @@ var withContainedUserFeedback = exports.withContainedUserFeedback = function wit
       _react2.default.createElement(Comp, _extends({}, props, { contextId: uniqueID }))
     );
   }, uniqueID);
+};
+
+var showAlert = exports.showAlert = function showAlert(alert) {
+  return function (dispatch) {
+    var id = (0, _v2.default)();
+    var alertWithId = _extends({}, alert, {
+      id: id,
+      type: alert.type || 'info'
+    });
+
+    var alertToUser = _actions.showInfo;
+    var hideToUser = shouldClearInfo;
+
+    if (alert.type === 'success') {
+      alertToUser = _actions.showSuccess;
+      hideToUser = shouldClearSuccess;
+    }
+
+    if (alert.type === 'error') {
+      alertToUser = _actions.showError;
+      hideToUser = shouldClearError;
+    }
+
+    if (alert.type === 'warning') {
+      alertToUser = _actions.showWarning;
+      hideToUser = shouldClearWarnings;
+    }
+
+    return showAndHide(function () {
+      return dispatch(alertToUser(alertWithId));
+    }, function () {
+      return dispatch(hideToUser(alertWithId));
+    });
+  };
+};
+
+var showSuccessAndHide = exports.showSuccessAndHide = function showSuccessAndHide(message) {
+  return showAlert(_extends({}, message, {
+    type: 'success'
+  }));
+};
+
+var showErrorAndHide = exports.showErrorAndHide = function showErrorAndHide(message) {
+  return showAlert(_extends({}, message, {
+    type: 'error'
+  }));
+};
+
+var showWarningAndHide = exports.showWarningAndHide = function showWarningAndHide(message) {
+  return showAlert(_extends({}, message, {
+    type: 'warning'
+  }));
+};
+
+var showInfoAndHide = exports.showInfoAndHide = function showInfoAndHide(message) {
+  return showAlert(_extends({}, message, {
+    type: 'info'
+  }));
 };
