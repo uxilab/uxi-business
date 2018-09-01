@@ -101,21 +101,21 @@ var showAlert = exports.showAlert = function showAlert(alert) {
     });
 
     var alertToUser = _actions.showInfo;
-    var hideToUser = shouldClearInfo;
+    var hideToUser = _actions.shouldClearInfo;
 
     if (alert.type === 'success') {
       alertToUser = _actions.showSuccess;
-      hideToUser = shouldClearSuccess;
+      hideToUser = _actions.shouldClearSuccess;
     }
 
     if (alert.type === 'error') {
       alertToUser = _actions.showError;
-      hideToUser = shouldClearError;
+      hideToUser = _actions.shouldClearError;
     }
 
     if (alert.type === 'warning') {
       alertToUser = _actions.showWarning;
-      hideToUser = shouldClearWarnings;
+      hideToUser = _actions.shouldClearWarnings;
     }
 
     return showAndHide(function () {
