@@ -86,6 +86,12 @@ var withContainedUserFeedback = exports.withContainedUserFeedback = function wit
   }, uniqueID);
 };
 
+var showAndHide = function showAndHide(showFn, hideFn) {
+  showFn();
+
+  setTimeout(hideFn, 5000);
+};
+
 var showAlert = exports.showAlert = function showAlert(alert) {
   return function (dispatch) {
     var id = (0, _v2.default)();
