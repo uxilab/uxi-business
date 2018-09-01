@@ -6,6 +6,10 @@ import {
   showWarning,
   showError,
   showInfo,
+  shouldClearError,
+  shouldClearSuccess,
+  shouldClearWarnings,
+  shouldClearInfo,
 } from './actions';
 import DefaultUserFeedback  from './components/DefaultUserFeedback';
 
