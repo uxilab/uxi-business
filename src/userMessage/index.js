@@ -59,3 +59,57 @@ export const withContainedUserFeedback = (Comp, options) => {
     uniqueID,
   );
 };
+
+export const showAlert = alert => (dispatch) => {
+  const id = uuid();
+  const alertWithId = {
+    ...alert,
+    id,
+    type: alert.type || 'info',
+  };
+
+  let alertToUser = showInfo;
+  let hideToUser = shouldClearInfo;
+
+  if (alert.type === 'success') {
+    alertToUser = showSuccess;
+    hideToUser = shouldClearSuccess;
+  }
+
+  if (alert.type === 'error') {
+    alertToUser = showError;
+    hideToUser = shouldClearError;
+  }
+
+  if (alert.type === 'warning') {
+    alertToUser = showWarning;
+    hideToUser = shouldClearWarnings;
+  }
+
+  return showAndHide(
+    () => dispatch(alertToUser(alertWithId)),
+    () => dispatch(hideToUser(alertWithId))
+  );
+};
+
+export const showSuccessAndHide = message => showAlert({
+  ...message,
+  type: 'success',
+});
+
+export const showErrorAndHide = message => showAlert({
+  ...message,
+  type: 'error',
+});
+
+
+export const showWarningAndHide = message => showAlert({
+  ...message,
+  type: 'warning',
+});
+
+
+export const showInfoAndHide = message => showAlert({
+  ...message,
+  type: 'info',
+});
