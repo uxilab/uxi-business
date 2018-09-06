@@ -52,7 +52,7 @@ export const defaultCatch = (response) => {
   return response;
 };
 
-export const withDefaultCatch = (promise) => (promise.then(handleErrorAndCreateErrorResp));
+export const withDefaultCatch = (promise) => (promise.then(defaultCatch));
 
 
 const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
@@ -83,6 +83,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
 
   if (options.onErrorAction) {
     dispatch(options.onErrorAction());
+    return;
   }
 
   if (response.original && response.original.status === 401) {
