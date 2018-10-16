@@ -16,23 +16,28 @@ import {
 import Button from 'uxi/Button';
 import FormDecoratorHoc from '../../form/FormDecoratorHoc';
 import { required, email } from '../../form/validation';
+import PublicFormLabel from '../../form/PublicFormLabel';
 
 const EmailInput = FormDecoratorHoc(TextField, {
   label: (
-    <FormattedMessage
-      id="uxi-business-Email"
-      defaultMessage="Email"
-    />
+    <PublicFormLabel>
+      <FormattedMessage
+        id="uxi-business-Email"
+        defaultMessage="Email"
+      />
+    </PublicFormLabel>
   ),
 });
 
 const PasswordInput = FormDecoratorHoc(TextField, {
   type: 'password',
   label: (
-    <FormattedMessage
-      id="uxi-business-password"
-      defaultMessage="Password"
-    />
+    <PublicFormLabel>
+      <FormattedMessage
+        id="uxi-business-password"
+        defaultMessage="Password"
+      />
+    </PublicFormLabel>
   ),
 });
 
@@ -51,7 +56,6 @@ const SignInForm = ({
         handleSubmit(onClick)();
       }
     }}
-    style={{ padding:'16px' }}
   >
     <div>
       <Field
@@ -78,7 +82,23 @@ const SignInForm = ({
             }
           />
         </div>
-        <div>
+      </div>
+      <div style={{ paddingTop: '16px' }}>
+        <Button
+          disabled={submitting || isFetching}
+          icon={ isFetching ? <Loader /> : null }
+          isFullWidth
+          type="primary"
+          onClick={handleSubmit(onClick)}
+          message={
+            <FormattedMessage
+              id="uxi-business-signin"
+              defaultMessage="Sign in"
+            />
+          }
+        />
+      </div>
+      <div style={{ paddingTop: '16px' }}>
           {
               !forgotLink &&
               (
@@ -91,21 +111,6 @@ const SignInForm = ({
               )
           }
           {forgotLink && forgotLink}
-        </div>
-      </div>
-      <div style={{ display: 'flex', justifyContent:'flex-end'}}>
-        <Button
-          disabled={submitting || isFetching}
-          icon={ isFetching ? <Loader /> : null }
-          type="primary"
-          onClick={handleSubmit(onClick)}
-          message={
-            <FormattedMessage
-              id="uxi-business-signin"
-              defaultMessage="Sign in"
-            />
-          }
-        />
       </div>
   </div>
 );

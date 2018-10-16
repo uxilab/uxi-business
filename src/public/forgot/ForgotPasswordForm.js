@@ -48,7 +48,6 @@ const ForgotPasswordForm = ({
         handleSubmit(onClick)();
       }
     }}
-    style={{ padding:'16px' }}
     >
     <div>
       <Field
@@ -59,22 +58,22 @@ const ForgotPasswordForm = ({
           validate={[required, email]}
         />
       </div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div>
-            <Button
-              disabled={pristine || submitting || isFetching}
-              icon={ isFetching ? <Loader /> : null }
-              type="primary"
-              onClick={handleSubmit(onClick)}
-              message={
-                <FormattedMessage
-                  id="uxi-business-sendMagicLink"
-                  defaultMessage="Send magic email"
-                />
-              }
-            />
-          </div>
-        <div style={{flex:1, paddingLeft:'32px'}}>
+      <div style={{ paddingTop: '16px' }}>
+          <Button
+            disabled={pristine || submitting || isFetching}
+            isFullWidth
+            icon={ isFetching ? <Loader /> : null }
+            type="primary"
+            onClick={handleSubmit(onClick)}
+            message={
+              <FormattedMessage
+                id="uxi-business-sendMagicLink"
+                defaultMessage="Send magic email"
+              />
+            }
+          />
+        </div>
+        <div style={{ paddingTop: '16px' }}>
             {
                 !loginLink &&
                 (
@@ -87,8 +86,7 @@ const ForgotPasswordForm = ({
                 )
             }
             {loginLink && loginLink}
-          </div>
-      </div>
+        </div>
   </div>
 );
 

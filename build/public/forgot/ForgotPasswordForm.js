@@ -54,8 +54,7 @@ var ForgotPasswordForm = function ForgotPasswordForm(_ref) {
         if (e.key === 'Enter') {
           handleSubmit(onClick)();
         }
-      },
-      style: { padding: '16px' }
+      }
     },
     _react2.default.createElement(
       'div',
@@ -70,34 +69,31 @@ var ForgotPasswordForm = function ForgotPasswordForm(_ref) {
     ),
     _react2.default.createElement(
       'div',
-      { style: { display: 'flex', alignItems: 'center' } },
-      _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Button2.default, {
-          disabled: pristine || submitting || isFetching,
-          icon: isFetching ? _react2.default.createElement(_Indicator.Loader, null) : null,
-          type: 'primary',
-          onClick: handleSubmit(onClick),
-          message: _react2.default.createElement(_reactIntl.FormattedMessage, {
-            id: 'uxi-business-sendMagicLink',
-            defaultMessage: 'Send magic email'
-          })
+      { style: { paddingTop: '16px' } },
+      _react2.default.createElement(_Button2.default, {
+        disabled: pristine || submitting || isFetching,
+        isFullWidth: true,
+        icon: isFetching ? _react2.default.createElement(_Indicator.Loader, null) : null,
+        type: 'primary',
+        onClick: handleSubmit(onClick),
+        message: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'uxi-business-sendMagicLink',
+          defaultMessage: 'Send magic email'
+        })
+      })
+    ),
+    _react2.default.createElement(
+      'div',
+      { style: { paddingTop: '16px' } },
+      !loginLink && _react2.default.createElement(
+        'a',
+        { href: loginUrl ? loginUrl : '/signin' },
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'uxi-business-backtoLogin',
+          defaultMessage: 'Return to sign in'
         })
       ),
-      _react2.default.createElement(
-        'div',
-        { style: { flex: 1, paddingLeft: '32px' } },
-        !loginLink && _react2.default.createElement(
-          'a',
-          { href: loginUrl ? loginUrl : '/signin' },
-          _react2.default.createElement(_reactIntl.FormattedMessage, {
-            id: 'uxi-business-backtoLogin',
-            defaultMessage: 'Return to sign in'
-          })
-        ),
-        loginLink && loginLink
-      )
+      loginLink && loginLink
     )
   );
 };

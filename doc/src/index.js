@@ -44,24 +44,24 @@ const App = () => (
             </div>
           </UserMessageProvider>
         </UxiBusinessProvider>
-      {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+       <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <SignInForm
             onClick={(value) => {alert(JSON.stringify(value))}}
           />
-        </div> */}
-         {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+        </div> 
+          <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <ForgotPasswordForm
             onClick={(value) => {alert(JSON.stringify(value))}}
           />
-        </div> */}
-       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+        </div> 
+        <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <FormWithCusomtInput />
-      </div>*/}
-       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
+      </div>
+      <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
           <ResetPasswordForm
             onClick={(value) => {alert(JSON.stringify(value))}}
           />
-      </div>*/}
+      </div>
       {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
         <FormWithFieldAsyncValidation
           onClick={(value) => {alert(JSON.stringify(value))}}

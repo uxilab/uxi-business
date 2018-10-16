@@ -26,21 +26,33 @@ var _FormDecoratorHoc2 = _interopRequireDefault(_FormDecoratorHoc);
 
 var _validation = require('../../form/validation');
 
+var _PublicFormLabel = require('../../form/PublicFormLabel');
+
+var _PublicFormLabel2 = _interopRequireDefault(_PublicFormLabel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var EmailInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
-  label: _react2.default.createElement(_reactIntl.FormattedMessage, {
-    id: 'uxi-business-Email',
-    defaultMessage: 'Email'
-  })
+  label: _react2.default.createElement(
+    _PublicFormLabel2.default,
+    null,
+    _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'uxi-business-Email',
+      defaultMessage: 'Email'
+    })
+  )
 });
 
 var PasswordInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
   type: 'password',
-  label: _react2.default.createElement(_reactIntl.FormattedMessage, {
-    id: 'uxi-business-password',
-    defaultMessage: 'Password'
-  })
+  label: _react2.default.createElement(
+    _PublicFormLabel2.default,
+    null,
+    _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'uxi-business-password',
+      defaultMessage: 'Password'
+    })
+  )
 });
 
 var SignInForm = function SignInForm(_ref) {
@@ -58,8 +70,7 @@ var SignInForm = function SignInForm(_ref) {
         if (e.key === 'Enter') {
           handleSubmit(onClick)();
         }
-      },
-      style: { padding: '16px' }
+      }
     },
     _react2.default.createElement(
       'div',
@@ -89,27 +100,15 @@ var SignInForm = function SignInForm(_ref) {
             defaultMessage: 'Remember me'
           })
         })
-      ),
-      _react2.default.createElement(
-        'div',
-        null,
-        !forgotLink && _react2.default.createElement(
-          'a',
-          { href: forgotUrl ? forgotUrl : '/forgot' },
-          _react2.default.createElement(_reactIntl.FormattedMessage, {
-            id: 'uxi-business-forgotPassword',
-            defaultMessage: 'I forgot my password'
-          })
-        ),
-        forgotLink && forgotLink
       )
     ),
     _react2.default.createElement(
       'div',
-      { style: { display: 'flex', justifyContent: 'flex-end' } },
+      { style: { paddingTop: '16px' } },
       _react2.default.createElement(_Button2.default, {
         disabled: submitting || isFetching,
         icon: isFetching ? _react2.default.createElement(_Indicator.Loader, null) : null,
+        isFullWidth: true,
         type: 'primary',
         onClick: handleSubmit(onClick),
         message: _react2.default.createElement(_reactIntl.FormattedMessage, {
@@ -117,6 +116,19 @@ var SignInForm = function SignInForm(_ref) {
           defaultMessage: 'Sign in'
         })
       })
+    ),
+    _react2.default.createElement(
+      'div',
+      { style: { paddingTop: '16px' } },
+      !forgotLink && _react2.default.createElement(
+        'a',
+        { href: forgotUrl ? forgotUrl : '/forgot' },
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'uxi-business-forgotPassword',
+          defaultMessage: 'I forgot my password'
+        })
+      ),
+      forgotLink && forgotLink
     )
   );
 };

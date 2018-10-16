@@ -44,7 +44,6 @@ const generateFormHoc = (formName, fields = [], options = {}) => {
           handleSubmit(onClick)();
         }
       }}
-      style={{ padding:'16px' }}
     >
       {
         generatedFields.map((field) => {

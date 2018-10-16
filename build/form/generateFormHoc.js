@@ -62,8 +62,7 @@ var generateFormHoc = function generateFormHoc(formName) {
           if (e.key === 'Enter') {
             handleSubmit(onClick)();
           }
-        },
-        style: { padding: '16px' }
+        }
       },
       generatedFields.map(function (field) {
         return _react2.default.createElement(_reduxForm.Field, {

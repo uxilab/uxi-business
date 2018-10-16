@@ -26,6 +26,10 @@ var _FormDecoratorHoc2 = _interopRequireDefault(_FormDecoratorHoc);
 
 var _validation = require('../../form/validation');
 
+var _PublicFormLabel = require('../../form/PublicFormLabel');
+
+var _PublicFormLabel2 = _interopRequireDefault(_PublicFormLabel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var validatePassword = function validatePassword(values) {
@@ -40,18 +44,26 @@ var validatePassword = function validatePassword(values) {
 
 var PasswordInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
   type: 'password',
-  label: _react2.default.createElement(_reactIntl.FormattedMessage, {
-    id: 'uxi-business-password',
-    defaultMessage: 'Password'
-  })
+  label: _react2.default.createElement(
+    _PublicFormLabel2.default,
+    null,
+    _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'uxi-business-password',
+      defaultMessage: 'Password'
+    })
+  )
 });
 
 var ConfirmPasswordInput = (0, _FormDecoratorHoc2.default)(_Input.TextField, {
   type: 'password',
-  label: _react2.default.createElement(_reactIntl.FormattedMessage, {
-    id: 'uxi-business-password',
-    defaultMessage: 'Confirm your password'
-  })
+  label: _react2.default.createElement(
+    _PublicFormLabel2.default,
+    null,
+    _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'uxi-business-password',
+      defaultMessage: 'Confirm your password'
+    })
+  )
 });
 
 var ResetPasswordForm = function ResetPasswordForm(_ref) {
@@ -59,7 +71,9 @@ var ResetPasswordForm = function ResetPasswordForm(_ref) {
       onClick = _ref.onClick,
       handleSubmit = _ref.handleSubmit,
       pristine = _ref.pristine,
-      submitting = _ref.submitting;
+      submitting = _ref.submitting,
+      loginLink = _ref.loginLink,
+      loginUrl = _ref.loginUrl;
   return _react2.default.createElement(
     'div',
     {
@@ -67,8 +81,7 @@ var ResetPasswordForm = function ResetPasswordForm(_ref) {
         if (e.key === 'Enter') {
           handleSubmit(onClick)();
         }
-      },
-      style: { padding: '16px' }
+      }
     },
     _react2.default.createElement(
       'div',
@@ -86,8 +99,9 @@ var ResetPasswordForm = function ResetPasswordForm(_ref) {
     ),
     _react2.default.createElement(
       'div',
-      { style: { width: '100%', display: 'flex', justifyContent: 'flex-end' } },
+      { style: { paddingTop: '16px' } },
       _react2.default.createElement(_Button2.default, {
+        isFullWidth: true,
         disabled: pristine || submitting || isFetching,
         icon: isFetching ? _react2.default.createElement(_Indicator.Loader, null) : null,
         type: 'primary',
@@ -97,6 +111,19 @@ var ResetPasswordForm = function ResetPasswordForm(_ref) {
           defaultMessage: 'Change Password'
         })
       })
+    ),
+    _react2.default.createElement(
+      'div',
+      { style: { paddingTop: '16px' } },
+      !loginLink && _react2.default.createElement(
+        'a',
+        { href: loginUrl ? loginUrl : '/signin' },
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'uxi-business-backtoLogin',
+          defaultMessage: 'Return to sign in'
+        })
+      ),
+      loginLink && loginLink
     )
   );
 };

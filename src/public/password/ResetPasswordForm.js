@@ -16,6 +16,7 @@ import {
 import Button from 'uxi/Button';
 import FormDecoratorHoc from '../../form/FormDecoratorHoc';
 import { required, email, validPassword } from '../../form/validation';
+import PublicFormLabel from '../../form/PublicFormLabel';
 
 const validatePassword = (values) => {
   const errors = {};
@@ -34,20 +35,24 @@ const validatePassword = (values) => {
 const PasswordInput = FormDecoratorHoc(TextField, {
   type: 'password',
   label: (
-    <FormattedMessage
-      id="uxi-business-password"
-      defaultMessage="Password"
-    />
+    <PublicFormLabel>
+      <FormattedMessage
+        id="uxi-business-password"
+        defaultMessage="Password"
+      />
+    </PublicFormLabel>
   ),
 });
 
 const ConfirmPasswordInput = FormDecoratorHoc(TextField, {
     type: 'password',
     label: (
-      <FormattedMessage
-        id="uxi-business-password"
-        defaultMessage="Confirm your password"
-      />
+      <PublicFormLabel>
+        <FormattedMessage
+          id="uxi-business-password"
+          defaultMessage="Confirm your password"
+        />
+      </PublicFormLabel>
     ),
 });
 
@@ -57,6 +62,8 @@ const ResetPasswordForm = ({
     handleSubmit,
     pristine,
     submitting,
+    loginLink,
+    loginUrl,
   }) => (
   <div
     onKeyPress={(e) => {
@@ -64,7 +71,6 @@ const ResetPasswordForm = ({
         handleSubmit(onClick)();
       }
     }}
-    style={{ padding:'16px' }}
   >
     <div>
         <Field
@@ -78,8 +84,9 @@ const ResetPasswordForm = ({
           validate={[required, validPassword]}
         />
       </div>
-      <div style={{ width: '100%', display: 'flex', justifyContent:'flex-end' }}>
+      <div style={{ paddingTop: '16px' }}>
         <Button
+          isFullWidth
           disabled={pristine || submitting || isFetching}
           icon={ isFetching ? <Loader /> : null }
           type="primary"
@@ -92,6 +99,20 @@ const ResetPasswordForm = ({
           }
         />
       </div>
+      <div style={{ paddingTop: '16px' }}>
+            {
+                !loginLink &&
+                (
+                  <a href={ loginUrl ? loginUrl : '/signin' }>
+                    <FormattedMessage
+                      id="uxi-business-backtoLogin"
+                      defaultMessage="Return to sign in"
+                    />
+                  </a>
+                )
+            }
+            {loginLink && loginLink}
+        </div>
   </div>
 );
 

@@ -84,7 +84,7 @@ var defaultCatch = exports.defaultCatch = function defaultCatch(response) {
 };
 
 var withDefaultCatch = exports.withDefaultCatch = function withDefaultCatch(promise) {
-  return promise.then(handleErrorAndCreateErrorResp);
+  return promise.then(defaultCatch);
 };
 
 var defaultMutationHandling = function defaultMutationHandling(dispatch) {
@@ -117,6 +117,7 @@ var defaultErrorHandling = exports.defaultErrorHandling = function defaultErrorH
 
     if (options.onErrorAction) {
       dispatch(options.onErrorAction());
+      return;
     }
 
     if (response.original && response.original.status === 401) {

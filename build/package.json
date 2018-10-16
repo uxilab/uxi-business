@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/uxilab/uxi-business#readme",
   "peerDependencies": {
-    "uxi": "0.0.300",
+    "uxi": "*",
     "react": "^16.3.2",
     "react-dom": "^16.4.2",
     "react-intl": "^2.4.0",
