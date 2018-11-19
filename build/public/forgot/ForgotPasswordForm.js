@@ -61,7 +61,7 @@ var ForgotPasswordForm = function ForgotPasswordForm(_ref) {
       null,
       _react2.default.createElement(_reduxForm.Field, {
         name: 'email',
-        type: 'email',
+        type: 'text',
         autoFocus: true,
         component: EmailInput,
         validate: [_validation.required, _validation.email]
