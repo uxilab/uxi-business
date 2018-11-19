@@ -52,7 +52,7 @@ const ForgotPasswordForm = ({
     <div>
       <Field
           name="email"
-          type="email"
+          type="text"
           autoFocus
           component={EmailInput}
           validate={[required, email]}
