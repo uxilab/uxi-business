@@ -32,7 +32,6 @@ const EmailInput = FormDecoratorHoc(TextField, {
   ),
 });
 
-
 const ForgotPasswordForm = ({
     isFetching,
     onClick,

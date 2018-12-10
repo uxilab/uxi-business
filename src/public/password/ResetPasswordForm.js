@@ -17,7 +17,7 @@ import Button from 'uxi/Button';
 import FormDecoratorHoc from '../../form/FormDecoratorHoc';
 import { required, email, validPassword } from '../../form/validation';
 import PublicFormLabel from '../../form/PublicFormLabel';
-
+import { PasswordInput } from '../utils/Fields';
 const validatePassword = (values) => {
   const errors = {};
 
@@ -32,15 +32,18 @@ const validatePassword = (values) => {
   return errors;
 };
 
-const PasswordInput = FormDecoratorHoc(TextField, {
-  type: 'password',
+const EmailInput = FormDecoratorHoc(TextField, {
   label: (
-    <PublicFormLabel>
-      <FormattedMessage
-        id="uxi-business-password"
-        defaultMessage="Password"
-      />
-    </PublicFormLabel>
+    <FormattedMessage
+      id="uxi-business-Email"
+      defaultMessage="Email"
+    />
+  ),
+  helpText: (
+    <FormattedMessage
+      id="uxi-business-resetPasswordEmailHelp"
+      defaultMessage="For security reason, we ask you to re-enter the email address linked to your account."
+    />
   ),
 });
 
@@ -73,6 +76,11 @@ const ResetPasswordForm = ({
     }}
   >
     <div>
+        <Field
+          name="email"
+          component={EmailInput}
+          validate={[required, email]}
+        />
         <Field
           name="password"
           component={PasswordInput}

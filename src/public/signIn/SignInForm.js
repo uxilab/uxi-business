@@ -16,30 +16,7 @@ import {
 import Button from 'uxi/Button';
 import FormDecoratorHoc from '../../form/FormDecoratorHoc';
 import { required, email } from '../../form/validation';
-import PublicFormLabel from '../../form/PublicFormLabel';
-
-const EmailInput = FormDecoratorHoc(TextField, {
-  label: (
-    <PublicFormLabel>
-      <FormattedMessage
-        id="uxi-business-Email"
-        defaultMessage="Email"
-      />
-    </PublicFormLabel>
-  ),
-});
-
-const PasswordInput = FormDecoratorHoc(TextField, {
-  type: 'password',
-  label: (
-    <PublicFormLabel>
-      <FormattedMessage
-        id="uxi-business-password"
-        defaultMessage="Password"
-      />
-    </PublicFormLabel>
-  ),
-});
+import { EmailInput, PasswordInput } from '../utils/Fields';
 
 const SignInForm = ({
     isFetching,
