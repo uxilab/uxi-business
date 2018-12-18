@@ -18,7 +18,7 @@ export withDefaultErrorHandlingActions from './actions';
 export withUserMessage from './components/hocs/withUserMessage';
 export UserMessageProvider from './components/UserMessageProvider';
 
-export const withUserMessageAction = (Comp, contextId) => {
+const withUserMessageAction = (Comp, contextId) => {
   const mapDispatchToProps = dispatch => ({
     success(message) {
       dispatch(showSuccess({ ...message, context: contextId }));
@@ -69,7 +69,7 @@ const showAndHide = (showFn, hideFn) => {
   setTimeout(hideFn, 5000);
 };
 
-export const showAlert = alert => (dispatch) => {
+const showAlert = alert => (dispatch) => {
   const id = uuid();
   const alertWithId = {
     ...alert,
