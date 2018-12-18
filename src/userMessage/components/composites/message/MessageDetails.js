@@ -43,4 +43,6 @@ const MessageDetails = ({ message }) => (
   </div>
 );
 
+MessageDetails.displayName = 'MessageDetails'
+
 export default MessageDetails;
