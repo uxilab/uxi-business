@@ -59,4 +59,6 @@ const GlobalMessage = ({
   );
 };
 
-export default GlobalSuccessMessage;
+GlobalMessage.displayName = 'GlobalMessage'
+
+export default GlobalMessage;

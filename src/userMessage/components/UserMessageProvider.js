@@ -32,6 +32,8 @@ const UserFeedbackProvider = ({
   </div>
 );
 
+UserFeedbackProvider.displayName = 'UserFeedbackProvider'
+
 const mapStateToProps = ({
   userMessage: {
     sessionExpiredGlobalMessages,

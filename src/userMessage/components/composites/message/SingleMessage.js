@@ -40,4 +40,6 @@ const SingleMessage = ({
   </Alert>
 );
 
+SingleMessage.displayName = 'SingleMessage'
+
 export default SingleMessage;

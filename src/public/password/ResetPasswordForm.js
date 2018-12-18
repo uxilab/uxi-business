@@ -124,6 +124,8 @@ const ResetPasswordForm = ({
   </div>
 );
 
+ResetPasswordForm.displayName = 'ResetPasswordForm'
+
 export default reduxForm({
     form: 'uxi-business-resetPassword',
     validate: validatePassword,
