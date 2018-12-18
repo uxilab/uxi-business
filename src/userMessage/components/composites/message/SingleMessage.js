@@ -1,8 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import {
-  FormattedMessage,
-} from 'react-intl';
 import Alert from 'uxi/Alert';
 import MessageTitle from './MessageTitle';
 
@@ -40,6 +36,6 @@ const SingleMessage = ({
   </Alert>
 );
 
-SingleMessage.displayName = 'SingleMessage'
+SingleMessage.displayName = 'SingleMessage';
 
 export default SingleMessage;

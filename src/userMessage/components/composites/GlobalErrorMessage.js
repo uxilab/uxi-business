@@ -76,7 +76,10 @@ const GlobalErrorMessage = ({
   }
 
   const messagesWithDetails = messages.filter(messageWithDetails => (
-    messageWithDetails.status || messageWithDetails.url || messageWithDetails.errorMessage || messageWithDetails.message
+    messageWithDetails.status
+    || messageWithDetails.url
+    || messageWithDetails.errorMessage
+    || messageWithDetails.message
   )).map(errorMessage => ({
     ...errorMessage,
     message: findAppropriateErrorMessage(errorMessage),

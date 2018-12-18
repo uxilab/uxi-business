@@ -34,6 +34,6 @@ const UserFeedbackContainer = ({ children }) => {
   );
 };
 
-UserFeedbackContainer.displayName = 'UserFeedbackContainer'
+UserFeedbackContainer.displayName = 'UserFeedbackContainer';
 
 export default UserFeedbackContainer;

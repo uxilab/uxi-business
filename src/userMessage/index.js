@@ -46,7 +46,7 @@ const withUserMessageAction = (Comp, contextId) => {
 };
 
 
-export const withContainedUserFeedback = (Comp, options) => {
+export const withContainedUserFeedback = (Comp) => {
   const uniqueID = uuid();
 
   return withUserMessageAction(

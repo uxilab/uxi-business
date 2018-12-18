@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import {
   generalAccessDenied,
   generalSessionExpired,
@@ -9,7 +10,6 @@ import {
   shouldClearError,
   showSuccess,
 } from '../userMessage/actions';
-import uuid from 'uuid/v4';
 
 class DefaultErrorRequest extends Error {
   constructor(requestError = {}, ...params) {
@@ -60,13 +60,13 @@ const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
   const id = uuid();
   if (resp.ok) {
     dispatch(
-      options.success ?
-        options.success({ id, message: successMessage }) :
-        showSuccess({ id, message: successMessage })
+      options.success
+        ? options.success({ id, message: successMessage })
+        : showSuccess({ id, message: successMessage })
     );
 
     setTimeout(() => {
-      dispatch(shouldClearError({ id }));
+      dispatch(shouldClearError({ id }));
     }, 10000);
   }
 };
@@ -87,7 +87,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   }
 
   if (response.original && response.original.status === 401) {
-    options.log && options.log(`Error 401 - unauthorized - for ${response.original.url}`);
+    if (options.log) {
+      options.log(`Error 401 - unauthorized - for ${response.original.url}`);
+    }
 
     const unauthorizedMessage = {
       id,
@@ -98,7 +100,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
       context,
     };
 
-    return dispatch(
+    return dispatch( // eslint-disable-line consistent-return
       options.sessionExpired ?
         options.sessionExpired(unauthorizedMessage) :
         generalSessionExpired(unauthorizedMessage)
@@ -106,7 +108,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   }
 
   if (response.original && response.original.status === 403) {
-    options.log && options.log(`Error 403 - access denied - for ${response.original.url}`);
+    if (options.log) {
+      options.log(`Error 403 - access denied - for ${response.original.url}`);
+    }
 
     const accessDeniedMessage = {
       id,
@@ -117,7 +121,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
       context,
     };
 
-    return dispatch(
+    return dispatch( // eslint-disable-line consistent-return
       options.accessDenied ?
         options.accessDenied(accessDeniedMessage) :
         generalAccessDenied(accessDeniedMessage)
@@ -125,7 +129,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   }
 
   if (response.original && response.original.status === 404) {
-    options.log && options.log(`Error 404 - Not Found - for ${response.original.url}`);
+    if (options.log) {
+      options.log(`Error 404 - Not Found - for ${response.original.url}`);
+    }
 
     const notFoundMessage = {
       id,
@@ -136,7 +142,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
       context,
     };
 
-    return dispatch(
+    return dispatch( // eslint-disable-line consistent-return
       options.notFound ?
         options.notFound(notFoundMessage) :
         generalEntityNotFound(notFoundMessage)
@@ -144,7 +150,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   }
 
   if (response.original && response.original.status === 202) {
-    options.log && options.log(`Error 202 - Queued - for ${response.original.url}`);
+    if (options.log) {
+      options.log(`Error 202 - Queued - for ${response.original.url}`);
+    }
 
     const queuedMessage = {
       id,
@@ -155,7 +163,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
       context,
     };
 
-    return dispatch(
+    return dispatch( // eslint-disable-line consistent-return
       options.queued ?
         options.queued(queuedMessage) :
         generalQueued(queuedMessage)
@@ -168,7 +176,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
     response.original.status >= 400 &&
     response.original.status <= 599
   ) {
-    options.log && options.log(`Error ${response.original.status} - Unknown - for ${response.original.url}`);
+    if (options.log) {
+      options.log(`Error ${response.original.status} - Unknown - for ${response.original.url}`);
+    }
 
     const unknownErrorMessage = {
       id,
@@ -179,7 +189,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
       context,
     };
 
-    return dispatch(
+    return dispatch( // eslint-disable-line consistent-return
       options.networkError ?
         options.networkError(unknownErrorMessage) :
         generalNetworkError(unknownErrorMessage)
@@ -187,7 +197,9 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   }
 
   if (response.isError) {
-    options.log && options.log(`Uknow Error - Unknown status - for ${response.original.url}`);
+    if (options.log) {
+      options.log(`Uknow Error - Unknown status - for ${response.original.url}`);
+    }
 
     const unknownErrorMessage = {
       id,
@@ -198,14 +210,14 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
     };
 
     if (response.original.status === 409) {
-      return dispatch(
+      return dispatch( // eslint-disable-line consistent-return
         options.conflictedEntity ?
           options.conflictedEntity(unknownErrorMessage) :
           generalConflictedEntity(unknownErrorMessage)
       );
     }
 
-    return dispatch(
+    return dispatch( // eslint-disable-line consistent-return
       options.networkError ?
         options.networkError(unknownErrorMessage) :
         generalNetworkError(unknownErrorMessage)
@@ -213,15 +225,15 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   }
 
   if (errorMessage) {
-    return dispatch(
-      options.unknownError ?
-        options.unknownError({
+    return dispatch( // eslint-disable-line consistent-return
+      options.unknownError
+        ? options.unknownError({
           id,
           params,
           errorMessage,
           context,
-        }) :
-        generalUnknownError({
+        })
+        : generalUnknownError({
           id,
           params,
           errorMessage,
@@ -230,7 +242,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
     );
   }
 
-  return null;
+  return null; // eslint-disable-line consistent-return
 };
 /**
  * Decorate an action that fetch Data and ensure there is a default actions handler.
@@ -246,8 +258,11 @@ export const withDefaultErrorHandlingActions = (
   thunk, options = {},
 ) => (params, context) => (dispatch) => {
   if (options.withMutation) {
-    return thunk(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options, context));
+    return thunk(params)(dispatch)
+      .then(defaultMutationHandling)
+      .catch(defaultErrorHandling(dispatch, params, options, context));
   }
 
-  return thunk(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options, context));
+  return thunk(params)(dispatch)
+    .catch(defaultErrorHandling(dispatch, params, options, context));
 };

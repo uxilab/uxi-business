@@ -1,10 +1,9 @@
 import { createAction } from 'redux-actions';
-import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 
 const addIdIfNotThere = (message = {}) => {
   if (!message.id) {
-    message.id = uuid();
+    message.id = uuid(); // eslint-disable-line no-param-reassign
   }
 
   return message;

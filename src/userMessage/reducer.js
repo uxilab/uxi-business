@@ -60,7 +60,7 @@ const clearStoreFromError = (messages = {}, payload) => {
   const id = payload ? payload.id : undefined;
 
   if (!messages[context]) {
-    messages[context] = {};
+    messages[context] = {}; // eslint-disable-line no-param-reassign
   }
 
   return {
@@ -83,10 +83,10 @@ const clearStoreFromError = (messages = {}, payload) => {
 
 const clearStoreFromAllErrors = (messages, payload) => {
   const context = (payload && payload.context) ? payload.context : 'global';
- const id = payload ? payload.id : undefined;
+  const id = payload ? payload.id : undefined;
 
   if (!messages[context]) {
-    messages[context] = {};
+    messages[context] = {}; // eslint-disable-line no-param-reassign
   }
 
   return {
@@ -104,7 +104,7 @@ const clearStoreFromAllErrors = (messages, payload) => {
       conflictedError: [],
     },
   };
-}
+};
 
 export default handleActions({
   [showSuccess]: (state, { payload }) => ({

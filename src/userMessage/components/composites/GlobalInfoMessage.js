@@ -47,6 +47,6 @@ const GlobalInfoMessage = ({
   );
 };
 
-GlobalInfoMessage.displayName = 'GlobalInfoMessage'
+GlobalInfoMessage.displayName = 'GlobalInfoMessage';
 
 export default GlobalInfoMessage;

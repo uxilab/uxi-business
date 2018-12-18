@@ -1,3 +1,5 @@
+
+
 export const selectErrorMessage = (userMessageForContext = {}) => {
   const {
     accessDenied,
@@ -56,4 +58,9 @@ export const selectErrorMessage = (userMessageForContext = {}) => {
     globalInfoMessages: info || [],
     warningMessages,
   };
+};
+
+
+export default {
+  selectErrorMessage,
 };

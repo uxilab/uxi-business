@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  FormattedMessage,
-} from 'react-intl';
 import Alert from 'uxi/Alert';
 import ShowMoreDetails from './ShowMoreDetails';
 import MessageTitle from './MessageTitle';

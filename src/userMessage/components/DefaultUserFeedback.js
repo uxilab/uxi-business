@@ -26,7 +26,6 @@ const DefaultUserFeedback = ({
   clearSuccess,
   clearWarning,
   clearInfo,
-  contextId,
 }) => (
   <div>
     {
@@ -73,7 +72,7 @@ const DefaultUserFeedback = ({
   </div>
 );
 
-DefaultUserFeedback.displayName = 'DefaultUserFeedback'
+DefaultUserFeedback.displayName = 'DefaultUserFeedback';
 
 const mapStateToProps = ({
   userMessage: {
@@ -81,7 +80,6 @@ const mapStateToProps = ({
   },
 }, {
   contextId,
-  messagesFromProps,
 }
 ) => {
   const messageStore = contextId ? messages[contextId] : messages.global;

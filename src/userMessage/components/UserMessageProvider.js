@@ -32,7 +32,7 @@ const UserFeedbackProvider = ({
   </div>
 );
 
-UserFeedbackProvider.displayName = 'UserFeedbackProvider'
+UserFeedbackProvider.displayName = 'UserFeedbackProvider';
 
 const mapStateToProps = ({
   userMessage: {

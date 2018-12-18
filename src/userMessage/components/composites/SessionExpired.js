@@ -11,13 +11,6 @@ class SessionExpired extends Component {
     };
   }
 
-  deCrementCountDown() {
-    const { countDown } = this.state;
-    this.setState({
-      countDown: (countDown > 0) ? countDown - 1 : 0,
-    });
-  }
-
   componentDidMount() {
     setInterval(() => {
       this.deCrementCountDown();
@@ -30,6 +23,13 @@ class SessionExpired extends Component {
     if (countDown === 1) {
       onSessionExpired();
     }
+  }
+
+  deCrementCountDown() {
+    const { countDown } = this.state;
+    this.setState({
+      countDown: (countDown > 0) ? countDown - 1 : 0,
+    });
   }
 
   render() {

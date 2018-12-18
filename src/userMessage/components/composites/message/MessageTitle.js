@@ -6,6 +6,6 @@ const AlertTitle = styled.div`
   padding-bottom: 6px;
 `;
 
-AlertTitle.displayName = 'AlertTitle'
+AlertTitle.displayName = 'AlertTitle';
 
 export default AlertTitle;
