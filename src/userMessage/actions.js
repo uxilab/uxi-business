@@ -26,5 +26,4 @@ export const generalUnknownError = createAction('UXI-B_GENERAL_UNKNOWN_ERROR', a
 export const generalEntityNotFound = createAction('UXI-B_GENERAL_ENTITY_NOT_FOUND', addIdIfNotThere);
 export const generalQueued = createAction('UXI-B_GENERAL_REQUEST_QUEUED', addIdIfNotThere);
 export const generalConflictedEntity = createAction('UXI-B_GENERAL_ENTITY_CONFLICTED', addIdIfNotThere);
-export const clearError = createAction('UXI-B_GENERAL_CLEAR_ERROR'/* , addIdIfNotThere */);
 export const generalNetworkError = createAction('UXI-B_GENERAL_NETWORK_ERROR', addIdIfNotThere);

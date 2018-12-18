@@ -11,7 +11,6 @@ import {
   generalEntityNotFound,
   generalConflictedEntity,
   generalQueued,
-  clearError,
   shouldClearError,
   shouldClearSuccess,
   shouldClearWarnings,
@@ -127,10 +126,6 @@ export default handleActions({
   [generalQueued]: (state, { payload }) => ({
     ...state,
     messages: updateMessageStore(state.messages, payload, 'queued'),
-  }),
-  [clearError]: (state, { payload }) => ({
-    ...state,
-    messages: clearStoreFromError(state.messages, payload),
   }),
   [shouldClearError]: (state, { payload }) => ({
     ...state,
