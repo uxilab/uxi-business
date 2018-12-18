@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/uxi-business.svg)](https://badge.fury.io/js/uxi-business)  [![CircleCI](https://circleci.com/gh/uxilab/uxi.svg?style=svg)](https://circleci.com/gh/uxilab/uxi-business)
+---
 # uxi-business
 
 Common business component that are 'ready' to use and follow UX best practises.

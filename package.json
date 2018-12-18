@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "uxi-cli dev",
     "pack": "uxi-cli pack",
+    "lint": "uxi-cli lint ./src",
+    "unitTest": "uxi-cli test",
+    "test": "npm run lint && npm run unitTest",
     "deploy": "npm version patch && npm run pack && npm publish build",
     "installPeerDeps": "npm i uxi react react-dom react-intl redux-form react-redux styled-components redux --no-save",
     "postinstall": "npm run installPeerDeps"
