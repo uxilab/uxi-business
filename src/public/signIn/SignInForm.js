@@ -92,4 +92,6 @@ const SignInForm = ({
   </div>
 );
 
+SignInForm.displayName = 'SignInForm'
+
 export default reduxForm({ form: 'uxi-business-signin' })(SignInForm);

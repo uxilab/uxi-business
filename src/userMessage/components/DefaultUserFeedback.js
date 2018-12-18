@@ -70,6 +70,8 @@ const DefaultUserFeedback = ({
     </div>
 );
 
+DefaultUserFeedback.displayName = 'DefaultUserFeedback'
+
 const mapStateToProps = ({
   userMessage: {
     messages,

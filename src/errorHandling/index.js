@@ -66,7 +66,7 @@ const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
     )
 
     setTimeout(() => {
-      dispatch(clearError(id));
+      dispatch(clearError({ id }));
     }, 10000);
   }
 }
@@ -78,7 +78,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   const id = uuid();
 
   setTimeout(() => {
-    dispatch(clearError(id));
+    dispatch(clearError({ id }));
   }, 10000);
 
   if (options.onErrorAction) {

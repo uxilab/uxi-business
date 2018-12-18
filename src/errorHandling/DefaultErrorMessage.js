@@ -8,4 +8,6 @@ const DefaultErrorMessage = ({ error }) => {
   )
 };
 
+DefaultErrorMessage.displayName = 'DefaultErrorMessage'
+
 export default DefaultErrorMessage;

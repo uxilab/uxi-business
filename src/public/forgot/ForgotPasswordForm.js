@@ -89,4 +89,6 @@ const ForgotPasswordForm = ({
   </div>
 );
 
+ForgotPasswordForm.displayName = 'ForgotPasswordForm'
+
 export default reduxForm({ form: 'uxi-business-forgot' })(ForgotPasswordForm);

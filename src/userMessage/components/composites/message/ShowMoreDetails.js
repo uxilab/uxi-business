@@ -25,4 +25,6 @@ const ShowMoreDetails = ({ toggle, showMore }) => (
   </div>
 );
 
+ShowMoreDetails.displayName = 'ShowMoreDetails'
+
 export default ShowMoreDetails;
