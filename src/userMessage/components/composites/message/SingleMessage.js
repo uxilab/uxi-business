@@ -9,11 +9,11 @@ import MessageTitle from './MessageTitle';
 const SingleMessage = ({
   message,
   type,
-  onClose,
+  clearErrorById,
   extra,
 }) => (
   <Alert
-    onClose={onClose}
+    onClose={() => clearErrorById(message.id)}
     style={{ fontSize: '14px', minWidth: '280px', width: '400px', maxWidth: '680px' }}
     type={type}
     showClose

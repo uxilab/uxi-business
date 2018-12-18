@@ -10,6 +10,7 @@ import GlobalInfoMessage from './composites/GlobalInfoMessage';
 
 import {
   shouldClearError,
+  shouldClearErrors,
   shouldClearSuccess,
   shouldClearWarnings,
   shouldClearInfo,
@@ -20,7 +21,8 @@ const DefaultUserFeedback = ({
   successMessages,
   warningMessages,
   globalInfoMessages,
-  clearErrors,
+  clearAllErrors,
+  clearErrorById,
   clearSuccess,
   clearWarning,
   clearInfo,
@@ -33,7 +35,8 @@ const DefaultUserFeedback = ({
           (
             <GlobalErrorMessage
               messages={errorMessages}
-              onClose={clearErrors}
+              clearAllErrors={clearAllErrors}
+              clearErrorById={clearErrorById}
             />
           )
     }
@@ -91,8 +94,11 @@ const mapStateToProps = ({
 };
 
 const mapDispatchToProps = (dispatch, { contextId }) => ({
-  clearErrors() {
-    dispatch(shouldClearError({ context: contextId }));
+  clearErrorById(id) {
+    dispatch(shouldClearError({ id, context: contextId }));
+  },
+  clearAllErrors() {
+    dispatch(shouldClearErrors({ context: contextId }));
   },
   clearSuccess() {
     dispatch(shouldClearSuccess({ context: contextId }));

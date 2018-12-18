@@ -28,7 +28,7 @@ class MultipleMessage extends Component {
     const {
       defaultTitle,
       defaultExplanation,
-      onClose,
+      clearAllErrors,
       extra,
       type,
       messages,
@@ -39,7 +39,7 @@ class MultipleMessage extends Component {
 
     return (
       <Alert
-        onClose={onClose}
+        onClose={clearAllErrors}
         showClose
         style={{ fontSize: '14px', minWidth: '280px', width: '400px', maxWidth: '680px' }}
         type={type}

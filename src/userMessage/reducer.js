@@ -12,6 +12,7 @@ import {
   generalConflictedEntity,
   generalQueued,
   shouldClearError,
+  shouldClearErrors,
   shouldClearSuccess,
   shouldClearWarnings,
   shouldClearInfo,
@@ -79,6 +80,32 @@ const clearStoreFromError = (messages = {}, payload) => {
   };
 };
 
+
+const clearStoreFromAllErrors = (messages, payload) => {
+  const context = (payload && payload.context) ? payload.context : 'global';
+ const id = payload ? payload.id : undefined;
+
+  if (!messages[context]) {
+    messages[context] = {};
+  }
+
+  return {
+    ...messages,
+    [context]: {
+      accessDenied: [],
+      notFoundError: [],
+      networkError: [],
+      success: (messages[context].success || []).filter(e => e.id !== id),
+      error: [],
+      warning: (messages[context].warning || []).filter(e => e.id !== id),
+      unknownError: [],
+      info: (messages[context].info || []).filter(e => e.id !== id),
+      queued: (messages[context].queued || []).filter(e => e.id !== id),
+      conflictedError: [],
+    },
+  };
+}
+
 export default handleActions({
   [showSuccess]: (state, { payload }) => ({
     ...state,
@@ -130,6 +157,10 @@ export default handleActions({
   [shouldClearError]: (state, { payload }) => ({
     ...state,
     messages: clearStoreFromError(state.messages, payload),
+  }),
+  [shouldClearErrors]: (state, { payload = {} }) => ({
+    ...state,
+    messages: clearStoreFromAllErrors(state.messages, payload),
   }),
   [shouldClearSuccess]: (state, { payload }) => ({
     ...state,

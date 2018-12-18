@@ -66,6 +66,8 @@ const findAppropriateErrorMessage = (errorMessage) => {
 const GlobalErrorMessage = ({
   messages = [],
   onClose,
+  clearErrorById,
+  clearAllErrors,
 }) => {
   const isEmpty = messages.length === 0;
 
@@ -111,6 +113,7 @@ const GlobalErrorMessage = ({
         message={messagesWithDetails[0]}
         extra={extra}
         onClose={onClose}
+        clearErrorById={clearErrorById}
       />
     );
   }
@@ -133,7 +136,7 @@ const GlobalErrorMessage = ({
       }
       extra={extra}
       messages={messagesWithDetails}
-      onClose={onClose}
+      clearAllErrors={clearAllErrors}
     />
   );
 };
