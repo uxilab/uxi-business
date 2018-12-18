@@ -13,9 +13,9 @@ const GlobalInfoMessage = ({
     return null;
   }
 
-  const messagesWithDetails = messages.filter((m) => (m.message));
+  const messagesWithDetails = messages.filter(m => (m.message));
 
-  if(messagesWithDetails.length === 1) {
+  if (messagesWithDetails.length === 1) {
     return (
       <SingleMessage
         type="info"

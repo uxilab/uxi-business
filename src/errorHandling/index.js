@@ -27,9 +27,9 @@ class DefaultErrorRequest extends Error {
   }
 }
 
-export const withDefaultErrorHandler = (Comp) => (props) => (
+export const withDefaultErrorHandler = Comp => props => (
   <AppContext.Consumer>
-    {({log})=> (
+    {({ log }) => (
       <SwallowComponet log={log}>
         <Comp {...props} />
       </SwallowComponet>
@@ -52,24 +52,24 @@ export const defaultCatch = (response) => {
   return response;
 };
 
-export const withDefaultCatch = (promise) => (promise.then(defaultCatch));
+export const withDefaultCatch = promise => (promise.then(defaultCatch));
 
 
 const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
   const successMessage = options.successMessage;
   const id = uuid();
-  if(resp.ok) {
+  if (resp.ok) {
     dispatch(
       options.success ?
-        options.success({ id, message: successMessage}) :
-        showSuccess({ id, message: successMessage})
-    )
+        options.success({ id, message: successMessage }) :
+        showSuccess({ id, message: successMessage })
+    );
 
     setTimeout(() => {
       dispatch(clearError({ id }));
     }, 10000);
   }
-}
+};
 
 export const defaultErrorHandling = (dispatch, params, options = {}, context) => (e) => {
   const response = e.requestError || {};
@@ -87,7 +87,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   }
 
   if (response.original && response.original.status === 401) {
-    options.log && options.log(`Error 401 - unauthorized - for ${response.original.url}`)
+    options.log && options.log(`Error 401 - unauthorized - for ${response.original.url}`);
 
     const unauthorizedMessage = {
       id,
@@ -100,7 +100,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
 
     return dispatch(
       options.sessionExpired ?
-      options.sessionExpired(unauthorizedMessage) :
+        options.sessionExpired(unauthorizedMessage) :
         generalSessionExpired(unauthorizedMessage)
     );
   }
@@ -119,7 +119,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
 
     return dispatch(
       options.accessDenied ?
-      options.accessDenied(accessDeniedMessage) :
+        options.accessDenied(accessDeniedMessage) :
         generalAccessDenied(accessDeniedMessage)
     );
   }
@@ -138,7 +138,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
 
     return dispatch(
       options.notFound ?
-      options.notFound(notFoundMessage) :
+        options.notFound(notFoundMessage) :
         generalEntityNotFound(notFoundMessage)
     );
   }
@@ -157,7 +157,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
 
     return dispatch(
       options.queued ?
-      options.queued(queuedMessage) :
+        options.queued(queuedMessage) :
         generalQueued(queuedMessage)
     );
   }
@@ -181,8 +181,8 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
 
     return dispatch(
       options.networkError ?
-      options.networkError(unknownErrorMessage) :
-      generalNetworkError(unknownErrorMessage)
+        options.networkError(unknownErrorMessage) :
+        generalNetworkError(unknownErrorMessage)
     );
   }
 
@@ -197,25 +197,25 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
       context,
     };
 
-    if(response.original.status === 409) {
+    if (response.original.status === 409) {
       return dispatch(
         options.conflictedEntity ?
-        options.conflictedEntity(unknownErrorMessage) :
-        generalConflictedEntity(unknownErrorMessage)
+          options.conflictedEntity(unknownErrorMessage) :
+          generalConflictedEntity(unknownErrorMessage)
       );
     }
 
     return dispatch(
       options.networkError ?
-      options.networkError(unknownErrorMessage) :
-      generalNetworkError(unknownErrorMessage)
+        options.networkError(unknownErrorMessage) :
+        generalNetworkError(unknownErrorMessage)
     );
   }
 
   if (errorMessage) {
     return dispatch(
       options.unknownError ?
-      options.unknownError({
+        options.unknownError({
           id,
           params,
           errorMessage,
@@ -244,10 +244,10 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
  */
 export const withDefaultErrorHandlingActions = (
   thunk, options = {},
-) => (params, context) => dispatch => {
-  if(options.withMutation) {
+) => (params, context) => (dispatch) => {
+  if (options.withMutation) {
     return thunk(params)(dispatch).then(defaultMutationHandling).catch(defaultErrorHandling(dispatch, params, options, context));
   }
 
   return thunk(params)(dispatch).catch(defaultErrorHandling(dispatch, params, options, context));
-}
+};

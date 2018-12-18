@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FormattedMessage
+  FormattedMessage,
 } from 'react-intl';
 import {
   reduxForm,
@@ -11,7 +11,7 @@ import {
   Checkbox,
 } from 'uxi/Input';
 import {
-  Loader
+  Loader,
 } from 'uxi/Indicator';
 import Button from 'uxi/Button';
 import FormDecoratorHoc from '../../form/FormDecoratorHoc';
@@ -33,59 +33,59 @@ const EmailInput = FormDecoratorHoc(TextField, {
 });
 
 const ForgotPasswordForm = ({
-    isFetching,
-    onClick,
-    handleSubmit,
-    pristine,
-    submitting,
-    loginLink,
-    loginUrl,
-  }) => (
+  isFetching,
+  onClick,
+  handleSubmit,
+  pristine,
+  submitting,
+  loginLink,
+  loginUrl,
+}) => (
   <div
     onKeyPress={(e) => {
       if (e.key === 'Enter') {
         handleSubmit(onClick)();
       }
     }}
-    >
+  >
     <div>
       <Field
-          name="email"
-          type="text"
-          autoFocus
-          component={EmailInput}
-          validate={[required, email]}
-        />
-      </div>
-      <div style={{ paddingTop: '16px' }}>
-          <Button
-            disabled={pristine || submitting || isFetching}
-            isFullWidth
-            icon={ isFetching ? <Loader /> : null }
-            type="primary"
-            onClick={handleSubmit(onClick)}
-            message={
-              <FormattedMessage
-                id="uxi-business-sendMagicLink"
-                defaultMessage="Send magic email"
-              />
-            }
+        name="email"
+        type="text"
+        autoFocus
+        component={EmailInput}
+        validate={[required, email]}
+      />
+    </div>
+    <div style={{ paddingTop: '16px' }}>
+      <Button
+        disabled={pristine || submitting || isFetching}
+        isFullWidth
+        icon={isFetching ? <Loader /> : null}
+        type="primary"
+        onClick={handleSubmit(onClick)}
+        message={
+          <FormattedMessage
+            id="uxi-business-sendMagicLink"
+            defaultMessage="Send magic email"
           />
-        </div>
-        <div style={{ paddingTop: '16px' }}>
-            {
-                !loginLink &&
+        }
+      />
+    </div>
+    <div style={{ paddingTop: '16px' }}>
+      {
+        !loginLink &&
                 (
-                  <a href={ loginUrl ? loginUrl : '/signin' }>
+                  <a href={loginUrl || '/signin'}>
                     <FormattedMessage
                       id="uxi-business-backtoLogin"
                       defaultMessage="Return to sign in"
                     />
                   </a>
                 )
-            }
-            {loginLink && loginLink}
-        </div>
+      }
+      {loginLink && loginLink}
+    </div>
   </div>
 );
 

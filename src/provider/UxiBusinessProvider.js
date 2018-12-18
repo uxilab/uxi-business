@@ -30,6 +30,6 @@ class UxiBusinessProvider extends Component {
       </AppContext.Provider>
     );
   }
-};
+}
 
-export default UxiBusinessProvider
+export default UxiBusinessProvider;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  selectErrorMessage
+  selectErrorMessage,
 } from '../selector';
 import GlobalErrorMessage from './composites/GlobalErrorMessage';
 import GlobalSuccessMessage from './composites/GlobalSuccessMessage';
@@ -27,8 +27,8 @@ const DefaultUserFeedback = ({
   contextId,
 }) => (
   <div>
-      {
-          errorMessages &&
+    {
+      errorMessages &&
           errorMessages.length > 0 &&
           (
             <GlobalErrorMessage
@@ -36,9 +36,9 @@ const DefaultUserFeedback = ({
               onClose={clearErrors}
             />
           )
-        }
-        {
-          successMessages &&
+    }
+    {
+      successMessages &&
           successMessages.length > 0 &&
           (
             <GlobalSuccessMessage
@@ -46,9 +46,9 @@ const DefaultUserFeedback = ({
               onClose={clearSuccess}
             />
           )
-        }
-        {
-          warningMessages &&
+    }
+    {
+      warningMessages &&
           warningMessages.length > 0 &&
           (
             <GlobalWarningMessage
@@ -56,9 +56,9 @@ const DefaultUserFeedback = ({
               onClose={clearWarning}
             />
           )
-        }
-        {
-          globalInfoMessages &&
+    }
+    {
+      globalInfoMessages &&
           globalInfoMessages.length > 0 &&
           (
             <GlobalInfoMessage
@@ -66,8 +66,8 @@ const DefaultUserFeedback = ({
               onClose={clearInfo}
             />
           )
-        }
-    </div>
+    }
+  </div>
 );
 
 DefaultUserFeedback.displayName = 'DefaultUserFeedback'
@@ -76,10 +76,10 @@ const mapStateToProps = ({
   userMessage: {
     messages,
   },
- }, {
-   contextId,
-   messagesFromProps,
-  }
+}, {
+  contextId,
+  messagesFromProps,
+}
 ) => {
   const messageStore = contextId ? messages[contextId] : messages.global;
   const store = selectErrorMessage(messageStore);

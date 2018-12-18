@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  AppContext
+  AppContext,
 } from '../../provider/UxiBusinessProvider';
 import SessionExpired from './composites/SessionExpired';
 import UserFeedbackWrapper from './composites/UserFeedbackWrapper';
@@ -38,7 +38,7 @@ const mapStateToProps = ({
   userMessage: {
     sessionExpiredGlobalMessages,
   },
- }) => ({
+}) => ({
   sessionExpiredGlobalMessages,
 });
 

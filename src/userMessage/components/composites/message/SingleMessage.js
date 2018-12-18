@@ -12,31 +12,31 @@ const SingleMessage = ({
   onClose,
   extra,
 }) => (
-    <Alert
-      onClose={onClose}
-      style={{ fontSize: '14px', minWidth: '280px', width:'400px', maxWidth: '680px' }}
-      type={type}
-      showClose
-    >
-      {
-        message.title &&
+  <Alert
+    onClose={onClose}
+    style={{ fontSize: '14px', minWidth: '280px', width: '400px', maxWidth: '680px' }}
+    type={type}
+    showClose
+  >
+    {
+      message.title &&
         (
           <MessageTitle>
             {message.title}
           </MessageTitle>
         )
-      }
-      {
-        message.message &&
+    }
+    {
+      message.message &&
         (
           <div>
             {message.message}
           </div>
         )
-      }
-      {
-        extra ? extra : null
-      }
+    }
+    {
+      extra || null
+    }
   </Alert>
 );
 

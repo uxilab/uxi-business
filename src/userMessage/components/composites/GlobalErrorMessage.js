@@ -42,7 +42,7 @@ const findAppropriateErrorMessage = (errorMessage) => {
     );
   }
 
-  if(errorMessage.type === 'conflicted') {
+  if (errorMessage.type === 'conflicted') {
     return (
       <span>
         <FormattedMessage
@@ -104,7 +104,7 @@ const GlobalErrorMessage = ({
     </div>
   );
 
-  if(messagesWithDetails.length === 1) {
+  if (messagesWithDetails.length === 1) {
     return (
       <SingleMessage
         type="error"

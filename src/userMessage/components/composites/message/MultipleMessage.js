@@ -34,14 +34,14 @@ class MultipleMessage extends Component {
       messages,
     } = this.props;
     const {
-      showMore
+      showMore,
     } = this.state;
 
     return (
       <Alert
         onClose={onClose}
         showClose
-        style={{ fontSize: '14px', minWidth: '280px', width:'400px', maxWidth: '680px' }}
+        style={{ fontSize: '14px', minWidth: '280px', width: '400px', maxWidth: '680px' }}
         type={type}
       >
         <MessageTitle>
@@ -64,9 +64,9 @@ class MultipleMessage extends Component {
         {
           showMore ? (
             <div style={{ marginTop: '12px' }}>
-               <AllMessageDetails
-                  messages={messages}
-                />
+              <AllMessageDetails
+                messages={messages}
+              />
             </div>
           ) : null
         }

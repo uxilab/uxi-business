@@ -19,7 +19,7 @@ const ExtendedFlex = Flex.extend`
 `;
 
 const UserFeedbackContainer = ({ children }) => {
-  const childArray = React.Children.map(children, child => child)
+  const childArray = React.Children.map(children, child => child);
 
   return (
     <CompactSlide
@@ -31,7 +31,7 @@ const UserFeedbackContainer = ({ children }) => {
         {childArray}
       </ExtendedFlex>
     </CompactSlide>
-  )
+  );
 };
 
 UserFeedbackContainer.displayName = 'UserFeedbackContainer'

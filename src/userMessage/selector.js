@@ -43,7 +43,7 @@ export const selectErrorMessage = (userMessageForContext = {}) => {
     ...(queued || []).map(m => ({
       ...m,
       type: 'queue',
-    }))
+    })),
   ];
 
   const successMessages = [
@@ -51,7 +51,7 @@ export const selectErrorMessage = (userMessageForContext = {}) => {
   ];
 
   return {
-    errorMessages: errorMessages,
+    errorMessages,
     successMessages: success || [],
     globalInfoMessages: info || [],
     warningMessages,

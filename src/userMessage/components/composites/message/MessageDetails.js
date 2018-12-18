@@ -23,7 +23,7 @@ const MessageDetails = ({ message }) => (
             id="module-error-urlTitle"
             defaultMessage="Url:"
           />
-          <span style={{ marginLeft:'6px' }}>
+          <span style={{ marginLeft: '6px' }}>
             {message.url}
           </span>
         </div> : null
@@ -34,7 +34,7 @@ const MessageDetails = ({ message }) => (
             id="module-error-statusTitle"
             defaultMessage="Status code:"
           />
-          <span style={{ marginLeft:'6px' }}>
+          <span style={{ marginLeft: '6px' }}>
             {message.status}
           </span>
         </div> : null

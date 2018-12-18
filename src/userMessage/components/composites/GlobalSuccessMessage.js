@@ -35,7 +35,7 @@ const GlobalSuccessMessage = ({
     message: findAppropriateSuccessMessage(successMessage),
   }));
 
-  if(messages.length === 1) {
+  if (messages.length === 1) {
     return (
       <SingleMessage
         type="success"

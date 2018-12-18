@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FormattedMessage
+  FormattedMessage,
 } from 'react-intl';
 import {
   reduxForm,
@@ -10,26 +10,24 @@ import {
   TextField,
 } from 'uxi/Input';
 import {
-  Loader
+  Loader,
 } from 'uxi/Indicator';
 import Button from 'uxi/Button';
 import FormDecoratorHoc from './FormDecoratorHoc';
 
-const genreateFields = (fields = []) => {
-  return fields.map(
-    (field) => ({
-      name: field.name,
-      type: field.type,
-      autoFocus: field.autoFocus,
-      validate: (field.validate || []),
-      component: FormDecoratorHoc(field.Input || TextField, field),
-    })
-  );
-};
+const genreateFields = (fields = []) => fields.map(
+  field => ({
+    name: field.name,
+    type: field.type,
+    autoFocus: field.autoFocus,
+    validate: (field.validate || []),
+    component: FormDecoratorHoc(field.Input || TextField, field),
+  })
+);
 
 const generateFormHoc = (formName, fields = [], options = {}) => {
   const generatedFields = genreateFields(fields) || [];
-  
+
   const GeneratedForm = ({
     isFetching,
     buttonLabel,
@@ -46,23 +44,21 @@ const generateFormHoc = (formName, fields = [], options = {}) => {
       }}
     >
       {
-        generatedFields.map((field) => {
-          return (
-            <Field
-              key={field.name}
-              name={field.name}
-              type={field.type || 'text'}
-              autoFocus={field.autoFocus || false}
-              component={field.component}
-              validate={field.validate || []}
-            />
-          );
-        })
+        generatedFields.map(field => (
+          <Field
+            key={field.name}
+            name={field.name}
+            type={field.type || 'text'}
+            autoFocus={field.autoFocus || false}
+            component={field.component}
+            validate={field.validate || []}
+          />
+        ))
       }
-      <div style={{ display: 'flex', justifyContent:'flex-end' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           disabled={pristine || submitting || isFetching}
-          icon={ isFetching ? <Loader /> : null }
+          icon={isFetching ? <Loader /> : null}
           type="primary"
           onClick={handleSubmit(onClick)}
           message={buttonLabel || 'Submit'}

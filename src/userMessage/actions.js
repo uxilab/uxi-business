@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 
 const addIdIfNotThere = (message = {}) => {
-  if(!message.id) {
+  if (!message.id) {
     message.id = uuid();
   }
 

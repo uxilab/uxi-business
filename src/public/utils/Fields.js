@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FormattedMessage
+  FormattedMessage,
 } from 'react-intl';
 import {
   TextField,

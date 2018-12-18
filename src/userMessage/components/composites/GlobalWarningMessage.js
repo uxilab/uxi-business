@@ -37,7 +37,7 @@ const GlobalWarningMessage = ({
     message: findAppropriateWarningMessage(warning),
   }));
 
-  if(messages.length === 1) {
+  if (messages.length === 1) {
     return (
       <SingleMessage
         type="warning"

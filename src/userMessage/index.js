@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import React from 'react';
 import uuid from 'uuid/v4';
 import {
@@ -11,7 +11,7 @@ import {
   shouldClearWarnings,
   shouldClearInfo,
 } from './actions';
-import DefaultUserFeedback  from './components/DefaultUserFeedback';
+import DefaultUserFeedback from './components/DefaultUserFeedback';
 
 export reducer from './reducer';
 export withDefaultErrorHandlingActions from './actions';
@@ -19,8 +19,7 @@ export withUserMessage from './components/hocs/withUserMessage';
 export UserMessageProvider from './components/UserMessageProvider';
 
 export const withUserMessageAction = (Comp, contextId) => {
-
-  const mapDispatchToProps = (dispatch) => ({
+  const mapDispatchToProps = dispatch => ({
     success(message) {
       dispatch(showSuccess({ ...message, context: contextId }));
     },
@@ -42,7 +41,7 @@ export const withUserMessageAction = (Comp, contextId) => {
     null,
     mapDispatchToProps,
   )(
-    (props) => (<Comp {...props} />)
+    props => (<Comp {...props} />)
   );
 };
 
@@ -51,13 +50,13 @@ export const withContainedUserFeedback = (Comp, options) => {
   const uniqueID = uuid();
 
   return withUserMessageAction(
-    (props) => (
+    props => (
       <div>
         <DefaultUserFeedback
           contextId={uniqueID}
           messagesFromProps={props.userMessage}
         />
-        <Comp {...props} contextId={uniqueID}/>
+        <Comp {...props} contextId={uniqueID} />
       </div>
     ),
     uniqueID,

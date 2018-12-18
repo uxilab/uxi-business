@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import SuccessMessage from './success/SuccessMessage'
+import SuccessMessage from './success/SuccessMessage';
 import AllMessageDetails from './message/AllMessageDetails';
 
 const findAppropriateSuccessMessage = (successMessage) => {
@@ -37,7 +37,7 @@ const GlobalMessage = ({
     message: findAppropriateSuccessMessage(successMessage),
   }));
 
-  if(messages.length === 1) {
+  if (messages.length === 1) {
     return (
       <SingleMessage type="success" message={messages[0]} />
     );

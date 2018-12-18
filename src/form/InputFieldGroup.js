@@ -20,23 +20,23 @@ const SufixWrapper = styled.div`
 `;
 
 const InputFieldGroup = ({ children, prefix, sufix }) => (
-    <WrapperInputGroup>
-        {
-            prefix &&
-            <PrefixWrapper>
-                {prefix}
-            </PrefixWrapper>
-        }
-        <InputWrapper>
-            {children}
-        </InputWrapper>
-        {
-            sufix &&
-            <SufixWrapper>
-                {sufix}
-            </SufixWrapper>
-        }
-    </WrapperInputGroup>
+  <WrapperInputGroup>
+    {
+      prefix &&
+      <PrefixWrapper>
+        {prefix}
+      </PrefixWrapper>
+    }
+    <InputWrapper>
+      {children}
+    </InputWrapper>
+    {
+      sufix &&
+      <SufixWrapper>
+        {sufix}
+      </SufixWrapper>
+    }
+  </WrapperInputGroup>
 );
 
 export default InputFieldGroup;

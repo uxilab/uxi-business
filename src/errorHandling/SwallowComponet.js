@@ -21,12 +21,12 @@ class CatchErrorComponent extends Component {
     const { children } = this.props;
     const { error } = this.state;
 
-    if(error) {
+    if (error) {
       return (
         <DefaultErrorMessage
           error={error}
         />
-      )
+      );
     }
 
     return (
