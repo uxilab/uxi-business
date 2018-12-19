@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "uxi-cli": "^1.0.81"
+    "uxi-cli": "1.0.82"
   },
   "dependencies": {
     "react": "^16.6.3",
