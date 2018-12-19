@@ -48,10 +48,6 @@ export const selectErrorMessage = (userMessageForContext = {}) => {
     })),
   ];
 
-  const successMessages = [
-    ...(success || []),
-  ];
-
   return {
     errorMessages,
     successMessages: success || [],
