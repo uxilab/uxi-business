@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const AlertTitle = styled.div`
+const MessageTitle = styled.div`
   font-size: 16px;
   font-weight: bold;
   padding-bottom: 6px;
 `;
 
-AlertTitle.displayName = 'AlertTitle';
+MessageTitle.displayName = 'MessageTitle';
 
-export default AlertTitle;
+export default MessageTitle;

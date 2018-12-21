@@ -7,7 +7,7 @@ import SessionExpired from './composites/SessionExpired';
 import UserFeedbackWrapper from './composites/UserFeedbackWrapper';
 import DefaultUserFeedback from './DefaultUserFeedback';
 
-const UserFeedbackProvider = ({
+const UserMessageProvider = ({
   children,
   sessionExpiredGlobalMessages,
 }) => (
@@ -32,7 +32,7 @@ const UserFeedbackProvider = ({
   </div>
 );
 
-UserFeedbackProvider.displayName = 'UserFeedbackProvider';
+UserMessageProvider.displayName = 'UserMessageProvider';
 
 const mapStateToProps = ({
   userMessage: {
@@ -44,4 +44,4 @@ const mapStateToProps = ({
 
 export default connect(
   mapStateToProps,
-)(UserFeedbackProvider);
+)(UserMessageProvider);
