@@ -6,7 +6,7 @@ import {
   showWarning,
   showError,
   showInfo,
-  shouldClearError,
+  shouldClearSuccesses,
   shouldClearSuccess,
   shouldClearWarnings,
   shouldClearInfo,
@@ -18,7 +18,7 @@ export withDefaultErrorHandlingActions from './actions';
 export withUserMessage from './components/hocs/withUserMessage';
 export UserMessageProvider from './components/UserMessageProvider';
 
-export const withUserMessageAction = (Comp, contextId) => {
+const withUserMessageAction = (Comp, contextId) => {
   const mapDispatchToProps = dispatch => ({
     success(message) {
       dispatch(showSuccess({ ...message, context: contextId }));
@@ -46,7 +46,7 @@ export const withUserMessageAction = (Comp, contextId) => {
 };
 
 
-export const withContainedUserFeedback = (Comp, options) => {
+export const withContainedUserFeedback = (Comp) => {
   const uniqueID = uuid();
 
   return withUserMessageAction(
@@ -69,7 +69,7 @@ const showAndHide = (showFn, hideFn) => {
   setTimeout(hideFn, 5000);
 };
 
-export const showAlert = alert => (dispatch) => {
+const showAlert = alert => (dispatch) => {
   const id = uuid();
   const alertWithId = {
     ...alert,
@@ -87,7 +87,7 @@ export const showAlert = alert => (dispatch) => {
 
   if (alert.type === 'error') {
     alertToUser = showError;
-    hideToUser = shouldClearError;
+    hideToUser = shouldClearSuccesses;
   }
 
   if (alert.type === 'warning') {

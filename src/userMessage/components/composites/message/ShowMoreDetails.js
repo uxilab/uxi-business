@@ -25,6 +25,6 @@ const ShowMoreDetails = ({ toggle, showMore }) => (
   </div>
 );
 
-ShowMoreDetails.displayName = 'ShowMoreDetails'
+ShowMoreDetails.displayName = 'ShowMoreDetails';
 
 export default ShowMoreDetails;

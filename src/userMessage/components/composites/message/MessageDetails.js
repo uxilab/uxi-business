@@ -43,6 +43,6 @@ const MessageDetails = ({ message }) => (
   </div>
 );
 
-MessageDetails.displayName = 'MessageDetails'
+MessageDetails.displayName = 'MessageDetails';
 
 export default MessageDetails;

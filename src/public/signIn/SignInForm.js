@@ -7,14 +7,12 @@ import {
   Field,
 } from 'redux-form';
 import {
-  TextField,
   Checkbox,
 } from 'uxi/Input';
 import {
   Loader,
 } from 'uxi/Indicator';
 import Button from 'uxi/Button';
-import FormDecoratorHoc from '../../form/FormDecoratorHoc';
 import { required, email } from '../../form/validation';
 import { EmailInput, PasswordInput } from '../utils/Fields';
 
@@ -24,7 +22,6 @@ const SignInForm = ({
   forgotLink,
   onClick,
   handleSubmit,
-  pristine,
   submitting,
 }) => (
   <div
@@ -92,6 +89,6 @@ const SignInForm = ({
   </div>
 );
 
-SignInForm.displayName = 'SignInForm'
+SignInForm.displayName = 'SignInForm';
 
 export default reduxForm({ form: 'uxi-business-signin' })(SignInForm);

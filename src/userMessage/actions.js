@@ -1,10 +1,9 @@
 import { createAction } from 'redux-actions';
-import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 
 const addIdIfNotThere = (message = {}) => {
   if (!message.id) {
-    message.id = uuid();
+    message.id = uuid(); // eslint-disable-line no-param-reassign
   }
 
   return message;
@@ -15,8 +14,9 @@ export const showWarning = createAction('UXI-B_GENERAL_SHOW_WARNING', addIdIfNot
 export const showError = createAction('UXI-B_GENERAL_SHOW_ERROR', addIdIfNotThere);
 export const showInfo = createAction('UXI-B_GENERAL_SHOW_INFORMATION', addIdIfNotThere);
 
-export const shouldClearError = createAction('UXI-B_GENERAL_CLEAR_ERROR'/* , addIdIfNotThere */);
-export const shouldClearSuccess = createAction('UXI-B_GENERAL_CLEAR_SUCCESS'/* , addIdIfNotThere */);
+export const shouldClearMessageById = createAction('UXI-B_GENERAL_CLEAR_MSG_BY_ID'/* , addIdIfNotThere */);
+export const shouldClearErrors = createAction('UXI-B_GENERAL_CLEAR_ERRORS'/* , addIdIfNotThere */);
+export const shouldClearSuccesses = createAction('UXI-B_GENERAL_CLEAR_SUCCESSES'/* , addIdIfNotThere */);
 export const shouldClearWarnings = createAction('UXI-B_GENERAL_CLEAR_WARNINGS'/* , addIdIfNotThere */);
 export const shouldClearInfo = createAction('UXI-B_GENERAL_CLEAR_INFOS' /* , addIdIfNotThere */);
 
@@ -26,5 +26,4 @@ export const generalUnknownError = createAction('UXI-B_GENERAL_UNKNOWN_ERROR', a
 export const generalEntityNotFound = createAction('UXI-B_GENERAL_ENTITY_NOT_FOUND', addIdIfNotThere);
 export const generalQueued = createAction('UXI-B_GENERAL_REQUEST_QUEUED', addIdIfNotThere);
 export const generalConflictedEntity = createAction('UXI-B_GENERAL_ENTITY_CONFLICTED', addIdIfNotThere);
-export const clearError = createAction('UXI-B_GENERAL_CLEAR_ERROR'/* , addIdIfNotThere */);
 export const generalNetworkError = createAction('UXI-B_GENERAL_NETWORK_ERROR', addIdIfNotThere);

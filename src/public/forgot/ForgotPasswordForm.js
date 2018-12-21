@@ -8,7 +8,6 @@ import {
 } from 'redux-form';
 import {
   TextField,
-  Checkbox,
 } from 'uxi/Input';
 import {
   Loader,
@@ -89,6 +88,6 @@ const ForgotPasswordForm = ({
   </div>
 );
 
-ForgotPasswordForm.displayName = 'ForgotPasswordForm'
+ForgotPasswordForm.displayName = 'ForgotPasswordForm';
 
 export default reduxForm({ form: 'uxi-business-forgot' })(ForgotPasswordForm);

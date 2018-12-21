@@ -9,6 +9,6 @@ const AllMessageDetails = ({ messages = [] }) => (
   </div>
 );
 
-AllMessageDetails.displayName = 'AllMessageDetails'
+AllMessageDetails.displayName = 'AllMessageDetails';
 
 export default AllMessageDetails;

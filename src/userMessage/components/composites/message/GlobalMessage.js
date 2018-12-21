@@ -1,7 +1,9 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import SuccessMessage from './success/SuccessMessage';
-import AllMessageDetails from './message/AllMessageDetails';
+// not sure what those are supposed to be (intended for)
+// so leaving it here as a trace for now
+// import SuccessMessage from './success/SuccessMessage';
+// import AllMessageDetails from './message/AllMessageDetails';
 
 const findAppropriateSuccessMessage = (successMessage) => {
   if (successMessage.message) {
@@ -59,6 +61,6 @@ const GlobalMessage = ({
   );
 };
 
-GlobalMessage.displayName = 'GlobalMessage'
+GlobalMessage.displayName = 'GlobalMessage';
 
 export default GlobalMessage;

@@ -1,20 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
-import {
-  FormattedMessage,
-} from 'react-intl';
 import Alert from 'uxi/Alert';
 import MessageTitle from './MessageTitle';
+import AlertStyles from './Alert.styles';
 
 const SingleMessage = ({
   message,
   type,
-  onClose,
+  clearMessageById,
   extra,
 }) => (
   <Alert
-    onClose={onClose}
-    style={{ fontSize: '14px', minWidth: '280px', width: '400px', maxWidth: '680px' }}
+    onClose={() => clearMessageById(message.id)}
+    style={AlertStyles}
     type={type}
     showClose
   >
@@ -40,6 +37,6 @@ const SingleMessage = ({
   </Alert>
 );
 
-SingleMessage.displayName = 'SingleMessage'
+SingleMessage.displayName = 'SingleMessage';
 
 export default SingleMessage;

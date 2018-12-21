@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {
-  FormattedMessage,
-} from 'react-intl';
 import Alert from 'uxi/Alert';
 import ShowMoreDetails from './ShowMoreDetails';
 import MessageTitle from './MessageTitle';
 import AllMessageDetails from './AllMessageDetails';
+import AlertStyles from './Alert.styles';
 
 class MultipleMessage extends Component {
   constructor(props) {
@@ -41,7 +39,7 @@ class MultipleMessage extends Component {
       <Alert
         onClose={onClose}
         showClose
-        style={{ fontSize: '14px', minWidth: '280px', width: '400px', maxWidth: '680px' }}
+        style={AlertStyles}
         type={type}
       >
         <MessageTitle>

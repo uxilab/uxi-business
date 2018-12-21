@@ -65,7 +65,8 @@ const findAppropriateErrorMessage = (errorMessage) => {
 
 const GlobalErrorMessage = ({
   messages = [],
-  onClose,
+  clearMessageById,
+  clearAllErrors,
 }) => {
   const isEmpty = messages.length === 0;
 
@@ -74,7 +75,10 @@ const GlobalErrorMessage = ({
   }
 
   const messagesWithDetails = messages.filter(messageWithDetails => (
-    messageWithDetails.status || messageWithDetails.url || messageWithDetails.errorMessage || messageWithDetails.message
+    messageWithDetails.status
+    || messageWithDetails.url
+    || messageWithDetails.errorMessage
+    || messageWithDetails.message
   )).map(errorMessage => ({
     ...errorMessage,
     message: findAppropriateErrorMessage(errorMessage),
@@ -110,7 +114,7 @@ const GlobalErrorMessage = ({
         type="error"
         message={messagesWithDetails[0]}
         extra={extra}
-        onClose={onClose}
+        clearMessageById={clearMessageById}
       />
     );
   }
@@ -133,7 +137,7 @@ const GlobalErrorMessage = ({
       }
       extra={extra}
       messages={messagesWithDetails}
-      onClose={onClose}
+      onClose={clearAllErrors}
     />
   );
 };

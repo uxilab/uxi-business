@@ -4,35 +4,33 @@ import {
   AppContext,
 } from '../../provider/UxiBusinessProvider';
 import SessionExpired from './composites/SessionExpired';
-import UserFeedbackWrapper from './composites/UserFeedbackWrapper';
 import DefaultUserFeedback from './DefaultUserFeedback';
 
-const UserFeedbackProvider = ({
+const UserMessageProvider = ({
   children,
   sessionExpiredGlobalMessages,
 }) => (
   <div>
-    <UserFeedbackWrapper>
-      <AppContext.Consumer>
-        {({ onSessionExpired }) => (
-          <div>
-            {
-              sessionExpiredGlobalMessages &&
+    <AppContext.Consumer>
+      {({ onSessionExpired }) => (
+        <div>
+          {
+            sessionExpiredGlobalMessages &&
               sessionExpiredGlobalMessages.length > 0 &&
               (
                 <SessionExpired onSessionExpired={onSessionExpired} />
               )
-            }
-            <DefaultUserFeedback />
-          </div>
-        )}
-      </AppContext.Consumer>
-    </UserFeedbackWrapper>
+          }
+          <DefaultUserFeedback />
+        </div>
+
+      )}
+    </AppContext.Consumer>
     {children}
   </div>
 );
 
-UserFeedbackProvider.displayName = 'UserFeedbackProvider'
+UserMessageProvider.displayName = 'UserMessageProvider';
 
 const mapStateToProps = ({
   userMessage: {
@@ -44,4 +42,4 @@ const mapStateToProps = ({
 
 export default connect(
   mapStateToProps,
-)(UserFeedbackProvider);
+)(UserMessageProvider);

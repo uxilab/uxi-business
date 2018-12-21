@@ -69,6 +69,6 @@ const GlobalWarningMessage = ({
   );
 };
 
-GlobalWarningMessage.displayName = 'GlobalWarningMessage'
+GlobalWarningMessage.displayName = 'GlobalWarningMessage';
 
 export default GlobalWarningMessage;

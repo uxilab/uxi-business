@@ -22,7 +22,8 @@ const findAppropriateSuccessMessage = (successMessage) => {
 
 const GlobalSuccessMessage = ({
   messages = [],
-  onClose,
+  clearMessageById,
+  clearAllSuccesses,
 }) => {
   const isEmpty = messages.length === 0;
 
@@ -40,9 +41,26 @@ const GlobalSuccessMessage = ({
       <SingleMessage
         type="success"
         message={messages[0]}
-        onClose={onClose}
+        clearMessageById={clearMessageById}
       />
     );
+  }
+
+  if (messages.length === 2) {
+    return [
+      <SingleMessage
+        key="0"
+        type="success"
+        message={messages[0]}
+        clearMessageById={clearMessageById}
+      />,
+      <SingleMessage
+        key="1"
+        type="success"
+        message={messages[0]}
+        clearMessageById={clearMessageById}
+      />,
+    ];
   }
 
   return (
@@ -62,11 +80,11 @@ const GlobalSuccessMessage = ({
         />
       }
       messages={messagesWithDetails}
-      onClose={onClose}
+      onClose={clearAllSuccesses}
     />
   );
 };
 
-GlobalSuccessMessage.displayName = 'GlobalSuccessMessage'
+GlobalSuccessMessage.displayName = 'GlobalSuccessMessage';
 
 export default GlobalSuccessMessage;
