@@ -12,7 +12,6 @@ import UserFeedbackWrapper from './composites/UserFeedbackWrapper';
 import {
   shouldClearMessageById,
   shouldClearErrors,
-  shouldClearSuccess,
   shouldClearSuccesses,
   shouldClearWarnings,
   shouldClearInfo,
