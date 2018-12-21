@@ -3,6 +3,7 @@ import Alert from 'uxi/Alert';
 import ShowMoreDetails from './ShowMoreDetails';
 import MessageTitle from './MessageTitle';
 import AllMessageDetails from './AllMessageDetails';
+import AlertStyles from './Alert.styles';
 
 class MultipleMessage extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class MultipleMessage extends Component {
     const {
       defaultTitle,
       defaultExplanation,
-      clearAllErrors,
+      onClose,
       extra,
       type,
       messages,
@@ -36,9 +37,9 @@ class MultipleMessage extends Component {
 
     return (
       <Alert
-        onClose={clearAllErrors}
+        onClose={onClose}
         showClose
-        style={{ fontSize: '14px', minWidth: '280px', width: '400px', maxWidth: '680px' }}
+        style={AlertStyles}
         type={type}
       >
         <MessageTitle>

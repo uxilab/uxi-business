@@ -34,7 +34,7 @@
     "uxi-cli": "^1.0.71"
   },
   "peerDependencies": {
-    "uxi": "*",
+    "uxi": "^0.0.370",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-intl": "^2.4.0",

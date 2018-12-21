@@ -14,9 +14,9 @@ export const showWarning = createAction('UXI-B_GENERAL_SHOW_WARNING', addIdIfNot
 export const showError = createAction('UXI-B_GENERAL_SHOW_ERROR', addIdIfNotThere);
 export const showInfo = createAction('UXI-B_GENERAL_SHOW_INFORMATION', addIdIfNotThere);
 
-export const shouldClearError = createAction('UXI-B_GENERAL_CLEAR_ERROR'/* , addIdIfNotThere */);
+export const shouldClearMessageById = createAction('UXI-B_GENERAL_CLEAR_MSG_BY_ID'/* , addIdIfNotThere */);
 export const shouldClearErrors = createAction('UXI-B_GENERAL_CLEAR_ERRORS'/* , addIdIfNotThere */);
-export const shouldClearSuccess = createAction('UXI-B_GENERAL_CLEAR_SUCCESS'/* , addIdIfNotThere */);
+export const shouldClearSuccesses = createAction('UXI-B_GENERAL_CLEAR_SUCCESSES'/* , addIdIfNotThere */);
 export const shouldClearWarnings = createAction('UXI-B_GENERAL_CLEAR_WARNINGS'/* , addIdIfNotThere */);
 export const shouldClearInfo = createAction('UXI-B_GENERAL_CLEAR_INFOS' /* , addIdIfNotThere */);
 

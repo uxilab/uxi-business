@@ -5,7 +5,7 @@ import Flex from 'uxi/Layout/Flex';
 const ExtendedFlex = Flex.extend`
   flex-direction: column;
 
-  & > *:first-child:before {
+  /* & > *:first-child:before {
     content: '';
     display: block;
     height: 16px;
@@ -15,25 +15,27 @@ const ExtendedFlex = Flex.extend`
     content: '';
     display: block;
     height: 16px;
-  }
+  } */
 `;
 
-const UserFeedbackContainer = ({ children }) => {
-  const childArray = React.Children.map(children, child => child);
+const UserFeedbackWrapper = ({ children }) => {
+  const cleanedChildren = React.Children.map(children, child => child);
 
   return (
     <CompactSlide
       anchor="top"
       direction="bottom"
-      inAttr={React.Children.count(childArray) > 0}
+      inAttr={React.Children.count(cleanedChildren) > 0}
+      offsetTop={16}
+      offsetBottom={16}
     >
       <ExtendedFlex>
-        {childArray}
+        {cleanedChildren}
       </ExtendedFlex>
     </CompactSlide>
   );
 };
 
-UserFeedbackContainer.displayName = 'UserFeedbackContainer';
+UserFeedbackWrapper.displayName = 'UserFeedbackWrapper';
 
-export default UserFeedbackContainer;
+export default UserFeedbackWrapper;

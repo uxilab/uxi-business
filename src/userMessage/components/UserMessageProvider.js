@@ -4,7 +4,6 @@ import {
   AppContext,
 } from '../../provider/UxiBusinessProvider';
 import SessionExpired from './composites/SessionExpired';
-import UserFeedbackWrapper from './composites/UserFeedbackWrapper';
 import DefaultUserFeedback from './DefaultUserFeedback';
 
 const UserMessageProvider = ({
@@ -12,22 +11,21 @@ const UserMessageProvider = ({
   sessionExpiredGlobalMessages,
 }) => (
   <div>
-    <UserFeedbackWrapper>
-      <AppContext.Consumer>
-        {({ onSessionExpired }) => (
-          <div>
-            {
-              sessionExpiredGlobalMessages &&
+    <AppContext.Consumer>
+      {({ onSessionExpired }) => (
+        <div>
+          {
+            sessionExpiredGlobalMessages &&
               sessionExpiredGlobalMessages.length > 0 &&
               (
                 <SessionExpired onSessionExpired={onSessionExpired} />
               )
-            }
-            <DefaultUserFeedback />
-          </div>
-        )}
-      </AppContext.Consumer>
-    </UserFeedbackWrapper>
+          }
+          <DefaultUserFeedback />
+        </div>
+
+      )}
+    </AppContext.Consumer>
     {children}
   </div>
 );

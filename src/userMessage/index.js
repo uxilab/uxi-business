@@ -6,7 +6,7 @@ import {
   showWarning,
   showError,
   showInfo,
-  shouldClearError,
+  shouldClearSuccesses,
   shouldClearSuccess,
   shouldClearWarnings,
   shouldClearInfo,
@@ -87,7 +87,7 @@ const showAlert = alert => (dispatch) => {
 
   if (alert.type === 'error') {
     alertToUser = showError;
-    hideToUser = shouldClearError;
+    hideToUser = shouldClearSuccesses;
   }
 
   if (alert.type === 'warning') {

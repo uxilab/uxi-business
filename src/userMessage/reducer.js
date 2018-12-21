@@ -11,9 +11,9 @@ import {
   generalEntityNotFound,
   generalConflictedEntity,
   generalQueued,
-  shouldClearError,
+  shouldClearMessageById,
   shouldClearErrors,
-  shouldClearSuccess,
+  shouldClearSuccesses,
   shouldClearWarnings,
   shouldClearInfo,
 } from './actions';
@@ -55,7 +55,7 @@ const updateMessageStore = (messages = {}, payload, type) => {
   return result;
 };
 
-const clearStoreFromError = (messages = {}, payload) => {
+const clearStoreFromMessage = (messages = {}, payload) => {
   const context = (payload && payload.context) ? payload.context : 'global';
   const id = payload ? payload.id : undefined;
 
@@ -83,7 +83,7 @@ const clearStoreFromError = (messages = {}, payload) => {
 
 const clearStoreFromAllErrors = (messages, payload) => {
   const context = (payload && payload.context) ? payload.context : 'global';
-  const id = payload ? payload.id : undefined;
+  // const id = payload ? payload.id : undefined;
 
   if (!messages[context]) {
     messages[context] = {}; // eslint-disable-line no-param-reassign
@@ -92,16 +92,35 @@ const clearStoreFromAllErrors = (messages, payload) => {
   return {
     ...messages,
     [context]: {
+      // success: (messages[context].success || []).filter(e => e.id !== id),
+      // warning: (messages[context].warning || []).filter(e => e.id !== id),
+      // info: (messages[context].info || []).filter(e => e.id !== id),
+      // queued: (messages[context].queued || []).filter(e => e.id !== id),
+      ...messages[context],
       accessDenied: [],
       notFoundError: [],
       networkError: [],
-      success: (messages[context].success || []).filter(e => e.id !== id),
       error: [],
-      warning: (messages[context].warning || []).filter(e => e.id !== id),
       unknownError: [],
-      info: (messages[context].info || []).filter(e => e.id !== id),
-      queued: (messages[context].queued || []).filter(e => e.id !== id),
       conflictedError: [],
+    },
+  };
+};
+
+const clearStoreFromAllSuccessesAndQueued = (messages, payload) => {
+  const context = (payload && payload.context) ? payload.context : 'global';
+  // const id = payload ? payload.id : undefined;
+
+  if (!messages[context]) {
+    messages[context] = {}; // eslint-disable-line no-param-reassign
+  }
+
+  return {
+    ...messages,
+    [context]: {
+      ...messages[context],
+      success: [],
+      queued: [],
     },
   };
 };
@@ -154,24 +173,24 @@ export default handleActions({
     ...state,
     messages: updateMessageStore(state.messages, payload, 'queued'),
   }),
-  [shouldClearError]: (state, { payload }) => ({
+  [shouldClearMessageById]: (state, { payload }) => ({
     ...state,
-    messages: clearStoreFromError(state.messages, payload),
+    messages: clearStoreFromMessage(state.messages, payload),
   }),
   [shouldClearErrors]: (state, { payload = {} }) => ({
     ...state,
     messages: clearStoreFromAllErrors(state.messages, payload),
   }),
-  [shouldClearSuccess]: (state, { payload }) => ({
+  [shouldClearSuccesses]: (state, { payload }) => ({
     ...state,
-    messages: clearStoreFromError(state.messages, payload),
+    messages: clearStoreFromAllSuccessesAndQueued(state.messages, payload),
   }),
   [shouldClearWarnings]: (state, { payload }) => ({
     ...state,
-    messages: clearStoreFromError(state.messages, payload),
+    messages: clearStoreFromMessage(state.messages, payload),
   }),
   [shouldClearInfo]: (state, { payload }) => ({
     ...state,
-    messages: clearStoreFromError(state.messages, payload),
+    messages: clearStoreFromMessage(state.messages, payload),
   }),
 }, initalDefault);

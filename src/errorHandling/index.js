@@ -7,7 +7,7 @@ import {
   generalEntityNotFound,
   generalQueued,
   generalConflictedEntity,
-  shouldClearError,
+  shouldClearSuccesses,
   showSuccess,
 } from '../userMessage/actions';
 
@@ -66,7 +66,7 @@ const defaultMutationHandling = (dispatch, options = {}) => (resp) => {
     );
 
     setTimeout(() => {
-      dispatch(shouldClearError({ id }));
+      dispatch(shouldClearSuccesses({ id }));
     }, 10000);
   }
 };
@@ -78,7 +78,7 @@ export const defaultErrorHandling = (dispatch, params, options = {}, context) =>
   const id = uuid();
 
   setTimeout(() => {
-    dispatch(shouldClearError({ id }));
+    dispatch(shouldClearSuccesses({ id }));
   }, 10000);
 
   if (options.onErrorAction) {
