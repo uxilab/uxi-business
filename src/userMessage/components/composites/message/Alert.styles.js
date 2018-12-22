@@ -4,5 +4,5 @@ export default {
   width: '600px',
   maxWidth: '680px',
   marginBottom: '12px',
-  boxShadow: '0 8px 16px 0 rgba(0,0,0,.34)',
+  boxShadow: 'rgba(0, 0, 0, 0.24) 0px 6px 20px 3px, rgba(0, 0, 0, 0.34) 0px 6px 32px 5px',
 };
