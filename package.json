@@ -28,6 +28,14 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "uxi": "^0.0.370",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-intl": "^2.4.0",
+    "redux-form": "^7.1.2",
+    "react-redux": "^6.0.0",
+    "styled-components": "3.2.0",
+    "redux": "^4.0.1",
     "uxi-cli": "^1.0.71"
   },
   "peerDependencies": {
