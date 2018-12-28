@@ -14,7 +14,7 @@ import {
   shouldClearErrors,
   shouldClearSuccesses,
   shouldClearWarnings,
-  shouldClearInfo,
+  shouldClearInfos,
 } from '../actions';
 
 const DefaultUserFeedback = ({
@@ -26,7 +26,7 @@ const DefaultUserFeedback = ({
   clearMessageById,
   clearAllSuccesses,
   clearWarning,
-  clearInfo,
+  clearAllInfos,
 }) => (
   <UserFeedbackWrapper>
     {
@@ -71,7 +71,8 @@ const DefaultUserFeedback = ({
         <GlobalInfoMessage
           key="GlobalInfoMessage"
           messages={globalInfoMessages}
-          onClose={clearInfo}
+          clearAllInfos={clearAllInfos}
+          clearMessageById={clearMessageById}
         />
       )
     }
@@ -111,8 +112,8 @@ const mapDispatchToProps = (dispatch, { contextId }) => ({
   clearWarning() {
     dispatch(shouldClearWarnings({ context: contextId }));
   },
-  clearInfo() {
-    dispatch(shouldClearInfo({ context: contextId }));
+  clearAllInfos() {
+    dispatch(shouldClearInfos({ context: contextId }));
   },
 });
 

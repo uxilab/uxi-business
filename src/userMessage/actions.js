@@ -18,7 +18,8 @@ export const shouldClearMessageById = createAction('UXI-B_GENERAL_CLEAR_MSG_BY_I
 export const shouldClearErrors = createAction('UXI-B_GENERAL_CLEAR_ERRORS'/* , addIdIfNotThere */);
 export const shouldClearSuccesses = createAction('UXI-B_GENERAL_CLEAR_SUCCESSES'/* , addIdIfNotThere */);
 export const shouldClearWarnings = createAction('UXI-B_GENERAL_CLEAR_WARNINGS'/* , addIdIfNotThere */);
-export const shouldClearInfo = createAction('UXI-B_GENERAL_CLEAR_INFOS' /* , addIdIfNotThere */);
+export const shouldClearInfo = createAction('UXI-B_GENERAL_CLEAR_INFO' /* , addIdIfNotThere */);
+export const shouldClearInfos = createAction('UXI-B_GENERAL_CLEAR_INFOS' /* , addIdIfNotThere */);
 
 export const generalAccessDenied = createAction('UXI-B_GENERAL_ACCESS_DENIED', addIdIfNotThere);
 export const generalSessionExpired = createAction('UXI-B_GENERAL_SESSION_EXPIRED', addIdIfNotThere);

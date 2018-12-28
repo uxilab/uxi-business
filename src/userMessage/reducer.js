@@ -15,7 +15,7 @@ import {
   shouldClearErrors,
   shouldClearSuccesses,
   shouldClearWarnings,
-  shouldClearInfo,
+  shouldClearInfos,
 } from './actions';
 
 const defaultMessage = 'global';
@@ -107,6 +107,23 @@ const clearStoreFromAllErrors = (messages, payload) => {
   };
 };
 
+const clearStoreFromAllInfos = (messages, payload) => {
+  const context = (payload && payload.context) ? payload.context : 'global';
+  // const id = payload ? payload.id : undefined;
+
+  if (!messages[context]) {
+    messages[context] = {}; // eslint-disable-line no-param-reassign
+  }
+
+  return {
+    ...messages,
+    [context]: {
+      ...messages[context],
+      info: [],
+    },
+  };
+};
+
 const clearStoreFromAllSuccessesAndQueued = (messages, payload) => {
   const context = (payload && payload.context) ? payload.context : 'global';
   // const id = payload ? payload.id : undefined;
@@ -189,8 +206,12 @@ export default handleActions({
     ...state,
     messages: clearStoreFromMessage(state.messages, payload),
   }),
-  [shouldClearInfo]: (state, { payload }) => ({
+  // [shouldClearInfo]: (state, { payload }) => ({
+  //   ...state,
+  //   messages: clearStoreFromMessage(state.messages, payload),
+  // }),
+  [shouldClearInfos]: (state, { payload }) => ({
     ...state,
-    messages: clearStoreFromMessage(state.messages, payload),
+    messages: clearStoreFromAllInfos(state.messages, payload),
   }),
 }, initalDefault);

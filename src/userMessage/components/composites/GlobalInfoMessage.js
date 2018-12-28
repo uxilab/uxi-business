@@ -5,7 +5,8 @@ import MultipleMessage from './message/MultipleMessage';
 
 const GlobalInfoMessage = ({
   messages = [],
-  onClose,
+  clearMessageById,
+  clearAllInfos,
 }) => {
   const isEmpty = messages.length === 0;
 
@@ -20,7 +21,7 @@ const GlobalInfoMessage = ({
       <SingleMessage
         type="info"
         message={messagesWithDetails[0]}
-        onClose={onClose}
+        clearMessageById={clearMessageById}
       />
     );
   }
@@ -37,12 +38,12 @@ const GlobalInfoMessage = ({
       defaultExplanation={
         <FormattedMessage
           id="module-info-defaultMultiple"
-          defaultMessage="You have {value} errors"
+          defaultMessage="You have {value} message"
           values={{ value: messagesWithDetails.length }}
         />
       }
       messages={messagesWithDetails}
-      onClose={onClose}
+      onClose={clearAllInfos}
     />
   );
 };
