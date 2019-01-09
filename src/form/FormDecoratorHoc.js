@@ -1,22 +1,21 @@
 import React from 'react';
 import Text from 'uxi/Text';
-// import RequiredField from './RequiredField';
+import RequiredField from './RequiredField';
 import InputFieldGroup from './InputFieldGroup';
 
 const FormDecorator = (Input, props) => field => (
   <div>
-    {/* <div>
-        {
-          !props.noLabel && props.label &&
+    <div>
+      {
+        !props.noLabel && props.label &&
         (
           <label>
             {props.label}
             {props && props.isRequired && <RequiredField />}
           </label>
         )
-        }
-      </div>
-      */}
+      }
+    </div>
     {props.helpText &&
       <div style={{ marginBottom: '12px' }}>
         <Text type="caption">
@@ -25,7 +24,7 @@ const FormDecorator = (Input, props) => field => (
       </div>
     }
     {
-      field.meta.asyncValidating && 'Loading!!!'
+      field.meta.asyncValidating && 'Loadingg!!!'
     }
     <div style={{ marginBottom: '16px' }}>
       {
