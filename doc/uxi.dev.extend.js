@@ -13,6 +13,7 @@ module.exports = (config) => {
     'redux-form': path.resolve(__dirname, 'node_modules/redux-form'),
     uxi: path.resolve(__dirname, 'node_modules/uxi'),
     'react-intl': path.resolve(__dirname, 'node_modules/react-intl'),
+    'react-redux': path.resolve(__dirname, 'node_modules/react-redux'),
   };
 
   return config;

@@ -38,7 +38,7 @@ const App = () => (
         <UxiBusinessProvider
           onSessionExpired={() => { alert('logout '); }}
         >
-          <UserMessageProvider>
+           <UserMessageProvider>
             <h1>Title</h1>
             <GlobalUserMessageExample />
             <div style={{ padding: '150px' }}>
