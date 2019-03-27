@@ -3,55 +3,51 @@ import Text from 'uxi/Text';
 import RequiredField from './RequiredField';
 import InputFieldGroup from './InputFieldGroup';
 
-const FormDecorator = (Input, props) => field => (
+const FormDecorator = (Input, option) => props => (
   <div>
     <div>
       {
-        !props.noLabel && props.label &&
+        !option.noLabel && option.label &&
         (
           <label>
-            {props.label}
-            {props && props.isRequired && <RequiredField />}
+            {option.label}
+            {option && option.isRequired && <RequiredField />}
           </label>
         )
       }
     </div>
-    {props.helpText &&
+    {option.helpText &&
       <div style={{ marginBottom: '12px' }}>
         <Text type="caption">
-          {props.helpText}
+          {option.helpText}
         </Text>
       </div>
     }
     {
-      field.meta.asyncValidating && 'Loadingg!!!'
+      props.meta.asyncValidating && 'Loadingg!!!'
     }
     <div style={{ marginBottom: '16px' }}>
       {
-        (props.prefix || props.sufix) && (
-          <InputFieldGroup prefix={props.prefix} sufix={props.sufix}>
+        (option.prefix || option.sufix) && (
+          <InputFieldGroup prefix={option.prefix} sufix={option.sufix}>
             <Input
+              {...option}
               {...props}
-              {...field}
-              {...field.input}
-              value={undefined}
-              defaultValue={field.input.value}
-              success={field.meta.touched && !field.meta.error}
-              error={field.meta.touched && field.meta.error}
+              {...props.input}
+              success={props.meta.touched && !props.meta.error}
+              error={props.meta.touched && props.meta.error}
             />
           </InputFieldGroup>
         )
       }
       {
-        (!props.prefix && !props.sufix) && (
+        (!option.prefix && !option.sufix) && (
           <Input
+            {...option}
             {...props}
-            {...field}
-            {...field.input}
-            value={undefined}
-            defaultValue={field.input.value}
-            success={field.meta.touched && !field.meta.error}
-            error={field.meta.touched && field.meta.error}
+            {...props.input}
+            success={props.meta.touched && !props.meta.error}
+            error={props.meta.touched && props.meta.error}
           />
         )
       }

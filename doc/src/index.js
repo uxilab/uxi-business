@@ -18,6 +18,8 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import FormWithCusomtInput from './examples/FormWithCusomtInput';
 // import FormWithFieldAsyncValidation from './examples/FormWithFieldAsyncValidation';
+import SimpleForm from './examples/SimpleForm';
+import CreateAccountForm from './examples/CreateAccountForm';
 
 import GlobalUserMessageExample from './examples/UserMessage/GlobalUserMessageExample';
 import ContextualUserMessageExample from './examples/UserMessage/ContextualUserMessageExample';
@@ -36,14 +38,13 @@ const App = () => (
         <UxiBusinessProvider
           onSessionExpired={() => { alert('logout '); }}
         >
-          <UserMessageProvider>
+           <UserMessageProvider>
             <h1>Title</h1>
             <GlobalUserMessageExample />
             <div style={{ padding: '150px' }}>
               <ContextualUserMessageExample />
             </div>
           </UserMessageProvider>
-        </UxiBusinessProvider>
         <div style={{ maxWidth: '500px', paddingTop: '64px', margin: '0 auto' }}>
           <SignInForm
             onClick={(value) => { alert(JSON.stringify(value)); }}
@@ -62,11 +63,18 @@ const App = () => (
             onClick={(value) => { alert(JSON.stringify(value)); }}
           />
         </div>
+        <div style={{ maxWidth: '500px', paddingTop: '64px', margin: '0 auto' }}>
+          <SimpleForm />
+        </div>
+        <div style={{ maxWidth: '500px', paddingTop: '64px', margin: '0 auto' }}>
+          <CreateAccountForm onSignup={() => {}} />
+        </div>
         {/* <div style={{ maxWidth:'500px', paddingTop: '64px', margin: '0 auto' }}>
         <FormWithFieldAsyncValidation
           onClick={(value) => {alert(JSON.stringify(value))}}
           />
       </div> */}
+      </UxiBusinessProvider>
       </ThemeProvider>
     </IntlProvider>
   </Provider>
