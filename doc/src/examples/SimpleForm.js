@@ -17,7 +17,7 @@ const MyForm = generateFormHoc('SimpleForm', [
 const SimpleForm = () => {
   return (
     <MyForm
-      initialValues={{ 'test': 'oefkeofkeofkeofk' }}
+      initialValues={{ 'firstName': 'oefkeofkeofkeofk' }}
       onClick={(values) => { alert(JSON.stringify(values)); }}
     />
   );
