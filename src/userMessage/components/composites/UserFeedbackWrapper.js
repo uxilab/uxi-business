@@ -1,8 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import CompactSlide from 'uxi/internal/CompactSlide';
-import Flex from 'uxi/Layout/Flex';
+import { flexCSSString } from 'uxi/Layout/Flex';
 
-const ExtendedFlex = Flex.extend`
+const ExtendedFlex = styled.div`
+  ${() => flexCSSString};
   flex-direction: column;
 
   /* & > *:first-child:before {
