@@ -34,13 +34,13 @@
     "uxi-cli": "^1.0.82"
   },
   "peerDependencies": {
-    "uxi": "^0.1.434",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "uxi": "^3.0.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-intl": "^2.4.0",
     "redux-form": "^8.0.4",
     "react-redux": "^6.0.0",
-    "styled-components": "3.2.0",
+    "styled-components": "^4.3.2",
     "redux": "^4.0.1"
   }
 }
