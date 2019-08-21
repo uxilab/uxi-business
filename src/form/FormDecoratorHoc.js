@@ -8,7 +8,7 @@ const FormDecorator = (Input, option) => props => (
     <div>
       {
         !option.noLabel && option.label &&
-        (
+        ( // eslint-disable-next-line jsx-a11y/label-has-for
           <label>
             {option.label}
             {option && option.isRequired && <RequiredField />}
