@@ -23,6 +23,7 @@ const SignInForm = ({
   onClick,
   handleSubmit,
   submitting,
+  showRememberMe,
 }) => (
   <div
     onKeyPress={(e) => {
@@ -45,18 +46,24 @@ const SignInForm = ({
         validate={[required]}
       />
     </div>
-    <div style={{ display: 'flex', padding: '0 0 16px 0', alignItems: 'center' }}>
-      <div style={{ flex: 1 }}>
-        <Checkbox
-          label={
-            <FormattedMessage
-              id="uxi-business-rememberMe"
-              defaultMessage="Remember me"
-            />
-          }
-        />
-      </div>
-    </div>
+    {
+      showRememberMe === true
+        ? (
+          <div style={{ display: 'flex', padding: '0 0 16px 0', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <Checkbox
+                label={
+                  <FormattedMessage
+                    id="uxi-business-rememberMe"
+                    defaultMessage="Remember me"
+                  />
+                }
+              />
+            </div>
+          </div>
+        )
+        : null
+    }
     <div style={{ paddingTop: '16px' }}>
       <Button
         disabled={submitting || isFetching}
